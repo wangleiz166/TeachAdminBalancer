@@ -21,7 +21,7 @@ Please add your own
 
 # Meeting Minutes
 
-#### First Bruce Meeting
+## First Bruce Meeting
 Bruce asked about our current project progress
 As we have not yet met with the client, the current communication with Bruce is as follows:
 
@@ -33,7 +33,7 @@ This project is purely for the staff.
 Technology requested: Django
 Other technologies if we have a requirement we can check with the client tomorrow to see if they need them.
 
-#### First Customer Meeting
+## First Customer Meeting
 Some details of the project raised by the client:
  The client is the head of the department, so he needs to assign work to other staff in his department and at the moment it is managed through a spreadsheet which has many, many tabs, for example, one of the tabs: this tab shows each course that we have to cover during the year and shows who is teaching these courses, and it also does another thing, some administrative work, that is someone is the academic department manager or the head of the department, which is the client himself, and this system tells the client who is doing this work, who is in charge of the research, organising the research. The Head of Department stated that there were many problems with this spreadsheet, where the same information existed in many different tabs, making it difficult to replicate and maintain the data. He wanted to develop a database application to solve this problem, enabling a single storage of data and access control for different user roles.
 
