@@ -1,0 +1,72 @@
+{% include 'common/header.html' %}
+<style>
+    .auth-form {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        padding: 30px;
+        width: 400px;
+    }
+    
+    .auth-form h2 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .auth-form label {
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    
+    .auth-form input[type="text"],
+    .auth-form input[type="password"] {
+        border-radius: 2px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .auth-form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    
+    .auth-form .form-check-label {
+        font-weight: 400;
+    }
+    
+    .auth-form .form-check-input {
+        margin-right: 5px;
+    }
+    
+    .back-btn {
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+          <form class="auth-form" method="post" action="">
+              {% csrf_token %}
+              <h2 style="color:black">Login</h2>
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" id="username" name="username" required>
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" required> {% if error_message != "" %}
+              <span style="color: red;margin-left:15px;">{{error_message}}</span> {% endif %}
+              <input type="submit" class="btn btn-success" style="margin-left: -15px;" value="Login">
+          </form>
+          <div class="back-btn">
+              <a style="color:black" href="/">Back to Home</a>
+          </div>
+      </div>
+  </div>
+</div>
