@@ -59,12 +59,12 @@ The Head of Department mentioned some other features such as activity costing an
 
 # Brief Description of Functionalities
 1. Personnel Hour Management:
-   1.1 Add/Delete/Edit personnel information (can be done individually or in bulk)（If a course is tied to a member of staff, it cannot be deleted）
-   1.2 Associate personnel with courses
-   1.3 Manage personnel's time based on requirements (this part is complex and requires reviewing meeting minutes, group discussions, and client's Excel template)
-   1.4 List of personnel
-   1.5 Search personnel by course or name (fuzzy search)
-   1.6 Export custom CSV format files from the database based on the client's Excel template
+   -  Add/Delete/Edit personnel information (can be done individually or in bulk)（If a course is tied to a member of staff, it cannot be deleted）
+   -  Associate personnel with courses
+   -  Manage personnel's time based on requirements (this part is complex and requires reviewing meeting minutes, group discussions, and client's Excel template)
+   -  List of personnel
+   -  Search personnel by course or name (fuzzy search)
+   -  Export custom CSV format files from the database based on the client's Excel template
 
    Personnel list can be quickly added in a specific format, for example:
    ```markdown
@@ -73,10 +73,10 @@ The Head of Department mentioned some other features such as activity costing an
    ```
    
 2. Course List Management:
-   2.1 Course list
-   2.2 Add/Delete/Edit course information（If a course is tied to a member of staff, it cannot be deleted）
-   2.3 Associate course information with personnel
-   2.4 Course search
+   -  Course list
+   -  Add/Delete/Edit course information（If a course is tied to a member of staff, it cannot be deleted）
+   -  Associate course information with personnel
+   -  Course search
 
    Course list can be quickly added in a specific format, for example:
     ```markdown
@@ -90,10 +90,10 @@ The Head of Department mentioned some other features such as activity costing an
    Display in chart form. Determine specific requirements in consultation with the client.
 
 4. Backend Administrator Management:
-   4.1 Backend administrator list (categorized as: Manager, Employee, IT Administrator)
-   4.2 Add/Delete/Edit backend administrators
-   4.3 Backend functionality with tree structure for permission control and hidden directories
-   4.4 Search backend personnel
+   -  Backend administrator list (categorized as: Manager, Employee, IT Administrator)
+   -  Add/Delete/Edit backend administrators
+   -  Backend functionality with tree structure for permission control and hidden directories
+   -  Search backend personnel
 
 # Collaboration and Development Instructions
 
