@@ -67,9 +67,11 @@ The Head of Department mentioned some other features such as activity costing an
    1.6 Export custom CSV format files from the database based on the client's Excel template
 
    Personnel list can be quickly added in a specific format, for example:
+   ```markdown
    - Lei Wang, 32, Researchers, A Courses
    - Ali Liu, 18, Researchers, A Courses
-
+   ```
+   
 2. Course List Management:
    2.1 Course list
    2.2 Add/Delete/Edit course information（If a course is tied to a member of staff, it cannot be deleted）
@@ -77,9 +79,11 @@ The Head of Department mentioned some other features such as activity costing an
    2.4 Course search
 
    Course list can be quickly added in a specific format, for example:
+    ```markdown
    - A Courses: 100
    - B Courses: 200
    - C Courses: 30
+   ```
 
 3. Dashboard
 
