@@ -21,7 +21,7 @@ Please add your own
 
 # Meeting Minutes
 
-## First Bruce Meeting
+## First Bruce Meeting (23/05/2023）
 Bruce asked about our current project progress
 As we have not yet met with the client, the current communication with Bruce is as follows:
 
@@ -33,7 +33,7 @@ This project is purely for the staff.
 Technology requested: Django
 Other technologies if we have a requirement we can check with the client tomorrow to see if they need them.
 
-## First Customer Meeting
+## First Customer Meeting (24/05/2023）
 Some details of the project raised by the client:
  The client is the head of the department, so he needs to assign work to other staff in his department and at the moment it is managed through a spreadsheet which has many, many tabs, for example, one of the tabs: this tab shows each course that we have to cover during the year and shows who is teaching these courses, and it also does another thing, some administrative work, that is someone is the academic department manager or the head of the department, which is the client himself, and this system tells the client who is doing this work, who is in charge of the research, organising the research. The Head of Department stated that there were many problems with this spreadsheet, where the same information existed in many different tabs, making it difficult to replicate and maintain the data. He wanted to develop a database application to solve this problem, enabling a single storage of data and access control for different user roles.
 
@@ -55,8 +55,6 @@ If possible, developers can try to obtain a free demo version or screenshots of 
 
 Remarks:
 The Head of Department mentioned some other features such as activity costing and Track reporting, which developers can decide to add depending on their actual needs. In addition, the developer needs to ensure that the application supports basic arithmetic operations and formula calculations to meet the needs of the department director.
-
-#### First team Meeting
 
 
 # Brief Description of Functionalities
