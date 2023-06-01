@@ -97,6 +97,8 @@ The Head of Department mentioned some other features such as activity costing an
 
 5.StaffvModules
 - A table similar to the following
+
+
 | Code   | Linked courses | Unlinked relatives | Name    | Num staff allocated | Est. Num Students | Hours | JD | JB | MC |
 |--------|----------------|--------------------|---------|---------------------|-------------------|-------|----|----|----|
 |        |                |                    | HS1     |                     |                   | 0     | 0  | 0  | 0  |
@@ -115,39 +117,33 @@ The Head of Department mentioned some other features such as activity costing an
 | CS1533 | QC1504         | JC1502             | Computer Systems and Architecture | 0 | 130               |       |    |    |    |
 | CS1527 | QC1502         | JC1503, SCNU15OOP  | Object-Oriented Programming | 0      | 130               |       |    |    |    |
 
+
 - Where teachers can click for details
 
 |                   | Total hours permitted | Total hours allocated | Total left | No Projects |
 |-------------------|-----------------------|------------------------|--------------|---------------|
-| JD                | 576                   | 558.6429797            | 17.35702025  | 329.145       |
+| JB                | 576                   | 558.6429797            | 17.35702025  | 329.145       |
 | Jane Doe          | 576                   | 558.6429797            | 17.35702025  |               |
 
 **Course** | **Credits** | **Alpha** | **Beta** | **Num. Students** | **Delta** | **Share** | **Coordinator** | **Total hours** |
 |------------|---------------|--------------|-------------|------------------------|--------------|-------------|--------------------|-------------------|
-|             |               |                 |                |                            |                |               |                        |                      |
-|             |               |                 |                |                            |                |               |                        |                      |
-|             |               |                 |                |                            |                |               |                        |                      |
 | CS502K   | 15            | 4.4            | 0.15         | 35                     | 1               | 0.5          | 15                   | 87.375            |
 | CS3525   | 15            | 4.4            | 0.15         | 50                     | 1               | 0.5          | 15                   | 104.25            |
-|             |               |                 |                |                            |                |               |                        |                      |
-|             |               |                 |                |                            |                |               |                        |                      |
-|             |               |                 |                |                            |                |               |                        |                      |
-|             |               |                 |                |                            |                |               |                        |                      |
 | Total teaching       |                        | 1                        |                        | 191.625           |
 | HS1                        |                        | 0.5                     |                        |                      |
 | HS2                        |                        | 0.5                     |                        |                      |
-|             |               |                 |                |                            |                |               |                        |                      |
 | **Project supervision and marking** | **Num groups/students** | **h** |                        | **Total project** | **229.4979797** |
-|                         | 30                        |          | 5                      | 0.8                   |                        |                       |                         | 99.5               |
-|                         | 60                        |          | 1                      | 0.5                   |                        |                       |                         | 29.8               |
-|                         | 60                        |          | 2                      |                        |                        |                       |                         | 59.6               |
-|                         | 60                        |          | 0                      | 0.5                   |                        |                       |                         | 0                  |
-|                         | 60                        |          | 0                      | 0.5                   |                        |                       |                         | 0                  |
-|                         | 60                        |          | 0                      | 0.8                   |                        |                       |                         | 0                  |
-|                         | 15                        |          | 1                      |                        |                        |                       |                         | 1                  |
-|                         | 60                        |          | 4                      |                        |                        |                       |                         | 11.3137085         |
-|                         | 60                        |          | 2                      |                        |                        |                       |                         | 5.656854249       |
-|                         | 60                        |          | 
+|                         | 30                        | 0          | 5                      | 0.8                   |                        |                       |                         | 99.5               |
+|                         | 60                        | 0          | 1                      | 0.5                   |                        |                       |                         | 29.8               |
+|                         | 60                        | 0          | 2                      | 0.0                   |                        |                       |                         | 59.6               |
+|                         | 60                        | 0          | 0                      | 0.5                   |                        |                       |                         | 0                  |
+|                         | 60                        | 0          | 0                      | 0.5                   |                        |                       |                         | 0                  |
+|                         | 60                        | 0          | 0                      | 0.8                   |                        |                       |                         | 0                  |
+|                         | 15                        | 0          | 1                      | 0.0                   |                        |                       |                         | 1                  |
+|                         | 60                        | 0          | 4                      | 0.0                   |                        |                       |                         | 11.3137085         |
+|                         | 60                        | 0          |
+
+
 
 # Collaboration and Development Instructions
 
