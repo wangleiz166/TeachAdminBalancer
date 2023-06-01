@@ -58,7 +58,7 @@ The Head of Department mentioned some other features such as activity costing an
 
 
 # Brief Description of Functionalities
-1. Personnel List Management:
+1. Personnel List Management:（Reference Staff）
    -  Add/Delete/Edit personnel information (can be done individually or in bulk)（If a course is tied to a member of staff, it cannot be deleted）
    -  Associate personnel with courses
    -  Manage personnel's time based on requirements (this part is complex and requires reviewing meeting minutes, group discussions, and client's Excel template)
@@ -85,9 +85,9 @@ The Head of Department mentioned some other features such as activity costing an
    - C Courses: 30
    ```
 
-3. Dashboard
-
-   Display in chart form. Determine specific requirements in consultation with the client.
+3. Dashboard（Reference TotalWork,Examining,Mentoring,PeerObs）
+  - TotalWork,Examining,Mentoring,PeerObs
+    Display in chart form. Determine specific requirements in consultation with the client.
 
 4. Backend Administrator Management:
    -  Backend administrator list (categorized as: Manager, Employee, IT Administrator)
@@ -95,9 +95,7 @@ The Head of Department mentioned some other features such as activity costing an
    -  Backend functionality with tree structure for permission control and hidden directories
    -  Search backend personnel
 
-5.StaffvModules
-- A table similar to the following
-
+5.StaffvModules（Reference staffvModules）
 
 | Code   | Linked courses | Unlinked relatives | Name    | Num staff allocated | Est. Num Students | Hours | JD | JB | MC |
 |--------|----------------|--------------------|---------|---------------------|-------------------|-------|----|----|----|
@@ -118,7 +116,7 @@ The Head of Department mentioned some other features such as activity costing an
 | CS1527 | QC1502         | JC1503, SCNU15OOP  | Object-Oriented Programming | 0      | 130               |       |    |    |    |
 
 
-- Where teachers can click for details
+- Where teachers can click for details （Reference JD, JB, MC）
 
 |                   | Total hours permitted | Total hours allocated | Total left | No Projects |
 |-------------------|-----------------------|------------------------|--------------|---------------|
