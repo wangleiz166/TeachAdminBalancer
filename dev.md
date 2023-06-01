@@ -99,8 +99,6 @@ The Head of Department mentioned some other features such as activity costing an
 
 | Code   | Linked courses | Unlinked relatives | Name    | Num staff allocated | Est. Num Students | Hours | JD | JB | MC |
 |--------|----------------|--------------------|---------|---------------------|-------------------|-------|----|----|----|
-|        |                |                    | HS1     |                     |                   | 0     | 0  | 0  | 0  |
-| Total  |                |                    |         |                     |                   | 0     | 0  | 0  | 0  |
 | CS1032 | QC1003         | JC1001             | Programming 1 | 0.5               | 230               |       |    |    |    |
 | CS1029 | QC1002         |                    | Modelling & Problem Solving for Computing | 0 | 118               |       |    |    |    |
 | CS1031 |                | JC2503             | Web app dev (optional) | 0               | 154               |       |    |    |    |
