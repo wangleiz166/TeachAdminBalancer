@@ -122,27 +122,10 @@ The Head of Department mentioned some other features such as activity costing an
 
 |                   | Total hours permitted | Total hours allocated | Total left | No Projects |
 |-------------------|-----------------------|------------------------|--------------|---------------|
-| JB                | 576                   | 558.6429797            | 17.35702025  | 329.145       |
+| JD                | 576                   | 558.6429797            | 17.35702025  | 329.145       |
 | Jane Doe          | 576                   | 558.6429797            | 17.35702025  |               |
 
-**Course** | **Credits** | **Alpha** | **Beta** | **Num. Students** | **Delta** | **Share** | **Coordinator** | **Total hours** |
-|------------|---------------|--------------|-------------|------------------------|--------------|-------------|--------------------|-------------------|
-| CS502K   | 15            | 4.4            | 0.15         | 35                     | 1               | 0.5          | 15                   | 87.375            |
-| CS3525   | 15            | 4.4            | 0.15         | 50                     | 1               | 0.5          | 15                   | 104.25            |
-| Total teaching       |                        | 1                        |                        | 191.625           |
-| HS1                        |                        | 0.5                     |                        |                      |
-| HS2                        |                        | 0.5                     |                        |                      |
-| **Project supervision and marking** | **Num groups/students** | **h** |                        | **Total project** | **229.4979797** |
-|                         | 30                        | 0          | 5                      | 0.8                   |                        |                       |                         | 99.5               |
-|                         | 60                        | 0          | 1                      | 0.5                   |                        |                       |                         | 29.8               |
-|                         | 60                        | 0          | 2                      | 0.0                   |                        |                       |                         | 59.6               |
-|                         | 60                        | 0          | 0                      | 0.5                   |                        |                       |                         | 0                  |
-|                         | 60                        | 0          | 0                      | 0.5                   |                        |                       |                         | 0                  |
-|                         | 60                        | 0          | 0                      | 0.8                   |                        |                       |                         | 0                  |
-|                         | 15                        | 0          | 1                      | 0.0                   |                        |                       |                         | 1                  |
-|                         | 60                        | 0          | 4                      | 0.0                   |                        |                       |                         | 11.3137085         |
-|                         | 60                        | 0          |
-
+There is still a lot of data that needs more time to sort through the tables
 
 
 # Collaboration and Development Instructions
