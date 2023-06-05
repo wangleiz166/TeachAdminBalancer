@@ -1,0 +1,36 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container mt-5">
+        <h1>add new User</h1>
+        <hr>
+        <form method="POST" action="">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Repeat Password</label>
+                <input type="password" class="form-control" id="confirm-password" name="confirm_password" required>
+            </div>
+            <div class="mb-3">
+                <label for="permission" class="form-label">Permission</label>
+                <select class="form-select" id="permission" name="permission" required>
+                    <option value="Manager">Manager</option>
+                    <option value="Employee">Employee</option>
+                    <option value="IT Administrator">IT Administrator</option>
+                </select>
+            </div>
+
+            <span style="color:red"></span><br>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+            <a href="/user/" class="btn btn-primary">Return to User List</a>
+        </form>
+    </div>
+</div>
