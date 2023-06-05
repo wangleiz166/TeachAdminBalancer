@@ -75,9 +75,9 @@
         {% if request.COOKIES.username %}
         <a href="#">{{ request.COOKIES.username }}</a><br> &nbsp; &nbsp;
         <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-        <a href="/authen/login">logout</a><br> &nbsp; &nbsp; 
+        <a href="/user/login">logout</a><br> &nbsp; &nbsp; 
         {% else %}
-        <a href="/authen/login">Login</a><br> &nbsp; &nbsp; 
+        <a href="/user/login">Login</a><br> &nbsp; &nbsp; 
         {% endif %}
     </div>
 

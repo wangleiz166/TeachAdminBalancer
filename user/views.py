@@ -15,3 +15,6 @@ def permission(request):
 
 def logs(request):
     return render(request, 'logs.html')
+
+def login(request):
+    return render(request, 'login.html')

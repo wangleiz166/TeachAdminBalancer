@@ -3,8 +3,15 @@
 
 <div class="main-content">
     <div class="container my-3">
-        <div class="d-flex justify-content-end mb-3">
-            <a href="/user/add/" class="btn btn-primary">Add Account</a>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by name" aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                    <a href="/user/logs" class="btn btn-secondary">Logs</a>&nbsp;
+                    <a href="/user/add" class="btn btn-primary">Add Account</a>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col">
@@ -28,7 +35,7 @@
                                 <a href="/edit" class="btn btn-primary">
                                     Edit
                                 </a>
-                                <a href="#" class="btn btn-secondary">
+                                <a href="/logs" class="btn btn-secondary">
                                     Logs
                                 </a>
                             </td>  
@@ -42,13 +49,11 @@
                                 <a href="/user/edit" class="btn btn-primary">
                                     Edit
                                 </a>
-                                <a href="#" class="btn btn-danger">
-                                    Delete
-                                </a>
-                                <a href="#" class="btn btn-info">
+                                <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                                <a href="/permission" class="btn btn-info">
                                     Permission
                                 </a>
-                                <a href="#" class="btn btn-secondary">
+                                <a href="/logs" class="btn btn-secondary">
                                     Logs
                                 </a>
                             </td>  
@@ -62,13 +67,11 @@
                                 <a href="/edit" class="btn btn-primary">
                                     Edit
                                 </a>
-                                <a href="#" class="btn btn-danger">
-                                    Delete
-                                </a>
-                                <a href="#" class="btn btn-info">
+                                <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                                <a href="/permission" class="btn btn-info">
                                     Permission
                                 </a>
-                                <a href="#" class="btn btn-secondary">
+                                <a href="/logs" class="btn btn-secondary">
                                     Logs
                                 </a>
                             </td>  
@@ -96,3 +99,13 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmDelete(event) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            // Continue with the deletion logic here
+            // For example, you can redirect to the delete URL or make an AJAX request
+        } else {
+            event.preventDefault(); // Prevent the default action (e.g., following the link)
+        }
+    }
+</script>
