@@ -58,7 +58,7 @@ The Head of Department mentioned some other features such as activity costing an
 
 
 # Brief Description of Functionalities
-1. Personnel Hour Management:
+1. Personnel List Management:（Reference Staff）
    -  Add/Delete/Edit personnel information (can be done individually or in bulk)（If a course is tied to a member of staff, it cannot be deleted）
    -  Associate personnel with courses
    -  Manage personnel's time based on requirements (this part is complex and requires reviewing meeting minutes, group discussions, and client's Excel template)
@@ -85,15 +85,44 @@ The Head of Department mentioned some other features such as activity costing an
    - C Courses: 30
    ```
 
-3. Dashboard
-
-   Display in chart form. Determine specific requirements in consultation with the client.
+3. Dashboard（Reference TotalWork,Examining,Mentoring,PeerObs）
+  - TotalWork,Examining,Mentoring,PeerObs
+    Display in chart form. Determine specific requirements in consultation with the client.
 
 4. Backend Administrator Management:
    -  Backend administrator list (categorized as: Manager, Employee, IT Administrator)
    -  Add/Delete/Edit backend administrators
    -  Backend functionality with tree structure for permission control and hidden directories
    -  Search backend personnel
+
+5.StaffvModules（Reference staffvModules）
+
+| Code   | Linked courses | Unlinked relatives | Name    | Num staff allocated | Est. Num Students | Hours | JD | JB | MC |
+|--------|----------------|--------------------|---------|---------------------|-------------------|-------|----|----|----|
+| CS1032 | QC1003         | JC1001             | Programming 1 | 0.5               | 230               |       |    |    |    |
+| CS1029 | QC1002         |                    | Modelling & Problem Solving for Computing | 0 | 118               |       |    |    |    |
+| CS1031 |                | JC2503             | Web app dev (optional) | 0               | 154               |       |    |    |    |
+| CS2019 | QC2002         | JC2504, SCNU25Data | Databases and Data Management | 0         | 64                |       |    |    |    |
+| CS2020 | QC2001         | JC2002, SCNU20SP   | Software Programming | 0               | 60                |       |    |    |    |
+| CS3026 | CS4096         | JC2505             | Operating Systems | 0                   | 61                |       |    |    |    |
+| CS3028 | QC3002         | JC2001             | Principles of Software Engineering | 0     | 68                |       |    |    |    |
+| CS3033 | QC3001         | JC3001*            | Artificial Intelligence | 0         | 66                |       |    |    |    |
+| CS4040 |                | JC3007*            | Research Methods | 0                     | 45                |       |    |    |    |
+| CS4028 | CS4097         | JC4002*            | Security | 1                         | 45                |       |    |    |    |
+| CS4049 |                | JC3503*, JC3509*   | Introduction to ML and Data Mining | 0 | 49                |       |    |    |    |
+| CS1533 | QC1504         | JC1502             | Computer Systems and Architecture | 0 | 130               |       |    |    |    |
+| CS1527 | QC1502         | JC1503, SCNU15OOP  | Object-Oriented Programming | 0      | 130               |       |    |    |    |
+
+
+- Where teachers can click for details （Reference JD, JB, MC）
+
+|                   | Total hours permitted | Total hours allocated | Total left | No Projects |
+|-------------------|-----------------------|------------------------|--------------|---------------|
+| JD                | 576                   | 558.6429797            | 17.35702025  | 329.145       |
+| Jane Doe          | 576                   | 558.6429797            | 17.35702025  |               |
+
+There is still a lot of data that needs more time to sort through the tables
+
 
 # Collaboration and Development Instructions
 
