@@ -1,0 +1,148 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by name" aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Staff_id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Operation</th>
+                            <th scope="col">Time &#9650;(change the sort)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1001</td>
+                            <td>John Doe</td>
+                            <td>Edit (User ID 1)</td>
+                            <td>2023-06-01 09:30 AM</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1002</td>
+                            <td>Jane Smith</td>
+                            <td>Delete (User ID 2)</td>
+                            <td>2023-06-02 02:45 PM</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>1003</td>
+                            <td>Mike Johnson</td>
+                            <td>Permission (User ID 3)</td>
+                            <td>2023-06-03 11:15 AM</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1004</td>
+                            <td>Sarah Williams</td>
+                            <td>Edit (User ID 4)</td>
+                            <td>2023-06-04 04:20 PM</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>1005</td>
+                            <td>Robert Davis</td>
+                            <td>Delete (User ID 5)</td>
+                            <td>2023-06-05 10:10 AM</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1002</td>
+                            <td>Jane Smith</td>
+                            <td>Delete (User ID 2)</td>
+                            <td>2023-06-02 02:45 PM</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>1003</td>
+                            <td>Mike Johnson</td>
+                            <td>Permission (User ID 3)</td>
+                            <td>2023-06-03 11:15 AM</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1004</td>
+                            <td>Sarah Williams</td>
+                            <td>Edit (User ID 4)</td>
+                            <td>2023-06-04 04:20 PM</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>1005</td>
+                            <td>Robert Davis</td>
+                            <td>Delete (User ID 5)</td>
+                            <td>2023-06-05 10:10 AM</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1002</td>
+                            <td>Jane Smith</td>
+                            <td>Delete (User ID 2)</td>
+                            <td>2023-06-02 02:45 PM</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>1003</td>
+                            <td>Mike Johnson</td>
+                            <td>Permission (User ID 3)</td>
+                            <td>2023-06-03 11:15 AM</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1004</td>
+                            <td>Sarah Williams</td>
+                            <td>Edit (User ID 4)</td>
+                            <td>2023-06-04 04:20 PM</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>1005</td>
+                            <td>Robert Davis</td>
+                            <td>Delete (User ID 5)</td>
+                            <td>2023-06-05 10:10 AM</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1002</td>
+                            <td>Jane Smith</td>
+                            <td>Delete (User ID 2)</td>
+                            <td>2023-06-02 02:45 PM</td>
+                        </tr>
+                    </tbody>
+                </table>                             
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-12 col-md-6">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page=1">1</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                    <a href="/user/" class="btn btn-primary">Return to User List</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <h1>Permission Management</h1>
+        <hr>
+
+        <h3>StaffvModules</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="staffvmodules-view" checked>
+            <label class="form-check-label" for="staffvmodules-view">
+                View
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="staffvmodules-edit" checked>
+            <label class="form-check-label" for="staffvmodules-edit">
+                Edit
+            </label>
+        </div>
+
+        <h3>Staff Management</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="staff-management-view" checked>
+            <label class="form-check-label" for="staff-management-view">
+                View
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="staff-management-edit" checked>
+            <label class="form-check-label" for="staff-management-edit">
+                Edit
+            </label>
+        </div>
+
+        <h3>Courses Management</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="courses-management-view" checked>
+            <label class="form-check-label" for="courses-management-view">
+                View
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="courses-management-edit" checked>
+            <label class="form-check-label" for="courses-management-edit">
+                Edit
+            </label>
+        </div>
+
+        <h3>Dashboard</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="dashboard-view" checked>
+            <label class="form-check-label" for="dashboard-view">
+                View
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="dashboard-edit" checked>
+            <label class="form-check-label" for="dashboard-edit">
+                Edit
+            </label>
+        </div>
+
+        <h3>User Management</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="user-management-view">
+            <label class="form-check-label" for="user-management-view">
+                View
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="user-management-edit">
+            <label class="form-check-label" for="user-management-edit">
+                Edit
+            </label>
+        </div>
+
+        <h3>Setting</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="setting-view">
+            <label class="form-check-label" for="setting-view">
+                View
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="setting-edit">
+            <label class="form-check-label" for="setting-edit">
+                Edit
+            </label>
+        </div>
+
+        <hr>
+
+        <button type="submit" class="btn btn-primary">Save Permissions</button>
+        <a href="/user/" class="btn btn-primary">Return to User List</a>
+    </div>
+</div>
