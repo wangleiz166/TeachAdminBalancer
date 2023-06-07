@@ -1,0 +1,103 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<style>
+    .main-content {
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+    
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<div class="main-content">
+    <div class="container my-3">
+        <table>
+            <thead>
+                <tr>
+                    <th>Alpha</th>
+                    <th>Beta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Standard classroom based</td>
+                    <td>4.4</td>
+                    <td>0.15</td>
+                </tr>
+                <tr>
+                    <td>Standard computer lab based</td>
+                    <td>5.14</td>
+                    <td>0.15</td>
+                </tr>
+                <tr>
+                    <td>Standard project based</td>
+                    <td>3.7</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Individual project</td>
+                    <td>0</td>
+                    <td>0.5</td>
+                </tr>
+                <tr>
+                    <td>Group project</td>
+                    <td>0</td>
+                    <td>0.8</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="container my-3">
+        <table>
+            <thead>
+                <tr>
+                    <th>Delta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Existing course previously delivered</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Established course, new to lecturer</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Existing course, major revamp</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>New content/module</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <h2>Add New Course</h2>
+        <form action="/staff/add" method="post">
+            <div class="mb-3">
+                <label for="initials" class="form-label">Staff( "," separated)</label>
+                <input type="text" class="form-control" id="initials" name="initials" required>
+            </div>
+            <div class="mb-3">
+                <label for="initials" class="form-label">Code</label>
+                <input type="text" class="form-control" id="initials" name="initials" required>
+            </div>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" required>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Credits</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" required>
+            </div>
+            <div class="mb-3">
+                <label for="cat" class="form-label">Type</label>
+                <input type="text" class="form-control" id="cat" name="cat" required>
+            </div>
+            <div class="mb-3">
+                <label for="probation" class="form-label">Num staff allocated</label>
+                <input type="text" class="form-control" id="probation" name="probation">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Course</button>&nbsp;&nbsp;
+            <a href="/totalWork/" class="btn btn-primary">Return to Course List</a>
+        </form>
+    </div>
+</div>
+
+       
