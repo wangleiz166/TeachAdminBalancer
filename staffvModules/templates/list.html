@@ -1,0 +1,112 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by code" aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">Linked courses</th>
+                    <th scope="col">Unlinked relatives</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Num staff allocated</th>
+                    <th scope="col">Est. Num Students</th>
+                    <th scope="col">Hours</th>
+                    <th scope="col"><a href="/staffvModules/detail">JD</a></th>
+                    <th scope="col"><a href="/staffvModules/detail">JB</a></th>
+                    <th scope="col"><a href="/staffvModules/detail">MC</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CS1032</td>
+                    <td><u>QC1003</u></td>
+                    <td>JC1001</td>
+                    <td>Programming 1</td>
+                    <td>0.5</td>
+                    <td>230</td>
+                    <td></td>
+                    <td>0.5</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CS1029</td>
+                    <td><u>QC1002</u></td>
+                    <td></td>
+                    <td>Modelling & Problem Solving for Computing</td>
+                    <td>0</td>
+                    <td>118</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CS1031</td>
+                    <td></td>
+                    <td>JC2503</td>
+                    <td>Web app dev (optional)</td>
+                    <td>0</td>
+                    <td>154</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CS2019</td>
+                    <td><u>QC2002</u></td>
+                    <td>JC2504, SCNU25Data</td>
+                    <td>Databases and Data Management</td>
+                    <td>0</td>
+                    <td>64</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CS2020</td>
+                    <td><u>QC2001</u></td>
+                    <td>JC2002, SCNU20SP</td>
+                    <td>Software Programming</td>
+                    <td>0</td>
+                    <td>60</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row my-3">
+            <div class="col-12 col-md-6">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?page=1">1</a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
