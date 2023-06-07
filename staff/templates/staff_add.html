@@ -1,0 +1,66 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <h2>Add New Staff</h2>
+        <form action="/staff/add" method="post">
+            <div class="mb-3">
+                <label for="initials" class="form-label">Coursess( "," separated)</label>
+                <input type="text" class="form-control" id="initials" name="initials" required>
+            </div>
+            <div class="mb-3">
+                <label for="initials" class="form-label">Staff Initials</label>
+                <input type="text" class="form-control" id="initials" name="initials" required>
+            </div>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" required>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" required>
+            </div>
+            <div class="mb-3">
+                <label for="cat" class="form-label">Cat</label>
+                <input type="text" class="form-control" id="cat" name="cat" required>
+            </div>
+            <div class="mb-3">
+                <label for="probation" class="form-label">Probation Yr (1-3 or n.a)</label>
+                <input type="text" class="form-control" id="probation" name="probation">
+            </div>
+            <div class="mb-3">
+                <label for="availability" class="form-label">Annual Availability</label>
+                <input type="text" class="form-control" id="availability" name="availability" required>
+            </div>
+            <div class="mb-3">
+                <label for="unadjustedMax" class="form-label">Unadjusted Max</label>
+                <input type="text" class="form-control" id="unadjustedMax" name="unadjustedMax" required>
+            </div>
+            <div class="mb-3">
+                <label for="adjustedMax" class="form-label">Adjusted Max</label>
+                <input type="text" class="form-control" id="adjustedMax" name="adjustedMax" required>
+            </div>
+            <div class="mb-3">
+                <label for="availabilityNotes" class="form-label">Availability Notes</label>
+                <textarea class="form-control" id="availabilityNotes" name="availabilityNotes" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="emplEndDate" class="form-label">Empl. end date</label>
+                <input type="text" class="form-control" id="emplEndDate" name="emplEndDate">
+            </div>
+            <div class="mb-3">
+                <label for="probationStartDate" class="form-label">Probation Start date</label>
+                <input type="text" class="form-control" id="probationStartDate" name="probationStartDate">
+            </div>
+            <div class="mb-3">
+                <label for="probationStartYearStage" class="form-label">Probation Start year stage</label>
+                <input type="text" class="form-control" id="probationStartYearStage" name="probationStartYearStage">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Staff</button>&nbsp;&nbsp;
+            <a href="/staff/" class="btn btn-primary">Return to Staff List</a>
+        </form>
+    </div>
+</div>
+
+       

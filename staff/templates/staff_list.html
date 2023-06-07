@@ -8,8 +8,8 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Search by staff" aria-label="Search" id="searchInput">
                     <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
-                    <a href="/user/add" class="btn btn-primary">Add</a>&nbsp;
-                    <a href="/user/add" class="btn btn-primary">Bulk Add</a>
+                    <a href="/staff/add" class="btn btn-primary">Add</a>&nbsp;
+                    <a href="/staff/bulk_add" class="btn btn-primary">Bulk Add</a>
                 </div>
             </div>
         </div>
@@ -24,10 +24,6 @@
                     <th>Annual Availability</th>
                     <th>Unadjusted Max</th>
                     <th>Adjusted Max</th>
-                    <th>Availability Notes</th>
-                    <th>Empl. end date</th>
-                    <th>Probation Start date</th>
-                    <th>Probation Start year stage</th>
                     <th>Operation</th>
                 </tr>
             </thead>
@@ -41,10 +37,12 @@
                     <td>1.00</td>
                     <td>1360</td>
                     <td>1360</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>  
                 </tr>
                 <tr>
                     <td><a href="/staffvModules/detail">JD</a></td>
@@ -55,10 +53,12 @@
                     <td>0.60</td>
                     <td>960</td>
                     <td>576</td>
-                    <td>Only available for 60% of full-time to University of Aberdeen across each component of teaching, admin and research.</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>  
                 </tr>
                 <tr>
                     <td><a href="/staffvModules/detail">MC</a></td>
@@ -69,10 +69,12 @@
                     <td>1.00</td>
                     <td>960</td>
                     <td>960</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>  
                 </tr>
             </tbody>
         </table>
@@ -95,3 +97,13 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmDelete(event) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            // Continue with the deletion logic here
+            // For example, you can redirect to the delete URL or make an AJAX request
+        } else {
+            event.preventDefault(); // Prevent the default action (e.g., following the link)
+        }
+    }
+</script>
