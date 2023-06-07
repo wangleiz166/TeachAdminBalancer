@@ -21,6 +21,7 @@
         margin-top: 10px;
     }
 
+
     .logo {
         display: flex;
         align-items: center;
@@ -41,6 +42,7 @@
         margin-top: 10px;
     }
 
+
     .sidebar a:hover::before {
         content: "";
         display: block;
@@ -53,6 +55,11 @@
     }
 
     .sidebar a:hover {
+        background-color: #1a1a1a;
+        border-left: 4px solid #c56fd5;
+    }
+
+    .sidebar a.hover-style {
         background-color: #1a1a1a;
         border-left: 4px solid #c56fd5;
     }
@@ -93,13 +100,15 @@
 
 <div class="sidebar">
     <div class="navbar-brand d-flex align-items-center logo" href="#">
-        <img src="https://github.com/wangleiz166/studyInAberdeen/blob/main/Log.png?raw=true" alt="Logo" class="me-2" height="40">
+        <img src="https://github.com/wangleiz166/studyInAberdeen/blob/main/Log.png?raw=true" alt="Logo" class="me-2"
+            height="40">
     </div>
-    
+
     <div class="navbar-brand d-flex align-items-center logo2" href="#">
-        <img src="https://github.com/wangleiz166/studyInAberdeen/blob/main/TeachAdminBalancer.png?raw=true" alt="Logo" class="me-2" height="30">
+        <img src="https://github.com/wangleiz166/studyInAberdeen/blob/main/TeachAdminBalancer.png?raw=true" alt="Logo"
+            class="me-2" height="30">
     </div>
-    
+
     <span class="downlog">
         <hr>
     </span>
@@ -131,3 +140,25 @@
     </div>
 
 </div>
+
+<script>
+    // 获取当前页面的 URL
+    var currentURL = window.location.href;
+
+    // 检查 URL 是否为 "/staffvModules/"
+    if (currentURL.includes("/staffvModules/")) {
+        // 获取 <a> 元素
+        var staffvModulesLink = document.querySelector('a[href="/staffvModules"]');
+
+        // 添加样式类
+        staffvModulesLink.classList.add("hover-style");
+    }
+    else if (currentURL.includes("/staff/")) {
+        // 获取 <a> 元素
+        var staffvModulesLink = document.querySelector('a[href="/staff"]');
+
+        // 添加样式类
+        staffvModulesLink.classList.add("hover-style");
+    }
+
+</script>
