@@ -19,5 +19,7 @@ urlpatterns = [
      path('user/', include('user.urls')),
      path('staffvModules/', include('staffvModules.urls')),
      path('staff/', include('staff.urls')),
+     path('totalWork/', include('totalWork.urls')),
+     path('dashboard/', include('dashboard.urls')),
      path('', include('staffvModules.urls')),
 ]

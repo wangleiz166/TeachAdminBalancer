@@ -1,0 +1,106 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search by Code" aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                    <a href="/staff/add" class="btn btn-primary">Add</a>&nbsp;
+                    <a href="/staff/bulk_add" class="btn btn-primary">Bulk Add</a>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Credits</th>
+                    <th>Type</th>
+                    <th>Num staff allocated</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CS1032</td>
+                    <td>Programming 1</td>
+                    <td>15</td>
+                    <td>Standard classroom based</td>
+                    <td>100</td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>CS1029</td>
+                    <td>Modelling &amp; Problem Solving for Computing</td>
+                    <td>15</td>
+                    <td>Standard classroom based</td>
+                    <td>10</td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>CS1031</td>
+                    <td>Web app</td>
+                    <td>15</td>
+                    <td>Standard classroom based</td>
+                    <td>100</td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>CS2019</td>
+                    <td>Databases and Data Management</td>
+                    <td>15</td>
+                    <td>Standard classroom based</td>
+                    <td>100</td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>CS2020</td>
+                    <td>Software Programming</td>
+                    <td>15</td>
+                    <td>Standard classroom based</td>
+                    <td>100</td>
+                    <td>
+                        <a href="/staff/detail" class="btn btn-primary">
+                            Detail
+                        </a>
+                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function confirmDelete(event) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            // Continue with the deletion logic here
+            // For example, you can redirect to the delete URL or make an AJAX request
+        } else {
+            event.preventDefault(); // Prevent the default action (e.g., following the link)
+        }
+    }
+</script>
