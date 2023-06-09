@@ -3,104 +3,271 @@
 
 <div class="main-content">
     <div class="container my-3">
-        <div class="row">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search by Code" aria-label="Search" id="searchInput">
-                    <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
-                    <a href="/totalWork/add" class="btn btn-primary">Add</a>&nbsp;
-                    <a href="/totalWork/bulk_add" class="btn btn-primary">Bulk Add</a>
+        <ul class="nav nav-tabs nav-fill" id="myTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold" id="coursesTab" data-bs-toggle="tab" data-bs-target="#courses" type="button" role="tab" aria-controls="courses" aria-selected="true">Courses & Projects</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="adminRolesTab" data-bs-toggle="tab" data-bs-target="#adminRoles" type="button" role="tab" aria-controls="adminRoles" aria-selected="false">Admin Roles</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="overallCalcsTab" data-bs-toggle="tab" data-bs-target="#overallCalcs" type="button" role="tab" aria-controls="overallCalcs" aria-selected="false">Overall Calcs</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="frozenModulesTab" data-bs-toggle="tab" data-bs-target="#frozenModules" type="button" role="tab" aria-controls="frozenModules" aria-selected="false">Frozen Modules</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabsContent">
+            <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="coursesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by code" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Credits</th>
+                            <th>Type</th>
+                            <th>Num staff allocated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CS1032</td>
+                            <td>Programming 1</td>
+                            <td>15</td>
+                            <td>Standard classroom based</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>CS1029</td>
+                            <td>Modelling & Problem Solving for Computing</td>
+                            <td>15</td>
+                            <td>Standard classroom based</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>CS1031</td>
+                            <td>Web app</td>
+                            <td>15</td>
+                            <td>Standard classroom based</td>
+                            <td>400</td>
+                        </tr>
+                        <tr>
+                            <td>CS2019</td>
+                            <td>Databases and Data Management</td>
+                            <td>15</td>
+                            <td>Standard classroom based</td>
+                            <td>200</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
+            <div class="tab-pane fade" id="adminRoles" role="tabpanel" aria-labelledby="adminRolesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by Admin roles" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Admin roles</th>
+                            <th>Credits</th>
+                            <th>Filled</th>
+                            <th>Load</th>
+                            <th>Allocated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ALM+A77:G93</td>
+                            <td>320</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>320</td>
+                        </tr>
+                        <tr>
+                            <td>CS core research theme lead</td>
+                            <td>280</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>280</td>
+                        </tr>
+                        <tr>
+                            <td>PGR</td>
+                            <td>80</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td>Taught PGT lead</td>
+                            <td>80</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>DuP</td>
+                            <td>320</td>
+                            <td>1</td>
+                            <td>320</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Msc AI Dir (300 with Jan)</td>
+                            <td>300</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>MSc Cyber Dir</td>
+                            <td>200</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>200</td>
+                        </tr>
+                        <tr>
+                            <td>MSc IT Dir (300 with Jan)</td>
+                            <td>300</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>Go abroad/Erasmus/Turing</td>
+                            <td>120</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>120</td>
+                        </tr>
+                        <tr>
+                            <td>Exam officer</td>
+                            <td>80</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>80</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="overallCalcs" role="tabpanel" aria-labelledby="overallCalcsTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by overallCalcs" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Credits</th>
+                            </tr>
+                            <tr>
+                                <td>Core staff Hours Available</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Minimum taught course load obliged</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Project Supervision obliged</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Project Marking obliged</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Total teaching load obliged</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row my-3">
+                        <div class="col-12 col-md-6">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="?page=1">1</a>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="frozenModules" role="tabpanel" aria-labelledby="frozenModulesTab">
+                <!-- Frozen Modules content goes here -->
+                <table class="table table-striped">
+                    <!-- Table content for Frozen Modules -->
+                </table>
+            </div>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Credits</th>
-                    <th>Type</th>
-                    <th>Num Staff allocated</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>CS1032</td>
-                    <td>Programming 1</td>
-                    <td>15</td>
-                    <td>Standard classroom based</td>
-                    <td>100</td>
-                    <td>
-                        <a href="/totalWork/detail" class="btn btn-primary">
-                            Detail
-                        </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CS1029</td>
-                    <td>Modelling &amp; Problem Solving for Computing</td>
-                    <td>15</td>
-                    <td>Standard classroom based</td>
-                    <td>10</td>
-                    <td>
-                        <a href="/totalWork/detail" class="btn btn-primary">
-                            Detail
-                        </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CS1031</td>
-                    <td>Web app</td>
-                    <td>15</td>
-                    <td>Standard classroom based</td>
-                    <td>100</td>
-                    <td>
-                        <a href="/totalWork/detail" class="btn btn-primary">
-                            Detail
-                        </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CS2019</td>
-                    <td>Databases and Data Management</td>
-                    <td>15</td>
-                    <td>Standard classroom based</td>
-                    <td>100</td>
-                    <td>
-                        <a href="/totalWork/detail" class="btn btn-primary">
-                            Detail
-                        </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>CS2020</td>
-                    <td>Software Programming</td>
-                    <td>15</td>
-                    <td>Standard classroom based</td>
-                    <td>100</td>
-                    <td>
-                        <a href="/totalWork/detail" class="btn btn-primary">
-                            Detail
-                        </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 </div>
+<!-- Include the necessary JavaScript code -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function confirmDelete(event) {
-        if (confirm("Are you sure you want to delete this item?")) {
-            // Continue with the deletion logic here
-            // For example, you can redirect to the delete URL or make an AJAX request
-        } else {
-            event.preventDefault(); // Prevent the default action (e.g., following the link)
-        }
-    }
+    // 设置默认活动选项卡
+    var tabs = new bootstrap.Tab(document.getElementById('myTabs').querySelector('.nav-link.active'));
+    tabs.show();
 </script>

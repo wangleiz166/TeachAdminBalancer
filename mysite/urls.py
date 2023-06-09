@@ -21,5 +21,6 @@ urlpatterns = [
      path('staff/', include('staff.urls')),
      path('totalWork/', include('totalWork.urls')),
      path('dashboard/', include('dashboard.urls')),
+     path('setting/', include('setting.urls')),
      path('', include('staffvModules.urls')),
 ]

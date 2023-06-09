@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'staffvModules',
     'staff',
     'totalWork',
-    'dashboard'
+    'dashboard',
+    'setting'
 ]
 
 MIDDLEWARE = [

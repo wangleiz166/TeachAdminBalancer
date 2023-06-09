@@ -3,7 +3,7 @@
 
 <div class="main-content">
     <div class="container my-3">
-        <h2>Table</h2>
+        <h2>Total</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -17,15 +17,16 @@
             <tbody>
                 <tr>
                     <td>Jane Doe</td>
-                    <td>576</td>
+                    <td><input type="text" value="576"></td>
                     <td>558.6429797</td>
                     <td>17.35702025</td>
                     <td>329.145</td>
                 </tr>
             </tbody>
         </table>
-        <h2>Teaching</h2>
-        <table class="table">
+        
+        <h2>Total Teaching</h2>
+        <table id="totalTeachingTable" class="table">
             <thead>
                 <tr>
                     <th>Course</th>
@@ -41,33 +42,34 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>CS502K</td>
-                    <td>15</td>
-                    <td>4.4</td>
-                    <td>0.15</td>
-                    <td>35</td>
-                    <td>1</td>
-                    <td>0.5</td>
-                    <td>15</td>
-                    <td>87.375</td>
+                    <td><input type="text" value="CS502K"></td>
+                    <td><input type="text" value="15"></td>
+                    <td><input type="text" value="4.4"></td>
+                    <td><input type="text" value="0.15"></td>
+                    <td><input type="text" value="35"></td>
+                    <td><input type="text" value="1"></td>
+                    <td><input type="text" value="0.5"></td>
+                    <td><input type="text" value="15"></td>
+                    <td><input type="text" value="87.375"></td>
                 </tr>
                 <tr>
-                    <td>CS3525</td>
-                    <td>15</td>
-                    <td>4.4</td>
-                    <td>0.15</td>
-                    <td>50</td>
-                    <td>1</td>
-                    <td>0.5</td>
-                    <td>15</td>
-                    <td>104.25</td>
+                    <td><input type="text" value="CS3525"></td>
+                    <td><input type="text" value="15"></td>
+                    <td><input type="text" value="4.4"></td>
+                    <td><input type="text" value="0.15"></td>
+                    <td><input type="text" value="50"></td>
+                    <td><input type="text" value="1"></td>
+                    <td><input type="text" value="0.5"></td>
+                    <td><input type="text" value="15"></td>
+                    <td><input type="text" value="104.25"></td>
                 </tr>
                 <!-- Add more rows here for other courses -->
             </tbody>
         </table>
-        
-        <h2>Project Supervision and Marking</h2>
-        <table class="table">
+        <button id="addNewOneTotalTeaching">Add New One</button>
+        <br><br>
+        <h2>Total Project</h2>
+        <table id="totalProjectTable" class="table">
             <thead>
                 <tr>
                     <th>Project</th>
@@ -77,21 +79,22 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>L3 Group project</td>
-                    <td>5</td>
-                    <td>99.5</td>
+                    <td><input type="text" value="L3 Group project"></td>
+                    <td><input type="text" value="5"></td>
+                    <td><input type="text" value="99.5"></td>
                 </tr>
                 <tr>
-                    <td>UG Project supervision</td>
-                    <td>1</td>
-                    <td>29.8</td>
+                    <td><input type="text" value="UG Project supervision"></td>
+                    <td><input type="text" value="1"></td>
+                    <td><input type="text" value="29.8"></td>
                 </tr>
                 <!-- Add more rows here for other project supervision and marking -->
             </tbody>
         </table>
-        
-        <h2>Admin</h2>
-        <table class="table">
+        <button id="addNewOneTotalProject">Add New One</button>
+        <br><br>
+        <h2>Total Admin</h2>
+        <table id="totalAdminTable" class="table">
             <thead>
                 <tr>
                     <th>Role</th>
@@ -100,21 +103,66 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Exam officer</td>
-                    <td>80</td>
+                    <td><input type="text" value="Exam officer"></td>
+                    <td><input type="text" value="80"></td>
                 </tr>
                 <tr>
-                    <td>Mentor</td>
-                    <td>32</td>
+                    <td><input type="text" value="Mentor"></td>
+                    <td><input type="text" value="32"></td>
                 </tr>
                 <!-- Add more rows here for other admin roles -->
             </tbody>
         </table>
-        
-       
-        
+        <button id="addNewOneTotalAdmin">Add New One</button>
+        <br><br>
         <!-- Add more sections and tables as needed for other categories -->
-        <a href="/staffvModules/" class="btn btn-primary">Return to staffvModules List</a> 
+        <a href="/staffvModules/" class="btn btn-success">Save</a> 
+        <a href="/staffvModules/" class="btn btn-success">Return to staffvModules List</a> 
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Add New One button click event for Total Teaching table
+                $("#addNewOneTotalTeaching").on("click", function() {
+                    var newRowHtml = `
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    `;
+                    $("#totalTeachingTable tbody").append(newRowHtml);
+                });
+                
+                // Add New One button click event for Total Project table
+                $("#addNewOneTotalProject").on("click", function() {
+                    var newRowHtml = `
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    `;
+                    $("#totalProjectTable tbody").append(newRowHtml);
+                });
+                
+                // Add New One button click event for Total Admin table
+                $("#addNewOneTotalAdmin").on("click", function() {
+                    var newRowHtml = `
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    `;
+                    $("#totalAdminTable tbody").append(newRowHtml);
+                });
+            });
+        </script>
     </div>
 </div>
-

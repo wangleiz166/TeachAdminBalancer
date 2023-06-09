@@ -1,0 +1,69 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="">
+                    <table class="table table-striped" id="menuTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">URL</th>
+                                <th scope="col">Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" name="name" value="StaffvModules" required>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="url" value="/staffvModules" required>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </td>  
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" name="name" value="Staff" required>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="url" value="/staff" required>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </td>  
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>                
+                <button id="addRowBtn" class="btn btn-primary">add new one</button>
+                <br>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Save menu</button>
+        <a href="/setting/" class="btn btn-success">Return to Setting List</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#addRowBtn").click(function() {
+            var newRow = '<tr>' +
+                '<td><input type="text" class="form-control" name="name" required></td>' +
+                '<td><input type="text" class="form-control" name="url" required></td>' +
+                '<td><button type="submit" class="btn btn-danger">Delete</button></td>' +
+                '</tr>';
+            $("#menuTable tbody").append(newRow);
+        });
+    });
+</script>

@@ -3,110 +3,378 @@
 
 <div class="main-content">
     <div class="container my-3">
-        <div class="row">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search by code" aria-label="Search" id="searchInput">
-                    <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+        <ul class="nav nav-tabs nav-fill justify-content-start" id="myTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold" id="coursesTab" data-bs-toggle="tab" data-bs-target="#courses" type="button" role="tab" aria-controls="courses" aria-selected="true">Courses & Projects</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="adminRolesTab" data-bs-toggle="tab" data-bs-target="#adminRoles" type="button" role="tab" aria-controls="adminRoles" aria-selected="false">Admin Roles</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="schoolRolesTab" data-bs-toggle="tab" data-bs-target="#schoolRoles" type="button" role="tab" aria-controls="schoolRoles" aria-selected="false">School Roles</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="uniRolesTab" data-bs-toggle="tab" data-bs-target="#uniRoles" type="button" role="tab" aria-controls="uniRoles" aria-selected="false">Uni Roles</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="myTabsContent">
+            <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="coursesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by code" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Code</th>
+                            <th scope="col">Linked courses</th>
+                            <th scope="col">Unlinked relatives</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Num staff allocated</th>
+                            <th scope="col">Est. Num Students</th>
+                            <th scope="col">Hours</th>
+                            <th scope="col"><a href="/staffvModules/detail">JD</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">JB</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">MC</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CS1032</td>
+                            <td><u>QC1003</u></td>
+                            <td>JC1001</td>
+                            <td>Programming 1</td>
+                            <td>0.5</td>
+                            <td>230</td>
+                            <td></td>
+                            <td>0.5</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS1029</td>
+                            <td><u>QC1002</u></td>
+                            <td></td>
+                            <td>Modelling & Problem Solving for Computing</td>
+                            <td>0</td>
+                            <td>118</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS1031</td>
+                            <td></td>
+                            <td>JC2503</td>
+                            <td>Web app dev (optional)</td>
+                            <td>0</td>
+                            <td>154</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS2019</td>
+                            <td><u>QC2002</u></td>
+                            <td>JC2504, SCNU25Data</td>
+                            <td>Databases and Data Management</td>
+                            <td>0</td>
+                            <td>64</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS2020</td>
+                            <td><u>QC2001</u></td>
+                            <td>JC2002, SCNU20SP</td>
+                            <td>Software Programming</td>
+                            <td>0</td>
+                            <td>60</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS1032</td>
+                            <td><u>QC1003</u></td>
+                            <td>JC1001</td>
+                            <td>Programming 1</td>
+                            <td>0.5</td>
+                            <td>230</td>
+                            <td></td>
+                            <td>0.5</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS1029</td>
+                            <td><u>QC1002</u></td>
+                            <td></td>
+                            <td>Modelling & Problem Solving for Computing</td>
+                            <td>0</td>
+                            <td>118</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS1032</td>
+                            <td><u>QC1003</u></td>
+                            <td>JC1001</td>
+                            <td>Programming 1</td>
+                            <td>0.5</td>
+                            <td>230</td>
+                            <td></td>
+                            <td>0.5</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS1029</td>
+                            <td><u>QC1002</u></td>
+                            <td></td>
+                            <td>Modelling & Problem Solving for Computing</td>
+                            <td>0</td>
+                            <td>118</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>CS1029</td>
+                            <td><u>QC1002</u></td>
+                            <td></td>
+                            <td>Modelling & Problem Solving for Computing</td>
+                            <td>0</td>
+                            <td>118</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="adminRoles" role="tabpanel" aria-labelledby="adminRolesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by Admin roles" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Admin roles</th>
+                            <th scope="col">Crit</th>
+                            <th scope="col">Hours</th>
+                            <th scope="col"><a href="/staffvModules/detail">JD</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">JB</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">MC</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ALM</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>640</td>
+                            <td></td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>CS core research theme lead</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>280</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>PGR</td>
+                            <td>0</td>
+                            <td>2</td>
+                            <td>80</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Taught PGT lead</td>
+                            <td>0</td>
+                            <td>4</td>
+                            <td>80</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>                
+            </div>
+            <div class="tab-pane fade" id="schoolRoles" role="tabpanel" aria-labelledby="schoolRolesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by Admin roles" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">School Roles</th>
+                            <th scope="col">Crit</th>
+                            <th scope="col">Hours</th>
+                            <th scope="col"><a href="/staffvModules/detail">JD</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">JB</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">MC</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>School DoR</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>640</td>
+                            <td></td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>School Entrepreneurship and Employability Lead</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>640</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="uniRoles" role="tabpanel" aria-labelledby="uniRolesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by Admin roles" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Uni Roles</th>
+                            <th scope="col">Crit</th>
+                            <th scope="col">Hours</th>
+                            <th scope="col"><a href="/staffvModules/detail">JD</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">JB</a></th>
+                            <th scope="col"><a href="/staffvModules/detail">MC</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Senate</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>640</td>
+                            <td></td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Code</th>
-                    <th scope="col">Linked courses</th>
-                    <th scope="col">Unlinked relatives</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Num staff allocated</th>
-                    <th scope="col">Est. Num Students</th>
-                    <th scope="col">Hours</th>
-                    <th scope="col"><a href="/staffvModules/detail">JD</a></th>
-                    <th scope="col"><a href="/staffvModules/detail">JB</a></th>
-                    <th scope="col"><a href="/staffvModules/detail">MC</a></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>CS1032</td>
-                    <td><u>QC1003</u></td>
-                    <td>JC1001</td>
-                    <td>Programming 1</td>
-                    <td>0.5</td>
-                    <td>230</td>
-                    <td></td>
-                    <td>0.5</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>CS1029</td>
-                    <td><u>QC1002</u></td>
-                    <td></td>
-                    <td>Modelling & Problem Solving for Computing</td>
-                    <td>0</td>
-                    <td>118</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>CS1031</td>
-                    <td></td>
-                    <td>JC2503</td>
-                    <td>Web app dev (optional)</td>
-                    <td>0</td>
-                    <td>154</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>CS2019</td>
-                    <td><u>QC2002</u></td>
-                    <td>JC2504, SCNU25Data</td>
-                    <td>Databases and Data Management</td>
-                    <td>0</td>
-                    <td>64</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>CS2020</td>
-                    <td><u>QC2001</u></td>
-                    <td>JC2002, SCNU20SP</td>
-                    <td>Software Programming</td>
-                    <td>0</td>
-                    <td>60</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row my-3">
-            <div class="col-12 col-md-6">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="?page=1">1</a>
-                        </li>
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
     </div>
 </div>
 
+<!-- Include the necessary JavaScript code -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+     // 设置默认活动选项卡
+    var tabs = new bootstrap.Tab(document.getElementById('myTabs').querySelector('.nav-link.active'));
+    tabs.show();
+</script>
