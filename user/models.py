@@ -1,27 +1,46 @@
 from django.db import models
 
 class User(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-    identity = models.IntegerField(choices=((1, 'Manager'), (2, 'Employee'), (3, 'IT Administrator')))
-    is_deleted = models.BooleanField(default=False)
+    id = models.AutoField(primary_key=True)
+    user_name = models.CharField(max_length=100)
+    mail = models.EmailField()
+    pass_word = models.CharField(max_length=100)
+    permission_id = models.IntegerField()
+    create_time = models.DateTimeField(auto_now_add=True)
+    is_delete = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.username
+        return f"User {self.user_name}"
+
+    class Meta:
+        db_table = 'balancer_user'
+
 
 class Permission(models.Model):
-    menu_id = models.IntegerField()
-    permission = models.IntegerField(choices=((0, 'No Access'), (1, 'View'), (2, 'Edit'), (3, 'Full Access')))
+    id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
+    position_id = models.IntegerField()
+    menu_id = models.IntegerField()
+    permission = models.IntegerField()
+    create_time = models.DateTimeField(auto_now_add=True)
+    is_delete = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"User ID: {self.user_id} - Menu ID: {self.menu_id}"
+        return f"{self.user_id} - {self.menu_id}"
+
+    class Meta:
+        db_table = 'balancer_permission'
+
 
 class Log(models.Model):
+    id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
-    operation = models.CharField(max_length=100)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    operation_details = models.CharField(max_length=500)
+    create_time = models.DateTimeField(auto_now_add=True)
+    is_delete = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"User ID: {self.user_id} - {self.operation}"
+        return f"{self.id} - User ID: {self.user_id}"
 
+    class Meta:
+        db_table = 'balancer_log'
