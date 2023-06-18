@@ -4,57 +4,58 @@
 <div class="main-content">
     <div class="container my-3">
         <h2>Add New Staff</h2>
-        <form action="/staff/add" method="post">
+        <form action="/staff/update/{{ staff.id }}/" method="post">
+            {% csrf_token %}
             <div class="mb-3">
                 <label for="initials" class="form-label">Staff Initials</label>
-                <input type="text" class="form-control" id="initials" name="initials" value="JB" required>
+                <input type="text" class="form-control" id="initials" name="initials" value="{{ staff.initials }}" required>
             </div>
             <div class="mb-3">
                 <label for="firstName" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" value="Joe" required>
+                <input type="text" class="form-control" id="firstName" name="firstName" value="{{ staff.first_name }}" required>
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" value="Bloggs" required>
+                <input type="text" class="form-control" id="lastName" name="lastName" value="{{ staff.last_name }}" required>
             </div>
             <div class="mb-3">
                 <label for="cat" class="form-label">Cat</label>
-                <input type="text" class="form-control" id="cat" name="cat" value="TS" required>
+                <input type="text" class="form-control" id="cat" name="cat" value="{{ staff.cat }}" required>
             </div>
             <div class="mb-3">
                 <label for="probation" class="form-label">Probation Yr (1-3 or n.a)</label>
-                <input type="text" class="form-control" id="probation" name="probation" value="1.00">
+                <input type="text" class="form-control" id="probation" name="probation" value="{{ staff.probation_year }}">
             </div>
             <div class="mb-3">
                 <label for="availability" class="form-label">Annual Availability</label>
-                <input type="text" class="form-control" id="availability" name="availability" value="1360" required>
+                <input type="text" class="form-control" id="availability" name="availability" value="{{ staff.annual_availability }}" required>
             </div>
             <div class="mb-3">
                 <label for="unadjustedMax" class="form-label">Unadjusted Max</label>
-                <input type="text" class="form-control" id="unadjustedMax" name="unadjustedMax" value="1360" required>
+                <input type="text" class="form-control" id="unadjustedMax" name="unadjustedMax" value="{{ staff.unadjusted_max }}" required>
             </div>
             <div class="mb-3">
                 <label for="adjustedMax" class="form-label">Adjusted Max</label>
-                <input type="text" class="form-control" id="adjustedMax" name="adjustedMax" value="1360" required>
+                <input type="text" class="form-control" id="adjustedMax" name="adjustedMax" value="{{ staff.adjusted_max }}" required>
             </div>
             <div class="mb-3">
                 <label for="availabilityNotes" class="form-label">Availability Notes</label>
-                <textarea class="form-control" id="availabilityNotes" name="availabilityNotes" rows="3">Ony available for 60% of full-time to University of Aberdeen across each component of teaching, admin and research.</textarea>
+                <textarea class="form-control" id="availabilityNotes" name="availabilityNotes" rows="3">{{ staff.availability_notes }}</textarea>
             </div>
             <div class="mb-3">
                 <label for="emplEndDate" class="form-label">Empl. end date</label>
-                <input type="text" class="form-control" id="emplEndDate" name="emplEndDate">
+                <input type="text" class="form-control" id="emplEndDate" name="emplEndDate" value="{{ staff.employment_end_date }}">
             </div>
             <div class="mb-3">
                 <label for="probationStartDate" class="form-label">Probation Start date</label>
-                <input type="text" class="form-control" id="probationStartDate" name="probationStartDate">
+                <input type="text" class="form-control" id="probationStartDate" name="probationStartDate" value="{{ staff.probation_start_date }}">
             </div>
             <div class="mb-3">
                 <label for="probationStartYearStage" class="form-label">Probation Start year</label>
-                <input type="text" class="form-control" id="probationStartYearStage" name="probationStartYearStage">
+                <input type="text" class="form-control" id="probationStartYearStage" name="probationStartYearStage" value="{{ staff.probation_start_year_stage }}">
             </div>
             <button type="submit" class="btn btn-primary">Update Staff</button>&nbsp;&nbsp;
             <a href="/staff/" class="btn btn-primary">Return to Staff List</a>
         </form>
     </div>
-</div>    
+</div>

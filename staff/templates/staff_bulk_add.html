@@ -2,13 +2,18 @@
 {% include 'common/nav.html' %}
 
 <div class="main-content">
+    <div class="alert alert-warning mt-3" role="alert">
+        Examples of formats:<br>
+        JD, John, Doe, A, 2, 160, 200, 180<br>
+        JS Jane, Smith, B, n.a, 120, 150, 140
+    </div>
     <div class="container my-3">
         <h2>Add New Staff</h2>
         <form action="/staff/add" method="post">
             <div class="mb-3">
                 <textarea class="form-control" id="notes" name="notes" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary"">Add Staff</button>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-primary" onclick="return validateForm()">Add Staff</button>&nbsp;&nbsp;
             <button type="submit" class="btn btn-primary" onclick="return validateForm()">format check</button>&nbsp;&nbsp;
             <a href="/staff/" class="btn btn-primary">Return to Staff List</a>
         </form>
@@ -17,10 +22,11 @@
 
 <script>
     function validateForm() {
+        alert("Features under development");
         var notes = document.getElementById("notes").value;
         
         if (notes === "") {
-            alert("format is ok");
+            //alert("format is ok");
             return false;
         }
         

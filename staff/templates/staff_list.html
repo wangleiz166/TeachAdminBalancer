@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search by staff" aria-label="Search" id="searchInput">
+                    <input type="text" class="form-control" placeholder="Search by Staff Initials, First Name, or Last Name" aria-label="Search" id="searchInput">
                     <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
                     <a href="/staff/add" class="btn btn-primary">Add</a>&nbsp;
                     <a href="/staff/bulk_add" class="btn btn-primary">Bulk Add</a>
@@ -28,69 +28,61 @@
                 </tr>
             </thead>
             <tbody>
+                {% for staff in page_obj %}
                 <tr>
-                    <td><a href="/staffvModules/detail">JB</a></td>
-                    <td>Joe</td>
-                    <td>Bloggs</td>
-                    <td>TS</td>
-                    <td></td>
-                    <td>1.00</td>
-                    <td>1360</td>
-                    <td>1360</td>
+                    <td><a href="/staffvModules/detail">{{ staff.initials }}</a></td>
+                    <td>{{ staff.first_name }}</td>
+                    <td>{{ staff.last_name }}</td>
+                    <td>{{ staff.cat }}</td>
+                    <td>{{ staff.probation_year }}</td>
+                    <td>{{ staff.annual_availability }}</td>
+                    <td>{{ staff.unadjusted_max }}</td>
+                    <td>{{ staff.adjusted_max }}</td>
                     <td>
-                        <a href="/staff/detail" class="btn btn-primary">
+                        <a href="/staff/detail/{{ staff.id }}" class="btn btn-primary">
                             Detail
                         </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                        <a href="#" onclick="confirmDelete(event,{{ staff.id }})" class="btn btn-danger">Delete</a>
                     </td>  
                 </tr>
-                <tr>
-                    <td><a href="/staffvModules/detail">JD</a></td>
-                    <td>Jane</td>
-                    <td>Doe</td>
-                    <td>TR</td>
-                    <td>n.a.</td>
-                    <td>0.60</td>
-                    <td>960</td>
-                    <td>576</td>
-                    <td>
-                        <a href="/staff/detail" class="btn btn-primary">
-                            Detail
-                        </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                    </td>  
-                </tr>
-                <tr>
-                    <td><a href="/staffvModules/detail">MC</a></td>
-                    <td>Matthew</td>
-                    <td>Collinson</td>
-                    <td>TR</td>
-                    <td>n.a.</td>
-                    <td>1.00</td>
-                    <td>960</td>
-                    <td>960</td>
-                    <td>
-                        <a href="/staff/detail" class="btn btn-primary">
-                            Detail
-                        </a>
-                        <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                    </td>  
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
         <div class="row my-3">
             <div class="col-12 col-md-6">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        {% else %}
                         <li class="page-item disabled">
                             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                         </li>
+                        {% endif %}
+
+                        {% for page in page_obj.paginator.page_range %}
+                        {% if page == page_obj.number %}
                         <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="?page=1">1</a>
+                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
                         </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        {% else %}
                         <li class="page-item disabled">
                             <a class="page-link" href="#">Next</a>
                         </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -98,12 +90,24 @@
     </div>
 </div>
 <script>
-    function confirmDelete(event) {
+    function confirmDelete(event, staffId) {
         if (confirm("Are you sure you want to delete this item?")) {
             // Continue with the deletion logic here
-            // For example, you can redirect to the delete URL or make an AJAX request
+            window.location.href = "/staff/delete/" + staffId + "/";
         } else {
             event.preventDefault(); // Prevent the default action (e.g., following the link)
         }
     }
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+
+    searchButton.addEventListener('click', () => {
+        const query = searchInput.value;
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('query', query);
+
+        window.location.href = '/staff/?' + searchParams.toString();
+    });
 </script>

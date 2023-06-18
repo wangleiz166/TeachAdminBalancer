@@ -1,0 +1,36 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="container my-3">
+    <h2>Add New course</h2>
+    <form action="/staffvModules/edit/{{ course.id }}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="code">Code:</label>
+            <input type="text" class="form-control" id="code" name="code" value="{{ course.code }}">
+        </div>
+        <div class="form-group">
+            <label for="linked_courses">Linked courses:</label>
+            <input type="text" class="form-control" id="linked_courses" name="linked_courses" value="{{ course.linked_courses }}">
+        </div>
+        <div class="form-group">
+            <label for="unlinked_relatives">Unlinked relatives:</label>
+            <input type="text" class="form-control" id="unlinked_relatives" name="unlinked_relatives" value="{{ course.unlinked_relatives }}">
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ course.name }}">
+        </div>
+        <div class="form-group">
+            <label for="est_num_students">Est. Num Students:</label>
+            <input type="number" class="form-control" id="est_num_students" name="est_num_students" value="{{ course.est_num_students }}">
+        </div>
+        <div class="form-group">
+            <label for="hours">Hours:</label>
+            <input type="number" class="form-control" id="hours" name="hours" value="{{ course.hours }}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/staffvModules/" class="btn btn-primary">Return to staffvModules List</a>
+    </form>
+</div>
