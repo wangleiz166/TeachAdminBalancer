@@ -1,24 +1,25 @@
 {% include 'common/header.html' %}
 {% include 'common/nav.html' %}
-
-<div class="container my-3">
-    <h2>Add New adminrole</h2>
-    <form action="/staffvModules/adminRole/add/" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name">
-        </div>
-        <div class="form-group">
-            <label for="hours">Hours:</label>
-            <input type="number" class="form-control" id="hours" name="hours">
-        </div>
-        <div class="form-group">
-            <label for="crit">Crit:</label>
-            <input type="text" class="form-control" id="crit" name="crit">
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Add</button>
-        <a href="/staffvModules/adminRole/" class="btn btn-primary">Return to adminRole List</a>
-    </form>
+<div class="main-content">
+    <div class="container my-3">
+        <h2>Add New adminrole</h2>
+        <form action="/staffvModules/adminRole/add/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="hours">Hours:</label>
+                <input type="number" class="form-control" id="hours" name="hours">
+            </div>
+            <div class="form-group">
+                <label for="crit">Crit:</label>
+                <input type="text" class="form-control" id="crit" name="crit">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Add</button>
+            <a href="/staffvModules/adminRole/" class="btn btn-primary">Return to adminRole List</a>
+        </form>
+    </div>
 </div>

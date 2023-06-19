@@ -1,24 +1,25 @@
 {% include 'common/header.html' %}
 {% include 'common/nav.html' %}
-
-<div class="container my-3">
-    <h2>Edit adminRole</h2>
-    <form action="/staffvModules/adminRole/edit/{{ adminrole.id }}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ adminrole.name }}">
-        </div>
-        <div class="form-group">
-            <label for="hours">Hours:</label>
-            <input type="number" class="form-control" id="hours" name="hours" value="{{ adminrole.hours }}">
-        </div>
-        <div class="form-group">
-            <label for="crit">Crit:</label>
-            <input type="text" class="form-control" id="crit" name="crit" value="{{ adminrole.crit }}">
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="/staffvModules/adminRole/" class="btn btn-primary">Return to AdminRole List</a>
-    </form>
+<div class="main-content">
+    <div class="container my-3">
+        <h2>Edit adminRole</h2>
+        <form action="/staffvModules/adminRole/edit/{{ adminrole.id }}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ adminrole.name }}">
+            </div>
+            <div class="form-group">
+                <label for="hours">Hours:</label>
+                <input type="number" class="form-control" id="hours" name="hours" value="{{ adminrole.hours }}">
+            </div>
+            <div class="form-group">
+                <label for="crit">Crit:</label>
+                <input type="text" class="form-control" id="crit" name="crit" value="{{ adminrole.crit }}">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/staffvModules/adminRole/" class="btn btn-primary">Return to AdminRole List</a>
+        </form>
+    </div>
 </div>
