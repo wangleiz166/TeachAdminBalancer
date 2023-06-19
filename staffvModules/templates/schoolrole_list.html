@@ -1,0 +1,149 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <ul class="nav nav-tabs nav-fill justify-content-start" id="myTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link fw-bold" href="/staffvModules/" role="tab" aria-controls="courses" aria-selected="true">Courses</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link  fw-bold" href="/staffvModules/project" role="tab" aria-controls="projects" aria-selected="true">Projects</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link fw-bold" href="/staffvModules/adminRole" role="tab" aria-controls="adminRoles" aria-selected="false">Admin Roles</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active fw-bold" href="/staffvModules/schoolRole" role="tab" aria-controls="schoolRoles" aria-selected="false">School Roles</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link fw-bold" href="/staffvModules/uniRole" role="tab" aria-controls="uniRoles" aria-selected="false">Uni Roles</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabsContent">
+            <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="coursesTab">
+
+            </div>
+            <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projectsTab">
+                
+            </div>
+            <div class="tab-pane fade" id="adminRoles" role="tabpanel" aria-labelledby="adminRolesTab">
+
+            </div>
+            <div class="tab-pane fade show active" id="schoolRoles" role="tabpanel" aria-labelledby="schoolRolesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by name" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                            <a href="/staffvModules/adminRole/add" class="btn btn-primary">Add</a>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-2">Name</th>
+                            <th class="col-1">Hours</th>
+                            <th class="col-1">crit</th>
+                            <th class="col-2">Num staff allocated</th>
+                            <th class="col-3">Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for schoolrole in schoolroles %}
+                        <tr>
+                            <td>{{ schoolrole.name }}</td>
+                            <td>{{ schoolrole.hours }}</td>
+                            <td>{{ schoolrole.crit }}</td>
+                            <td>{{ schoolrole.num_staff_allocated }}</td>
+                            <td>
+                                <a href="/staffvModules/schoolRole/edit/{{ schoolrole.id }}" class="btn btn-primary">
+                                    Edit
+                                </a>
+                                <a href="/staffvModules/detail/{{ schoolrole.id }}" class="btn btn-primary">
+                                    Staff List
+                                </a>
+                                <a href="#" onclick="confirmDelete(event, {{ schoolrole.id }})" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                {% if schoolrole.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ schoolrole.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                {% endif %}
+                                
+                                {% for num in schoolrole.paginator.page_range %}
+                                {% if num == schoolrole.number %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                
+                                {% if schoolrole.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ schoolrole.next_page_number }}">Next</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>                
+            </div>
+            <div class="tab-pane fade" id="uniRoles" role="tabpanel" aria-labelledby="uniRolesTab">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include the necessary JavaScript code -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Set default active tab
+    var tabs = new bootstrap.Tab(document.getElementById('myTabs').querySelector('.nav-link.active'));
+    tabs.show();
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchInput = document.getElementById('searchInput');
+        var searchButton = document.getElementById('searchButton');
+
+        searchButton.addEventListener('click', function() {
+            var query = searchInput.value;
+            var url = '/staffvModules/schoolRole/?query=' + encodeURIComponent(query);
+            window.location.href = url;
+        });
+    });
+
+    function confirmDelete(event, schoolRoleId) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            // Continue with the deletion logic here
+            window.location.href = "/staffvModules/schoolRole/delete/" + schoolRoleId;
+        } else {
+            event.preventDefault(); // Prevent the default action (e.g., following the link)
+        }
+    }
+</script>

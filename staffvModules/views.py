@@ -1,6 +1,6 @@
 
 from django.shortcuts import get_object_or_404,render, redirect
-from .models import Course,Project,AdminRole
+from .models import Course,Project,AdminRole,SchoolRole,UniRole
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -61,6 +61,44 @@ def adminrole_list(request):
     # Pass the courses and search query to the template
     context = {'adminroles': adminroles, 'query': adminrole_query}
     return render(request, 'adminrole_list.html', context)
+
+def schoolrole_list(request):
+    # Retrieve all non-deleted courses from the database
+    schoolroles = SchoolRole.objects.filter(is_delete=0)
+
+     # Search functionality
+    schoolrole_query = request.GET.get('query')
+    if schoolrole_query:
+        # Filter courses based on the search query and is_delete condition
+        schoolroles = schoolroles.filter(name__icontains=schoolrole_query)    
+
+    # Pagination
+    paginator = Paginator(schoolroles, 10)  # Show 10 courses per page
+    page_number = request.GET.get('page')
+    schoolroles = paginator.get_page(page_number)
+
+    # Pass the courses and search query to the template
+    context = {'schoolroles': schoolroles, 'query': schoolrole_query}
+    return render(request, 'schoolrole_list.html', context)
+
+def unirole_list(request):
+    # Retrieve all non-deleted courses from the database
+    uniroles = UniRole.objects.filter(is_delete=0)
+
+     # Search functionality
+    unirole_query = request.GET.get('query')
+    if unirole_query:
+        # Filter courses based on the search query and is_delete condition
+        uniroles = uniroles.filter(name__icontains=unirole_query)    
+
+    # Pagination
+    paginator = Paginator(uniroles, 10)  # Show 10 courses per page
+    page_number = request.GET.get('page')
+    uniroles = paginator.get_page(page_number)
+
+    # Pass the courses and search query to the template
+    context = {'uniroles': uniroles, 'query': unirole_query}
+    return render(request, 'unirole_list.html', context)
 
 def detail(request):
     return render(request, 'detail.html')
@@ -254,4 +292,113 @@ def staffvModules_adminrole_del(request, adminroleId):
     return redirect('/staffvModules/adminRole/')
 
 
+def staffvModules_schoolrole_edit(request, schoolroleId):
+    # Retrieve the course object based on the courseId
+    schoolrole = SchoolRole.objects.get(id=schoolroleId)
+
+    if request.method == 'POST':
+        # Retrieve the form data from the request
+        name = request.POST.get('name')
+        hours = request.POST.get('hours')
+        crit =  request.POST.get('crit')
+        if hours == '':
+           hours = 0
+
+        # Update the course object with the form data
+        schoolrole.crit = crit
+        schoolrole.name = name
+        schoolrole.hours = hours
+
+        # Save the updated course object to the database
+        schoolrole.save()
+
+        # Redirect to the staffvModules list page
+        return redirect('/staffvModules/schoolRole/')
+
+    # Pass the course object to the template
+    context = {'schoolrole': schoolrole}
+    return render(request, 'staffvModules_schoolrole_edit.html', context)
+
+def staffvModules_schoolrole_add(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        hours = request.POST.get('hours')
+        crit =  request.POST.get('crit')
+        if hours == '':
+           hours = 0
+
+        schoolrole = SchoolRole.objects.create(
+            name=name,
+            num_staff_allocated=0,
+            hours=hours,
+            crit=crit
+        )
+
+        schoolrole.save()
+
+        return redirect('/staffvModules/schoolRole/')
+
+    return render(request, 'staffvModules_schoolrole_add.html')
+
+def staffvModules_schoolrole_del(request, schoolroleId):
+    schoolrole = get_object_or_404(SchoolRole, id=schoolroleId)
+    schoolrole.is_delete = 1
+    schoolrole.save()
+    return redirect('/staffvModules/schoolRole/')
+
+
+
+def staffvModules_unirole_edit(request, uniroleId):
+    # Retrieve the course object based on the courseId
+    unirole = UniRole.objects.get(id=uniroleId)
+
+    if request.method == 'POST':
+        # Retrieve the form data from the request
+        name = request.POST.get('name')
+        hours = request.POST.get('hours')
+        crit =  request.POST.get('crit')
+        if hours == '':
+           hours = 0
+
+        # Update the course object with the form data
+        unirole.crit = crit
+        unirole.name = name
+        unirole.hours = hours
+
+        # Save the updated course object to the database
+        unirole.save()
+
+        # Redirect to the staffvModules list page
+        return redirect('/staffvModules/uniRole/')
+
+    # Pass the course object to the template
+    context = {'unirole': unirole}
+    return render(request, 'staffvModules_unirole_edit.html', context)
+
+def staffvModules_unirole_add(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        hours = request.POST.get('hours')
+        crit =  request.POST.get('crit')
+        if hours == '':
+           hours = 0
+
+        unirole = UniRole.objects.create(
+            name=name,
+            num_staff_allocated=0,
+            hours=hours,
+            crit=crit
+        )
+
+        unirole.save()
+
+        return redirect('/staffvModules/uniRole/')
+
+    return render(request, 'staffvModules_unirole_add.html')
+
+def staffvModules_unirole_del(request, uniroleId):
+    unirole = get_object_or_404(UniRole, id=uniroleId)
+    unirole.is_delete = 1
+    unirole.save()
+    return redirect('/staffvModules/uniRole/')
 
