@@ -28,7 +28,7 @@ def add(request):
             pass_word=make_password(pass_word),
             permission_id=permission_id,
         )
-
+      
         # Save the User object to the database
         user.save()
 

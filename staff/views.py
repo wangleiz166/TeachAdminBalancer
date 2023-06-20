@@ -4,22 +4,24 @@ from django.core.paginator import Paginator
 import datetime
 from django.db.models import Q
 
+
 def staff_list(request):
     query = request.GET.get('query')
     staff_data = Staff.objects.filter(is_delete=0)
-    
+
     if query:
         staff_data = staff_data.filter(
             Q(first_name__icontains=query) |
             Q(last_name__icontains=query) |
             Q(initials__icontains=query)
         )
-    
-    paginator = Paginator(staff_data, 10)
+
+    paginator = Paginator(staff_data.order_by('id'), 10)  # 按照id字段升序排序
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     return render(request, 'staff_list.html', {'page_obj': page_obj, 'query': query})
+
 
 
 def staff_search(request):

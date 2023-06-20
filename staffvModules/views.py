@@ -35,7 +35,7 @@ def project_list(request):
         projects = projects.filter(code__icontains=project_query)    
 
     # Pagination
-    paginator = Paginator(projects, 10)  # Show 10 courses per page
+    paginator = Paginator(projects.order_by('id'), 10)  # Show 10 courses per page
     page_number = request.GET.get('page')
     projects = paginator.get_page(page_number)
 
@@ -54,7 +54,7 @@ def adminrole_list(request):
         adminroles = adminroles.filter(name__icontains=adminrole_query)    
 
     # Pagination
-    paginator = Paginator(adminroles, 10)  # Show 10 courses per page
+    paginator = Paginator(adminroles.order_by('id'), 10)  # Show 10 courses per page
     page_number = request.GET.get('page')
     adminroles = paginator.get_page(page_number)
 
@@ -73,7 +73,7 @@ def schoolrole_list(request):
         schoolroles = schoolroles.filter(name__icontains=schoolrole_query)    
 
     # Pagination
-    paginator = Paginator(schoolroles, 10)  # Show 10 courses per page
+    paginator = Paginator(schoolroles.order_by('id'), 10)  # Show 10 courses per page
     page_number = request.GET.get('page')
     schoolroles = paginator.get_page(page_number)
 
@@ -92,7 +92,7 @@ def unirole_list(request):
         uniroles = uniroles.filter(name__icontains=unirole_query)    
 
     # Pagination
-    paginator = Paginator(uniroles, 10)  # Show 10 courses per page
+    paginator = Paginator(uniroles.order_by('id'), 10)  # Show 10 courses per page
     page_number = request.GET.get('page')
     uniroles = paginator.get_page(page_number)
 
