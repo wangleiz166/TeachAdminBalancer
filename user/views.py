@@ -25,13 +25,9 @@ def add(request):
         user = User(
             user_name=user_name,
             pass_word=make_password(pass_word),
-            permission_id=permission_id,
+            permission_id=permission_id
         )
-<<<<<<< HEAD
-        print(user.permission_id)
-=======
-      
->>>>>>> 72232cfe857a5ea5cc05903c17b555e55e26abb0
+
         # Save the User object to the database
         user.save()
 
