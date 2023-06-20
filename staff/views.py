@@ -16,11 +16,16 @@ def staff_list(request):
             Q(initials__icontains=query)
         )
 
+<<<<<<< HEAD
     paginator = Paginator(staff_data, 10)
+=======
+    paginator = Paginator(staff_data.order_by('id'), 10)  # 按照id字段升序排序
+>>>>>>> 72232cfe857a5ea5cc05903c17b555e55e26abb0
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'staff_list.html', {'page_obj': page_obj, 'query': query})
+
 
 
 def staff_search(request):

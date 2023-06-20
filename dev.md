@@ -1,3 +1,44 @@
+# Project Progress
+
+| Task                   | Responsible                   | Progress |
+|------------------------|--------------------------------|----------|
+| Deploy Render          | Lei Wang                       | 100%     |
+| Deploy Heiku           |                                |          |
+| Migrate MySQL Database | Lei Wang                       | 100%     |
+| Script Data Entry      | Lei Wang                       | 100%     |
+| Staff Module           | Lei Wang, Ali, Frederick, Abdul-Kadir |          |
+|   - Requirement Design |                                | 100%     |
+|   - Frontend Development |                              | 100%     |
+|   - Module Function Development |                        | 90%      |
+|   - Test Writing       |                                | 100%     |
+| StaffvModules Module   | Lei Wang, Ali, Frederick, Abdul-Kadir |      |
+|   - Requirement Design |                                | 100%     |
+|   - Frontend Development |                              | 100%     |
+|   - Module Function Development |                        | 90%      |
+|   - Test Writing       |                                | 100%     |
+| Totalwork Module       | Rui Hao, Jia Qi                |          |
+|   - Requirement Design |                                | 100%     |
+|   - Frontend Development |                              | 100%     |
+|   - Module Function Development |                        |          |
+|   - Test Writing       |                                |          |
+| User Module            | Lei Wang, Ali, Frederick, Abdul-Kadir |      |
+|   - Requirement Design |                                | 100%     |
+|   - Frontend Development |                              | 100%     |
+|   - Module Function Development |                        | 30%      |
+|   - Test Writing       |                                |          |
+| Dashboard Module       | Rui Hao, Jia Qi                |          |
+|   - Requirement Design |                                | 100%     |
+|   - Frontend Development |                              | 100%     |
+|   - Module Function Development |                        |          |
+|   - Test Writing       |                                |          |
+| Setting Module         | Lei Wang, Ali, Frederick, Abdul-Kadir |      |
+|   - Requirement Design |                                | 100%     |
+|   - Frontend Development |                              | 100%     |
+|   - Module Function Development |                        |          |
+|   - Test Writing       |                                |          |
+
+
+
 # This week to do list  (30/05/2023 - 06/06/2023)
 - Get spreadsheets from customers
 - Interface Discuss and determine
