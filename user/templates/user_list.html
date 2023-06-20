@@ -29,7 +29,7 @@
                     <tbody>
                         {% for user in page_obj %}
                         <tr>
-                            <th scope="row">{{user.id}}</th>
+                            <th scope="row">{{forloop.counter}}</th>
                             <td>{{user.user_name}}</td>
                             <td> {% if user.permission_id == 1 %}
                                 Manager
@@ -44,7 +44,7 @@
 
 
                             <td style="color: green;">Yes</td>
-                            {% if user.id == 1 %}
+                            {% if user.permission_id == 1 %}
                             <td>
                                 <a href="/user/edit" class="btn btn-primary">
                                     Edit

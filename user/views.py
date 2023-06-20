@@ -17,7 +17,8 @@ def list(request):
             Q(last_name__icontains=query)
         )
 
-    paginator = Paginator(user_data.order_by('id'), 10)  # 按照id字段升序排序
+    paginator = Paginator(user_data.order_by(
+        'permission_id'), 10)  # 按照id字段升序排序
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
