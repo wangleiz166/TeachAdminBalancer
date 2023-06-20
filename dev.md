@@ -1,3 +1,43 @@
+# 项目进度
+
+| 任务                 | 负责人 | 进度 |
+|----------------------|--------|------|
+| 部署 Render          |  LeiWang  | 100% |
+| 部署 Heiku           |    |   |
+| 迁移 MySQL 数据库     | LeiWang | 100% |
+| 脚本数据录入             |  LeiWang  | 100% |
+| staff 模块           |  LeiWang, Ali, FREDERICK, ABDUL-KADIR   |      |
+|   - 需求设计        |         | 100% |
+|   - 前端开发        |         | 100% |
+|   - 模块功能开发    |         | 90% |
+|   - test 编写       |         | 100% |
+| staffvModules 模块   |   LeiWang, Ali, FREDERICK, ABDUL-KADIR     |      |
+|   - 需求设计        |        |  100%    |
+|   - 前端开发        |        |  100%    |
+|   - 模块功能开发    |        |  90%     |
+|   - test 编写       |        |  100%    |
+| totalwork 模块       | RuiHao, JiaQi       |      |
+|   - 需求设计        |        | 100%     |
+|   - 前端开发        |        | 100%     |
+|   - 模块功能开发    |        |      |
+|   - test 编写       |        |      |
+| user 模块            | LeiWang, Ali, FREDERICK, ABDUL-KADIR        |      |
+|   - 需求设计        |        |  100%    |
+|   - 前端开发        |        |  100%    |
+|   - 模块功能开发    |        |  30%   |
+|   - test 编写       |        |      |
+| dashboard 模块       |  RuiHao, JiaQi     |      |
+|   - 需求设计        |        |  100%    |
+|   - 前端开发        |        |  100%    |
+|   - 模块功能开发    |        |      |
+|   - test 编写       |        |      |
+| setting 模块         |  LeiWang, Ali, FREDERICK, ABDUL-KADIR      |      |
+|   - 需求设计        |        |  100%     |
+|   - 前端开发        |        |  100%     |
+|   - 模块功能开发    |        |      |
+|   - test 编写       |        |      |
+
+
 # This week to do list  (30/05/2023 - 06/06/2023)
 - Get spreadsheets from customers
 - Interface Discuss and determine
