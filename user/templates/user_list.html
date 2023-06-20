@@ -6,7 +6,8 @@
         <div class="row">
             <div class="col">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search by name" aria-label="Search" id="searchInput">
+                    <input type="text" class="form-control" placeholder="Search by name" aria-label="Search"
+                        id="searchInput">
                     <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
                     <a href="/user/logs" class="btn btn-secondary">Logs</a>&nbsp;
                     <a href="/user/add" class="btn btn-primary">Add Account</a>
@@ -26,11 +27,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for user in page_obj %}
                         <tr>
                             <th scope="row">1</th>
-                            <td>John Doe</td>
-                            <td>Manager</td>
+                            <td>{{user.id}}</td>
+                            <td>{{user.user_name}}</td>
+                            <td>{{user.permission_id}}</td>
                             <td style="color: green;">Yes</td>
+                            {% if user.id == 1 %}
                             <td>
                                 <a href="/user/edit" class="btn btn-primary">
                                     Edit
@@ -38,13 +42,8 @@
                                 <a href="/user/logs" class="btn btn-secondary">
                                     Logs
                                 </a>
-                            </td>  
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jane Smith</td>
-                            <td>Employee</td>
-                            <td>No</td>
+                            </td>
+                            {% else %}
                             <td>
                                 <a href="/user/edit" class="btn btn-primary">
                                     Edit
@@ -56,28 +55,12 @@
                                 <a href="/user/logs" class="btn btn-secondary">
                                     Logs
                                 </a>
-                            </td>  
+                            </td>
+                            {% endif %}
                         </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Mike Johnson</td>
-                            <td>IT Administrator</td>
-                            <td style="color: green;">Yes</td>
-                            <td>
-                                <a href="/user/edit" class="btn btn-primary">
-                                    Edit
-                                </a>
-                                <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
-                                <a href="/user/permission" class="btn btn-info">
-                                    Permission
-                                </a>
-                                <a href="/user/logs" class="btn btn-secondary">
-                                    Logs
-                                </a>
-                            </td>  
-                        </tr>
+                        {% endfor %}
                     </tbody>
-                </table>                
+                </table>
             </div>
         </div>
         <div class="row my-3">

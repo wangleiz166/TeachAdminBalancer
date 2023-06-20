@@ -20,15 +20,14 @@ def add(request):
         # Retrieve the form data from the request
         user_name = request.POST.get('username')
         pass_word = request.POST.get('pass_word')
-        permission_id = 3
-
+        permission_id = request.POST.get('permission_id')
         # Create a new User object with the form data
         user = User(
             user_name=user_name,
             pass_word=make_password(pass_word),
             permission_id=permission_id,
         )
-
+        print(user.permission_id)
         # Save the User object to the database
         user.save()
 
@@ -38,6 +37,12 @@ def add(request):
     else:
         # Render the staff_add.html template
         return render(request, 'add.html')
+
+# def staff_delete(request, staffId):
+#     user = get_object_or_404(User, id=staffId)
+#     user.is_delete = 1
+#     user.save()
+#     return redirect('user_list')
 
 
 def permission(request):
