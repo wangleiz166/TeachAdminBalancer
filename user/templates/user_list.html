@@ -29,10 +29,20 @@
                     <tbody>
                         {% for user in page_obj %}
                         <tr>
-                            <th scope="row">1</th>
-                            <td>{{user.id}}</td>
+                            <th scope="row">{{user.id}}</th>
                             <td>{{user.user_name}}</td>
-                            <td>{{user.permission_id}}</td>
+                            <td> {% if user.permission_id == 1 %}
+                                Manager
+                                {% elif user.permission_id == 2 %}
+                                Employee
+                                {% elif user.permission_id == 3 %}
+                                IT Administrator
+                                {% else %}
+                                number
+                                {% endif %}
+                            </td>
+
+
                             <td style="color: green;">Yes</td>
                             {% if user.id == 1 %}
                             <td>
@@ -91,4 +101,5 @@
             event.preventDefault(); // Prevent the default action (e.g., following the link)
         }
     }
+
 </script>

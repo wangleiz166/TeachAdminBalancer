@@ -8,7 +8,20 @@ from django.contrib.auth.hashers import make_password
 
 
 def list(request):
-    return render(request, 'user_list.html')
+    query = request.GET.get('query')
+    user_data = User.objects.filter(is_delete=0)
+
+    if query:
+        user_data = user_data.filter(
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query)
+        )
+
+    paginator = Paginator(user_data.order_by('id'), 10)  # 按照id字段升序排序
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'user_list.html', {'page_obj': page_obj, 'query': query})
 
 
 def edit(request):
@@ -30,7 +43,6 @@ def add(request):
 
         # Save the User object to the database
         user.save()
-
         # Redirect to the staff list page
         return redirect('/user/')
 
