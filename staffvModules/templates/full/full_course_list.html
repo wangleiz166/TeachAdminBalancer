@@ -1,0 +1,132 @@
+{% include 'common/header.html' %}
+<style>
+    .container.my-3 {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .table {
+        width: 100%;
+    }
+    
+    .table thead th {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    .table tbody td {
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .table tbody td.editing {
+        background-color: #d3d3d3;
+    }
+    
+    .table tbody td .edit-input {
+        display: none;
+        width: 100%;
+    }
+    
+    .table tbody td.editing .edit-input {
+        display: block;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    .table tbody td.editing::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #000;
+        animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+</style>
+<script>
+    function editCell(element) {
+        const cells = document.querySelectorAll('.table tbody td');
+        cells.forEach(cell => cell.classList.remove('editing'));
+        
+        element.classList.add('editing');
+        
+        const cellValue = element.innerText;
+        element.innerHTML = `<input type="text" class="form-control edit-input" value="${cellValue}" onblur="saveCell(this)">`;
+        const inputElement = element.querySelector('input');
+        inputElement.focus();
+    }
+    
+    function saveCell(element) {
+        const cellValue = element.value;
+        element.parentNode.innerHTML = cellValue;
+    }
+</script>
+<div class="main-content">
+    <div class="container my-3">
+        <div class="alert alert-warning mt-3" role="alert">
+            Click me to view the normal screen version <a href="/staffvModules/">here</a>
+            <span  style="margin-left: 30px;">Double click on the grid to edit</span><button class="btn btn-success" style="margin-left: 10px;">Save</button>
+        </div>
+        <div class="tab-content" id="myTabsContent">
+            <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="coursesTab">              
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Linked courses</th>
+                                <th>Unlinked relatives</th>
+                                <th>Name</th>
+                                <th>Num staff allocated</th>
+                                <th>Est. Num Students</th>
+                                <th>Hours</th>
+                                <th>JD</th>
+                                <th>JB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course in courses %}
+                            <tr>
+                                <td ondblclick="editCell(this)">{{ course.code }}</td>
+                                <td ondblclick="editCell(this)">{{ course.linked_courses }}</td>
+                                <td ondblclick="editCell(this)">{{ course.unlinked_relatives }}</td>
+                                <td ondblclick="editCell(this)">{{ course.name }}</td>
+                                <td ondblclick="editCell(this)">{{ course.num_staff_allocated }}</td>
+                                <td ondblclick="editCell(this)">{{ course.est_num_students }}</td>
+                                <td ondblclick="editCell(this)">{{ course.hours }}</td>
+                                <td ondblclick="editCell(this)">0.5</td>
+                                <td ondblclick="editCell(this)">0.5</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projectsTab">
+                
+            </div>
+            <div class="tab-pane fade" id="adminRoles" role="tabpanel" aria-labelledby="adminRolesTab">
+                  
+            </div>
+            <div class="tab-pane fade" id="schoolRoles" role="tabpanel" aria-labelledby="schoolRolesTab">
+                
+            </div>
+            <div class="tab-pane fade" id="uniRoles" role="tabpanel" aria-labelledby="uniRolesTab">
+                
+            </div>
+        </div>
+    </div>
+</div>

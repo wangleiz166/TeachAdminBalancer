@@ -24,6 +24,15 @@ def list(request):
     context = {'courses': courses, 'query': query}
     return render(request, 'list.html', context)
 
+def full_course_list(request):
+    # Retrieve all non-deleted courses from the database
+    courses = Course.objects.filter(is_delete=0)
+
+    # Pass the courses, search query, and pagination to the template
+    context = {'courses': courses}
+    return render(request, 'full/full_course_list.html', context)
+
+
 def project_list(request):
     # Retrieve all non-deleted courses from the database
     projects = Project.objects.filter(is_delete=0)

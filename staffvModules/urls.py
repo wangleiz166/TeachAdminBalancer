@@ -27,4 +27,7 @@ urlpatterns = [
     path('uniRole/add/', views.staffvModules_unirole_add, name='staffvModules_unirole_add'),
     path('uniRole/edit/<int:uniroleId>', views.staffvModules_unirole_edit, name='staffvModules_unirole_edit'),
     path('uniRole/delete/<int:uniroleId>', views.staffvModules_unirole_del, name='staffvModules_unirole_del'),
+
+
+    path('full/', views.full_course_list, name='staffvModules_full_course_list'),
 ]
