@@ -141,6 +141,7 @@ def staffvModules_course_edit(request, courseId):
         if hours == '':
            hours = 0
         course_type = request.POST.get('type')  # 获取type字段的值
+        hs = request.POST.get('hs')
 
         # Update the course object with the form data
         course.code = code
@@ -150,6 +151,7 @@ def staffvModules_course_edit(request, courseId):
         course.est_num_students = est_num_students
         course.hours = hours
         course.type = course_type  # 设置type字段的值
+        course.hs = hs
 
         # Save the updated course object to the database
         course.save()
@@ -174,6 +176,8 @@ def staffvModules_course_add(request):
         course_type = request.POST.get('type') 
         if course_type == '':
            course_type = "Standard classroom based"
+        hs = request.POST.get('hs')
+           
         course = Course.objects.create(
             code=code,
             linked_courses=linked_courses,
@@ -182,7 +186,8 @@ def staffvModules_course_add(request):
             type=course_type,
             num_staff_allocated=0,
             est_num_students=est_num_students,
-            hours=hours
+            hours=hours,
+            hs = hs
         )
 
         course.save()

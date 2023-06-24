@@ -50,10 +50,24 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
+                            <select class="form-control" id="hsSearch">
+                                <option selected disabled>Search by HS</option>
+                                <option value="HS1">HS1</option>
+                                <option value="HS2">HS2</option>
+                                <option value="HS3">HS3</option>
+                            </select>
+                            <select class="form-control" id="Type">
+                                <option selected disabled>Search by Type</option>
+                                <option value="Standard classroom based">Standard classroom based</option>
+                                <option value="Standard computer lab based">Standard computer lab based</option>
+                            </select>
+                            
                             <input type="text" class="form-control" placeholder="Search by code" aria-label="Search" id="searchInput">
                             <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
                             <a href="/staffvModules/add" class="btn btn-primary">Add</a>&nbsp;
                         </div>
+                        
+                        
                     </div>
                 </div>                
                 <table class="table table-striped">

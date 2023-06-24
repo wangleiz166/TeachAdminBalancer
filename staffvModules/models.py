@@ -113,6 +113,7 @@ class Course(models.Model):
     unlinked_relatives = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100, null=True, blank=True)
+    hs = models.CharField(max_length=100, null=True, blank=True)
     num_staff_allocated = models.IntegerField()
     est_num_students = models.IntegerField()
     hours = models.IntegerField()

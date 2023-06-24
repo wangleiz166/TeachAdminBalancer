@@ -87,6 +87,7 @@
                         <thead>
                             <tr>
                                 <th>Code</th>
+                                <th>Type</th>
                                 <th>Linked courses</th>
                                 <th>Unlinked relatives</th>
                                 <th>Name</th>
@@ -101,6 +102,7 @@
                             {% for project in list %}
                             <tr>
                                 <td ondblclick="editCell(this)">{{ project.code }}</td>
+                                <td ondblclick="editCell(this)">{{ project.type }}</td>
                                 <td ondblclick="editCell(this)">{{ project.linked_courses }}</td>
                                 <td ondblclick="editCell(this)">{{ project.unlinked_relatives }}</td>
                                 <td ondblclick="editCell(this)">{{ project.name }}</td>

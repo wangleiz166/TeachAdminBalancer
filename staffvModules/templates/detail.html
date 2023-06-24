@@ -6,7 +6,8 @@
         <div class="alert alert-warning mt-3" role="alert">
             This feature has not yet been developed and is expected to be updated on 23 June
         </div>
-        <h2>Total</h2>
+        <div style="background-color: #75ad8c; padding: 20px;">
+        <h3>Total</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -27,136 +28,157 @@
                 </tr>
             </tbody>
         </table>
-        
-        <h2>Total Teaching</h2>
-        <table id="totalTeachingTable" class="table">
+        <h3>Total Courses</h3>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Course</th>
-                    <th>Credits</th>
-                    <th>Alpha</th>
-                    <th>Beta</th>
-                    <th>Num. Students</th>
-                    <th>Delta</th>
+                    <th>HS</th>
                     <th>Share</th>
-                    <th>Coordinator</th>
                     <th>Total hours</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="text" value="CS502K"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="4.4"></td>
-                    <td><input type="text" value="0.15"></td>
-                    <td><input type="text" value="35"></td>
-                    <td><input type="text" value="1"></td>
-                    <td><input type="text" value="0.5"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="87.375"></td>
+                    <td>Total</td>
+                    <td>Value</td>
+                    <td>Value</td>
                 </tr>
                 <tr>
-                    <td><input type="text" value="CS3525"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="4.4"></td>
-                    <td><input type="text" value="0.15"></td>
-                    <td><input type="text" value="50"></td>
-                    <td><input type="text" value="1"></td>
-                    <td><input type="text" value="0.5"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="104.25"></td>
+                    <td>HS1</td>
+                    <td>Value</td>
+                    <td>Value</td>
                 </tr>
-                <!-- Add more rows here for other courses -->
+                <tr>
+                    <td>HS2</td>
+                    <td>Value</td>
+                    <td>Value</td>
+                </tr>
+                <tr>
+                    <td>HS3</td>
+                    <td>Value</td>
+                    <td>Value</td>
+                </tr>
             </tbody>
         </table>
-        <button id="addNewOneTotalTeaching">Add New One</button>
-        <br><br>
-        <h2>Total Project</h2>
-        <table id="totalProjectTable" class="table">
-            <thead>
-                <tr>
-                    <th>Project</th>
-                    <th>Credits</th>
-                    <th>Alpha</th>
-                    <th>Beta</th>
-                    <th>Num groups/students</th>
-                    <th>Delta</th>
-                    <th>Share</th>
-                    <th>Coordinator</th>
-                    <th>Total hours</th>
-                </tr>
-            </thead>
+        <h3>Total Project</h3>
+        <table class="table" style="max-width: 300px;">
             <tbody>
                 <tr>
-                    <td><input type="text" value="L3 Group project"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="4.4"></td>
-                    <td><input type="text" value="0.15"></td>
-                    <td><input type="text" value="35"></td>
-                    <td><input type="text" value="1"></td>
-                    <td><input type="text" value="0.5"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="87.375"></td>
+                    <td>Total hours:</td>
+                    <td>Value</td>
                 </tr>
-                <tr>
-                    <td><input type="text" value="UG Project supervision"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="4.4"></td>
-                    <td><input type="text" value="0.15"></td>
-                    <td><input type="text" value="35"></td>
-                    <td><input type="text" value="1"></td>
-                    <td><input type="text" value="0.5"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="87.375"></td>
-                </tr>
-                <!-- Add more rows here for other project supervision and marking -->
             </tbody>
         </table>
-        <button id="addNewOneTotalProject">Add New One</button>
-        <br><br>
-        <h2>Total Admin</h2>
-        <table id="totalAdminTable" class="table">
-            <thead>
-                <tr>
-                    <th>Role</th>
-                    <th>Credits</th>
-                    <th>Alpha</th>
-                    <th>Beta</th>
-                    <th>Num groups/students</th>
-                    <th>Delta</th>
-                    <th>Share</th>
-                    <th>Coordinator</th>
-                    <th>Total hours</th>
-                </tr>
-            </thead>
+        <h3>Total Admin</h3>
+        <table class="table" style="max-width: 300px;">
             <tbody>
                 <tr>
-                    <td><input type="text" value="Exam officer"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="4.4"></td>
-                    <td><input type="text" value="0.15"></td>
-                    <td><input type="text" value="35"></td>
-                    <td><input type="text" value="1"></td>
-                    <td><input type="text" value="0.5"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="87.375"></td>
+                    <td>Total hours:</td>
+                    <td>Value</td>
                 </tr>
-                <tr>
-                    <td><input type="text" value="Mentor"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="4.4"></td>
-                    <td><input type="text" value="0.15"></td>
-                    <td><input type="text" value="35"></td>
-                    <td><input type="text" value="1"></td>
-                    <td><input type="text" value="0.5"></td>
-                    <td><input type="text" value="15"></td>
-                    <td><input type="text" value="87.375"></td>
-                </tr>
-                <!-- Add more rows here for other admin roles -->
             </tbody>
         </table>
-        <button id="addNewOneTotalAdmin">Add New One</button>
-        <br><br>
+        </div>
+
+        <br>
+       
+            <h3>Courses</h3>
+            <table id="totalTeachingTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>HS</th>
+                        <th>Credits</th>
+                        <th>Alpha</th>
+                        <th>Beta</th>
+                        <th>Num. Students</th>
+                        <th>Delta</th>
+                        <th>Share</th>
+                        <th>Coordinator</th>
+                        <th>Total hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" value="CS502K"></td>
+                        <td>HS1</td>
+                        <td><input type="text" value="15"></td>
+                        <td><input type="text" value="4.4"></td>
+                        <td><input type="text" value="0.15"></td>
+                        <td><input type="text" value="35"></td>
+                        <td><input type="text" value="1"></td>
+                        <td><input type="text" value="0.5"></td>
+                        <td><input type="text" value="15"></td>
+                        <td><input type="text" value="87.375"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="addNewOneTotalTeaching">Add New One</button>
+            <br><br>
+            <h3>Project</h3>
+            <table id="totalProjectTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Credits</th>
+                        <th>Alpha</th>
+                        <th>Beta</th>
+                        <th>Num groups/students</th>
+                        <th>Delta</th>
+                        <th>Share</th>
+                        <th>Coordinator</th>
+                        <th>Total hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" value="L3 Group project"></td>
+                        <td><input type="text" value="10"></td>
+                        <td><input type="text" value="3.5"></td>
+                        <td><input type="text" value="0.1"></td>
+                        <td><input type="text" value="30"></td>
+                        <td><input type="text" value="0.8"></td>
+                        <td><input type="text" value="0.4"></td>
+                        <td><input type="text" value="10"></td>
+                        <td><input type="text" value="75.125"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="addNewOneTotalProject">Add New One</button>
+            <br><br>
+            <h3>Admin</h3>
+            <table id="totalAdminTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Credits</th>
+                        <th>Alpha</th>
+                        <th>Beta</th>
+                        <th>Num groups/students</th>
+                        <th>Delta</th>
+                        <th>Share</th>
+                        <th>Coordinator</th>
+                        <th>Total hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" value="Exam officer"></td>
+                        <td><input type="text" value="10"></td>
+                        <td><input type="text" value="3.5"></td>
+                        <td><input type="text" value="0.1"></td>
+                        <td><input type="text" value="30"></td>
+                        <td><input type="text" value="0.8"></td>
+                        <td><input type="text" value="0.4"></td>
+                        <td><input type="text" value="10"></td>
+                        <td><input type="text" value="75.125"></td>
+                    </tr>
+                
+                </tbody>
+            </table>
+            <button id="addNewOneTotalAdmin">Add New One</button>
+            <br>
+        <br>
         <!-- Add more sections and tables as needed for other categories -->
         <a href="/staffvModules/" class="btn btn-success">Save</a> 
         <a href="/staffvModules/" class="btn btn-success">Return to staffvModules List</a> 
@@ -186,6 +208,7 @@
                 $("#addNewOneTotalProject").on("click", function() {
                     var newRowHtml = `
                         <tr>
+                            <td><input type="text"></td>
                             <td><input type="text"></td>
                             <td><input type="text"></td>
                             <td><input type="text"></td>

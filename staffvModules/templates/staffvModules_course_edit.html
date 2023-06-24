@@ -36,6 +36,16 @@
                     <option value="Standard computer lab based" {% if course.type == "Standard computer lab based" %}selected{% endif %}>Standard computer lab based</option>
                 </select>
             </div>
+            <!-- 新增的form-group -->
+            <div class="form-group">
+                <label for="HS">HS:</label>
+                <select class="form-control" id="HS" name="HS">
+                    <option value="HS1" {% if course.HS == "HS1" %}selected{% endif %}>HS1</option>
+                    <option value="HS2" {% if course.HS == "HS2" %}selected{% endif %}>HS2</option>
+                    <option value="HS3" {% if course.HS == "HS3" %}selected{% endif %}>HS3</option>
+                </select>
+            </div>
+            <!-- 新增部分结束 -->
             <br>
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="/staffvModules/" class="btn btn-primary">Return to staffvModules List</a>
