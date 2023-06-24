@@ -24,14 +24,28 @@ def list(request):
     context = {'courses': courses, 'query': query}
     return render(request, 'list.html', context)
 
-def full_course_list(request):
-    # Retrieve all non-deleted courses from the database
-    courses = Course.objects.filter(is_delete=0)
+def full_list(request, category=None):
+    # Retrieve all non-deleted items from the database based on the category
+    if category == 'project':
+        items = Project.objects.filter(is_delete=0)
+        template_name = 'full/full_project_list.html'
+    elif category == 'adminrole':
+        items = AdminRole.objects.filter(is_delete=0)
+        template_name = 'full/full_adminrole_list.html'
+    elif category == 'schoolrole':
+        items = SchoolRole.objects.filter(is_delete=0)
+        template_name = 'full/full_schoolrole_list.html'
+    elif category == 'unirole':
+        items = UniRole.objects.filter(is_delete=0)
+        template_name = 'full/full_unirole_list.html'
+    else:
+        items = Course.objects.filter(is_delete=0)
+        template_name = 'full/full_course_list.html'
+    
+    context = {'list': items}
+    return render(request, template_name, context)
 
-    # Pass the courses, search query, and pagination to the template
-    context = {'courses': courses}
-    return render(request, 'full/full_course_list.html', context)
-
+    
 
 def project_list(request):
     # Retrieve all non-deleted courses from the database
@@ -126,6 +140,8 @@ def staffvModules_course_edit(request, courseId):
         hours = request.POST.get('hours')
         if hours == '':
            hours = 0
+        course_type = request.POST.get('type')  # 获取type字段的值
+
         # Update the course object with the form data
         course.code = code
         course.linked_courses = linked_courses
@@ -133,6 +149,7 @@ def staffvModules_course_edit(request, courseId):
         course.name = name
         course.est_num_students = est_num_students
         course.hours = hours
+        course.type = course_type  # 设置type字段的值
 
         # Save the updated course object to the database
         course.save()
@@ -154,12 +171,15 @@ def staffvModules_course_add(request):
         hours = request.POST.get('hours')
         if hours == '':
            hours = 0
-
+        course_type = request.POST.get('type') 
+        if course_type == '':
+           course_type = "Standard classroom based"
         course = Course.objects.create(
             code=code,
             linked_courses=linked_courses,
             unlinked_relatives=unlinked_relatives,
             name=name,
+            type=course_type,
             num_staff_allocated=0,
             est_num_students=est_num_students,
             hours=hours
@@ -171,6 +191,7 @@ def staffvModules_course_add(request):
 
     return render(request, 'staffvModules_course_add.html')
 
+
 def staffvModules_course_del(request, courseId):
     course = get_object_or_404(Course, id=courseId)
     course.is_delete = 1
@@ -179,7 +200,7 @@ def staffvModules_course_del(request, courseId):
 
 
 def staffvModules_project_edit(request, projectId):
-    # Retrieve the course object based on the courseId
+    # Retrieve the project object based on the projectId
     project = Project.objects.get(id=projectId)
 
     if request.method == 'POST':
@@ -192,24 +213,27 @@ def staffvModules_project_edit(request, projectId):
         hours = request.POST.get('hours')
         if hours == '':
            hours = 0
+        project_type = request.POST.get('type')  # 获取type字段的值
 
-        # Update the course object with the form data
+        # Update the project object with the form data
         project.code = code
         project.linked_courses = linked_courses
         project.unlinked_relatives = unlinked_relatives
         project.name = name
         project.est_num_students = est_num_students
         project.hours = hours
+        project.type = project_type  # 设置type字段的值
 
-        # Save the updated course object to the database
+        # Save the updated project object to the database
         project.save()
 
-        # Redirect to the staffvModules list page
+        # Redirect to the staffvModules project list page
         return redirect('/staffvModules/project/')
 
-    # Pass the course object to the template
+    # Pass the project object to the template
     context = {'project': project}
     return render(request, 'staffvModules_project_edit.html', context)
+
 
 def staffvModules_project_add(request):
     if request.method == 'POST':
@@ -221,6 +245,7 @@ def staffvModules_project_add(request):
         hours = request.POST.get('hours')
         if hours == '':
            hours = 0
+        project_type = request.POST.get('type')  # 获取type字段的值
 
         project = Project.objects.create(
             code=code,
@@ -229,7 +254,8 @@ def staffvModules_project_add(request):
             name=name,
             num_staff_allocated=0,
             est_num_students=est_num_students,
-            hours=hours
+            hours=hours,
+            type=project_type  # 设置type字段的值
         )
 
         project.save()
@@ -237,6 +263,7 @@ def staffvModules_project_add(request):
         return redirect('/staffvModules/project/')
 
     return render(request, 'staffvModules_project_add.html')
+
 
 def staffvModules_project_del(request, projectId):
     project = get_object_or_404(Project, id=projectId)

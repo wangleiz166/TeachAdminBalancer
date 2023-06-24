@@ -29,5 +29,9 @@ urlpatterns = [
     path('uniRole/delete/<int:uniroleId>', views.staffvModules_unirole_del, name='staffvModules_unirole_del'),
 
 
-    path('full/', views.full_course_list, name='staffvModules_full_course_list'),
+    path('full/', views.full_list, name='staffvModules_full_course_list'),
+    path('full/project/', views.full_list, {'category': 'project'}, name='staffvModules_full_project_list'),
+    path('full/adminRole/', views.full_list, {'category': 'adminrole'}, name='staffvModules_full_adminrole_list'),
+    path('full/schoolRole/', views.full_list, {'category': 'schoolrole'}, name='staffvModules_full_schoolrole_list'),
+    path('full/uniRole/', views.full_list, {'category': 'unirole'}, name='staffvModules_full_unirole_list'),
 ]

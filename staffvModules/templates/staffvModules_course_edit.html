@@ -2,7 +2,7 @@
 {% include 'common/nav.html' %}
 <div class="main-content">
     <div class="container my-3">
-        <h2>Add New course</h2>
+        <h2>Edit Course</h2>
         <form action="/staffvModules/edit/{{ course.id }}" method="post">
             {% csrf_token %}
             <div class="form-group">
@@ -28,6 +28,13 @@
             <div class="form-group">
                 <label for="hours">Hours:</label>
                 <input type="number" class="form-control" id="hours" name="hours" value="{{ course.hours }}">
+            </div>
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <select class="form-control" id="type" name="type">
+                    <option value="Standard classroom based" {% if course.type == "Standard classroom based" %}selected{% endif %}>Standard classroom based</option>
+                    <option value="Standard computer lab based" {% if course.type == "Standard computer lab based" %}selected{% endif %}>Standard computer lab based</option>
+                </select>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Update</button>
