@@ -1,0 +1,167 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+
+<div class="main-content">
+    <div class="container my-3">
+        <ul class="nav nav-tabs nav-fill" id="myTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link fw-bold" href="/totalWork/" role="tab" aria-controls="courses" aria-selected="true">Courses & Projects</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active fw-bold" href="/totalWork/adminRoles/" role="tab" aria-controls="adminRoles" aria-selected="true">Admin Roles</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link fw-bold" href="/totalWork/overallCalcs/" role="tab" aria-controls="overallCalcs" aria-selected="true">Overall Calcs</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link fw-bold" href="/totalWork/frozenModules/" role="tab" aria-controls="frozenModules" aria-selected="true">Frozen Modules</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabsContent">
+            <div class="tab-pane fade show active" id="adminRoles" role="tabpanel" aria-labelledby="adminRolesTab">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search by Admin roles" aria-label="Search" id="searchInput">
+                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Admin roles</th>
+                            <th>Hours</th>
+                            <th>Filled</th>
+                            <th>Load</th>
+                            <th>Allocated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ALM+A77:G93</td>
+                            <td>320</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>320</td>
+                        </tr>
+                        <tr>
+                            <td>CS core research theme lead</td>
+                            <td>280</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>280</td>
+                        </tr>
+                        <tr>
+                            <td>PGR</td>
+                            <td>80</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td>Taught PGT lead</td>
+                            <td>80</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>DuP</td>
+                            <td>320</td>
+                            <td>1</td>
+                            <td>320</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Msc AI Dir (300 with Jan)</td>
+                            <td>300</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>MSc Cyber Dir</td>
+                            <td>200</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>200</td>
+                        </tr>
+                        <tr>
+                            <td>MSc IT Dir (300 with Jan)</td>
+                            <td>300</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>Go abroad/Erasmus/Turing</td>
+                            <td>120</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>120</td>
+                        </tr>
+                        <tr>
+                            <td>Exam officer</td>
+                            <td>80</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>80</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include the necessary JavaScript code -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/<!-- Include the necessary JavaScript code -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Set default active tab
+        var tabs = new bootstrap.Tab(document.getElementById('myTabs').querySelector('.nav-link.active'));
+        tabs.show();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var searchInput = document.getElementById('searchInput');
+            var searchButton = document.getElementById('searchButton');
+
+            searchButton.addEventListener('click', function() {
+                var query = searchInput.value;
+                var url = '/staffvModules/project/?query=' + encodeURIComponent(query);
+                window.location.href = url;
+            });
+        });
+
+        function confirmDelete(event, projectId) {
+            if (confirm("Are you sure you want to delete this item?")) {
+                // Continue with the deletion logic here
+                window.location.href = "/staffvModules/project/delete/" + projectId;
+            } else {
+                event.preventDefault(); // Prevent the default action (e.g., following the link)
+            }
+        }
+    </script>
