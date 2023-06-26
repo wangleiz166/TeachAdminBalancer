@@ -1,246 +1,590 @@
 {% include 'common/header.html' %}
 {% include 'common/nav.html' %}
-
+{% csrf_token %}
+<style>
+    .removeRow {
+        cursor: pointer;
+    }
+</style>
 <div class="main-content">
     <div class="container my-3">
         <div class="alert alert-warning mt-3" role="alert">
             This feature has not yet been developed and is expected to be updated on 23 June
         </div>
-        <div style="background-color: #75ad8c; padding: 20px;">
-        <h3>Total</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Total hours permitted</th>
-                    <th>Total hours allocated</th>
-                    <th>Total left</th>
-                    <th>No Projects</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Jane Doe</td>
-                    <td><input type="text" value="576"></td>
-                    <td>558.6429797</td>
-                    <td>17.35702025</td>
-                    <td>329.145</td>
-                </tr>
-            </tbody>
-        </table>
-        <h3>Total Courses</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>HS</th>
-                    <th>Share</th>
-                    <th>Total hours</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Total</td>
-                    <td>Value</td>
-                    <td>Value</td>
-                </tr>
-                <tr>
-                    <td>HS1</td>
-                    <td>Value</td>
-                    <td>Value</td>
-                </tr>
-                <tr>
-                    <td>HS2</td>
-                    <td>Value</td>
-                    <td>Value</td>
-                </tr>
-                <tr>
-                    <td>HS3</td>
-                    <td>Value</td>
-                    <td>Value</td>
-                </tr>
-            </tbody>
-        </table>
-        <h3>Total Project</h3>
-        <table class="table" style="max-width: 300px;">
-            <tbody>
-                <tr>
-                    <td>Total hours:</td>
-                    <td>Value</td>
-                </tr>
-            </tbody>
-        </table>
-        <h3>Total Admin</h3>
-        <table class="table" style="max-width: 300px;">
-            <tbody>
-                <tr>
-                    <td>Total hours:</td>
-                    <td>Value</td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
+        <div style="background-color: #cad4c8; padding: 20px;">
+            <h3>Total</h3>
+            <!-- Total table -->
+            <table class="table">
+                <!-- Table headers -->
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Total hours permitted</th>
+                        <th>Total hours allocated</th>
+                        <th>Total left</th>
+                        <th>No Projects</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                    <tr>
+                        <td>Jane Doe</td>
+                        <td><input type="text" id="totalHoursPermitted" value="576"></td>
+                        <td id="totalHoursAllocated">558.6429797</td>
+                        <td id="totalHoursLeft">17.35702025</td>
+                        <td id="noProjects">329.145</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Total Courses table -->
+            <h3>Total Courses</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>HS</th>
+                        <th>Share</th>
+                        <th>Total hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td id="totalShare">Value</td>
+                        <td id="totalHours">Value</td>
+                    </tr>
+                    <tr>
+                        <td>HS1</td>
+                        <td id="hs1Share">Value</td>
+                        <td id="hs1Hours">Value</td>
+                    </tr>
+                    <tr>
+                        <td>HS2</td>
+                        <td id="hs2Share">Value</td>
+                        <td id="hs2Hours">Value</td>
+                    </tr>
+                    <tr>
+                        <td>HS3</td>
+                        <td id="hs3Share">Value</td>
+                        <td id="hs3Hours">Value</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Total Project table -->
+            <h3>Total Project</h3>
+            <table class="table" style="max-width: 300px;">
+                <tbody>
+                    <tr>
+                        <td>Total hours:</td>
+                        <td id="totalProjectHours">Value</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Total Admin table -->
+            <h3>Total Admin</h3>
+            <table class="table" style="max-width: 300px;">
+                <tbody>
+                    <tr>
+                        <td>Total hours:</td>
+                        <td id="totalAdminHours">Value</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Total School table -->
+            <h3>Total School</h3>
+            <table class="table" style="max-width: 300px;">
+                <tbody>
+                    <tr>
+                        <td>Total hours:</td>
+                        <td id="totalSchoolHours">Value</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Total Uni table -->
+            <h3>Total Uni</h3>
+            <table class="table" style="max-width: 300px;">
+                <tbody>
+                    <tr>
+                        <td>Total hours:</td>
+                        <td id="totalUniHours">Value</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
 
         <br>
-       
-            <h3>Courses</h3>
-            <table id="totalTeachingTable" class="table">
-                <thead>
-                    <tr>
-                        <th>Course</th>
-                        <th>HS</th>
-                        <th>Credits</th>
-                        <th>Alpha</th>
-                        <th>Beta</th>
-                        <th>Num. Students</th>
-                        <th>Delta</th>
-                        <th>Share</th>
-                        <th>Coordinator</th>
-                        <th>Total hours</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" value="CS502K"></td>
-                        <td>HS1</td>
-                        <td><input type="text" value="15"></td>
-                        <td><input type="text" value="4.4"></td>
-                        <td><input type="text" value="0.15"></td>
-                        <td><input type="text" value="35"></td>
-                        <td><input type="text" value="1"></td>
-                        <td><input type="text" value="0.5"></td>
-                        <td><input type="text" value="15"></td>
-                        <td><input type="text" value="87.375"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button id="addNewOneTotalTeaching">Add New One</button>
-            <br><br>
-            <h3>Project</h3>
-            <table id="totalProjectTable" class="table">
-                <thead>
-                    <tr>
-                        <th>Project</th>
-                        <th>Credits</th>
-                        <th>Alpha</th>
-                        <th>Beta</th>
-                        <th>Num groups/students</th>
-                        <th>Delta</th>
-                        <th>Share</th>
-                        <th>Coordinator</th>
-                        <th>Total hours</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" value="L3 Group project"></td>
-                        <td><input type="text" value="10"></td>
-                        <td><input type="text" value="3.5"></td>
-                        <td><input type="text" value="0.1"></td>
-                        <td><input type="text" value="30"></td>
-                        <td><input type="text" value="0.8"></td>
-                        <td><input type="text" value="0.4"></td>
-                        <td><input type="text" value="10"></td>
-                        <td><input type="text" value="75.125"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button id="addNewOneTotalProject">Add New One</button>
-            <br><br>
-            <h3>Admin</h3>
-            <table id="totalAdminTable" class="table">
-                <thead>
-                    <tr>
-                        <th>Role</th>
-                        <th>Credits</th>
-                        <th>Alpha</th>
-                        <th>Beta</th>
-                        <th>Num groups/students</th>
-                        <th>Delta</th>
-                        <th>Share</th>
-                        <th>Coordinator</th>
-                        <th>Total hours</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" value="Exam officer"></td>
-                        <td><input type="text" value="10"></td>
-                        <td><input type="text" value="3.5"></td>
-                        <td><input type="text" value="0.1"></td>
-                        <td><input type="text" value="30"></td>
-                        <td><input type="text" value="0.8"></td>
-                        <td><input type="text" value="0.4"></td>
-                        <td><input type="text" value="10"></td>
-                        <td><input type="text" value="75.125"></td>
-                    </tr>
-                
-                </tbody>
-            </table>
-            <button id="addNewOneTotalAdmin">Add New One</button>
-            <br>
+
+        <!-- Courses table -->
+        <h3>Courses</h3>
+        <table id="totalTeachingTable" class="table">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>HS</th>
+                    <th>Credits</th>
+                    <th>Alpha</th>
+                    <th>Beta</th>
+                    <th>Num. Students</th>
+                    <th>Delta</th>
+                    <th>Share</th>
+                    <th>Coordinator</th>
+                    <th>Total hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="courseName" value="CS502K"></td>
+                    <td class="hs">HS1</td>
+                    <td><input type="text" class="credits" value="15"></td>
+                    <td><input type="text" class="alpha" value="4.4"></td>
+                    <td><input type="text" class="beta" value="0.15"></td>
+                    <td><input type="text" class="numStudents" value="35"></td>
+                    <td><input type="text" class="delta" value="1"></td>
+                    <td><input type="text" class="share" value="0.5"></td>
+                    <td><input type="text" class="coordinator" value="15"></td>
+                    <td><input type="text" class="totalHours" value="87.375"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="addNewOneTotalTeaching">Add New One</button>
+        <br><br>
+        <!-- Project table -->
+        <h3>Project</h3>
+        <table id="totalProjectTable" class="table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Credits</th>
+                    <th>Alpha</th>
+                    <th>Beta</th>
+                    <th>Num groups/students</th>
+                    <th>Delta</th>
+                    <th>Share</th>
+                    <th>Coordinator</th>
+                    <th>Total hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="projectName" value="L3 Group project"></td>
+                    <td><input type="text" class="credits" value="10"></td>
+                    <td><input type="text" class="alpha" value="3.5"></td>
+                    <td><input type="text" class="beta" value="0.1"></td>
+                    <td><input type="text" class="numGroupsStudents" value="30"></td>
+                    <td><input type="text" class="delta" value="0.8"></td>
+                    <td><input type="text" class="share" value="0.4"></td>
+                    <td><input type="text" class="coordinator" value="10"></td>
+                    <td><input type="text" class="totalHours" value="75.125"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="addNewOneTotalProject">Add New One</button>
+        <br><br>
+        <!-- Admin table -->
+        <h3>Admin</h3>
+        <table id="totalAdminTable" class="table">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Credits</th>
+                    <th>Alpha</th>
+                    <th>Beta</th>
+                    <th>Num groups/students</th>
+                    <th>Delta</th>
+                    <th>Share</th>
+                    <th>Coordinator</th>
+                    <th>Total hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="role" value="Exam officer"></td>
+                    <td><input type="text" class="credits" value="10"></td>
+                    <td><input type="text" class="alpha" value="3.5"></td>
+                    <td><input type="text" class="beta" value="0.1"></td>
+                    <td><input type="text" class="numGroupsStudents" value="30"></td>
+                    <td><input type="text" class="delta" value="0.8"></td>
+                    <td><input type="text" class="share" value="0.4"></td>
+                    <td><input type="text" class="coordinator" value="10"></td>
+                    <td><input type="text" class="totalHours" value="75.125"></td>
+                    <td><a  class="removeRow">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="addNewOneTotalAdmin">Add New One</button>
         <br>
-        <!-- Add more sections and tables as needed for other categories -->
-        <a href="/staffvModules/" class="btn btn-success">Save</a> 
-        <a href="/staffvModules/" class="btn btn-success">Return to staffvModules List</a> 
-        
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                // Add New One button click event for Total Teaching table
-                $("#addNewOneTotalTeaching").on("click", function() {
-                    var newRowHtml = `
-                        <tr>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                        </tr>
-                    `;
-                    $("#totalTeachingTable tbody").append(newRowHtml);
-                });
-                
-                // Add New One button click event for Total Project table
-                $("#addNewOneTotalProject").on("click", function() {
-                    var newRowHtml = `
-                        <tr>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                        </tr>
-                    `;
-                    $("#totalProjectTable tbody").append(newRowHtml);
-                });
-                
-                // Add New One button click event for Total Admin table
-                $("#addNewOneTotalAdmin").on("click", function() {
-                    var newRowHtml = `
-                        <tr>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                        </tr>
-                    `;
-                    $("#totalAdminTable tbody").append(newRowHtml);
-                });
-            });
-        </script>
+        <br>
+        <!-- School table -->
+        <h3>School</h3>
+        <table id="schoolTable" class="table">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Credits</th>
+                    <th>Alpha</th>
+                    <th>Beta</th>
+                    <th>Num groups/students</th>
+                    <th>Delta</th>
+                    <th>Share</th>
+                    <th>Coordinator</th>
+                    <th>Total hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="role" value="Role 1"></td>
+                    <td><input type="text" class="credits" value="10"></td>
+                    <td><input type="text" class="alpha" value="3.5"></td>
+                    <td><input type="text" class="beta" value="0.1"></td>
+                    <td><input type="text" class="numGroupsStudents" value="30"></td>
+                    <td><input type="text" class="delta" value="0.8"></td>
+                    <td><input type="text" class="share" value="0.4"></td>
+                    <td><input type="text" class="coordinator" value="10"></td>
+                    <td><input type="text" class="totalHours" value="75.125"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="addNewOneSchool">Add New One</button>
+        <br>
+        <br>
+
+        <!-- Uni table -->
+        <h3>Uni</h3>
+        <table id="uniTable" class="table">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Credits</th>
+                    <th>Alpha</th>
+                    <th>Beta</th>
+                    <th>Num groups/students</th>
+                    <th>Delta</th>
+                    <th>Share</th>
+                    <th>Coordinator</th>
+                    <th>Total hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="role" value="Role 1"></td>
+                    <td><input type="text" class="credits" value="10"></td>
+                    <td><input type="text" class="alpha" value="3.5"></td>
+                    <td><input type="text" class="beta" value="0.1"></td>
+                    <td><input type="text" class="numGroupsStudents" value="30"></td>
+                    <td><input type="text" class="delta" value="0.8"></td>
+                    <td><input type="text" class="share" value="0.4"></td>
+                    <td><input type="text" class="coordinator" value="10"></td>
+                    <td><input type="text" class="totalHours" value="75.125"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="addNewOneUni">Add New One</button>
+        <br>
+        <br>
+
+        <button id="saveButton" class="btn btn-success">Save</button>&nbsp;
+        <a href="/staffvModules/" class="btn btn-success">Return to staffvModules List</a>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Add New One button click event for Total Teaching table
+        $("#addNewOneTotalTeaching").on("click", function () {
+            var newRowHtml = `
+                <tr>
+                    <td><input type="text" class="courseName"></td>
+                    <td class="hs">HS1</td>
+                    <td><input type="text" class="credits"></td>
+                    <td><input type="text" class="alpha"></td>
+                    <td><input type="text" class="beta"></td>
+                    <td><input type="text" class="numStudents"></td>
+                    <td><input type="text" class="delta"></td>
+                    <td><input type="text" class="share"></td>
+                    <td><input type="text" class="coordinator"></td>
+                    <td><input type="text" class="totalHours"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            `;
+            $("#totalTeachingTable tbody").append(newRowHtml);
+        });
+
+        // Add New One button click event for Total Project table
+        $("#addNewOneTotalProject").on("click", function () {
+            var newRowHtml = `
+                <tr>
+                    <td><input type="text" class="projectName"></td>
+                    <td><input type="text" class="credits"></td>
+                    <td><input type="text" class="alpha"></td>
+                    <td><input type="text" class="beta"></td>
+                    <td><input type="text" class="numGroupsStudents"></td>
+                    <td><input type="text" class="delta"></td>
+                    <td><input type="text" class="share"></td>
+                    <td><input type="text" class="coordinator"></td>
+                    <td><input type="text" class="totalHours"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            `;
+            $("#totalProjectTable tbody").append(newRowHtml);
+        });
+
+        // Add New One button click event for Total Admin table
+        $("#addNewOneTotalAdmin").on("click", function () {
+            var newRowHtml = `
+                <tr>
+                    <td><input type="text" class="role"></td>
+                    <td><input type="text" class="credits"></td>
+                    <td><input type="text" class="alpha"></td>
+                    <td><input type="text" class="beta"></td>
+                    <td><input type="text" class="numGroupsStudents"></td>
+                    <td><input type="text" class="delta"></td>
+                    <td><input type="text" class="share"></td>
+                    <td><input type="text" class="coordinator"></td>
+                    <td><input type="text" class="totalHours"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            `;
+            $("#totalAdminTable tbody").append(newRowHtml);
+        });
+
+        // Add New One button click event for School table
+        $("#addNewOneSchool").on("click", function () {
+            var newRowHtml = `
+                <tr>
+                    <td><input type="text" class="role"></td>
+                    <td><input type="text" class="credits"></td>
+                    <td><input type="text" class="alpha"></td>
+                    <td><input type="text" class="beta"></td>
+                    <td><input type="text" class="numGroupsStudents"></td>
+                    <td><input type="text" class="delta"></td>
+                    <td><input type="text" class="share"></td>
+                    <td><input type="text" class="coordinator"></td>
+                    <td><input type="text" class="totalHours"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            `;
+            $("#schoolTable tbody").append(newRowHtml);
+        });
+
+        // Add New One button click event for Uni table
+        $("#addNewOneUni").on("click", function () {
+            var newRowHtml = `
+                <tr>
+                    <td><input type="text" class="role"></td>
+                    <td><input type="text" class="credits"></td>
+                    <td><input type="text" class="alpha"></td>
+                    <td><input type="text" class="beta"></td>
+                    <td><input type="text" class="numGroupsStudents"></td>
+                    <td><input type="text" class="delta"></td>
+                    <td><input type="text" class="share"></td>
+                    <td><input type="text" class="coordinator"></td>
+                    <td><input type="text" class="totalHours"></td>
+                    <td><a class="removeRow">Remove</a></td>
+                </tr>
+            `;
+            $("#uniTable tbody").append(newRowHtml);
+        });
+
+        // Remove button click event
+        $(document).on("click", ".removeRow", function () {
+            $(this).closest("tr").remove();
+        });
+
+        // Save button click event
+        $("#saveButton").on("click", function () {
+            var jsonData = {
+                "staff_id": 1,
+                "course": {},
+                "project": {},
+                "adminrole": {},
+                "school": {},
+                "uni": {}
+            };
+
+            // Extract Total Teaching data
+            var totalTeachingData = [];
+            $("#totalTeachingTable tbody tr").each(function () {
+                var courseName = $(this).find(".courseName").val();
+                var hs = $(this).find(".hs").text();
+                var credits = $(this).find(".credits").val();
+                var alpha = $(this).find(".alpha").val();
+                var beta = $(this).find(".beta").val();
+                var numStudents = $(this).find(".numStudents").val();
+                var delta = $(this).find(".delta").val();
+                var share = $(this).find(".share").val();
+                var coordinator = $(this).find(".coordinator").val();
+                var totalHours = $(this).find(".totalHours").val();
+
+                var totalTeachingItem = {
+                    "courseName": courseName,
+                    "hs": hs,
+                    "credits": credits,
+                    "alpha": alpha,
+                    "beta": beta,
+                    "numStudents": numStudents,
+                    "delta": delta,
+                    "share": share,
+                    "coordinator": coordinator,
+                    "totalHours": totalHours
+                };
+
+                totalTeachingData.push(totalTeachingItem);
+            });
+
+            // Extract Total Project data
+            var totalProjectData = [];
+            $("#totalProjectTable tbody tr").each(function () {
+                var projectName = $(this).find(".projectName").val();
+                var credits = $(this).find(".credits").val();
+                var alpha = $(this).find(".alpha").val();
+                var beta = $(this).find(".beta").val();
+                var numGroupsStudents = $(this).find(".numGroupsStudents").val();
+                var delta = $(this).find(".delta").val();
+                var share = $(this).find(".share").val();
+                var coordinator = $(this).find(".coordinator").val();
+                var totalHours = $(this).find(".totalHours").val();
+
+                var totalProjectItem = {
+                    "projectName": projectName,
+                    "credits": credits,
+                    "alpha": alpha,
+                    "beta": beta,
+                    "numGroupsStudents": numGroupsStudents,
+                    "delta": delta,
+                    "share": share,
+                    "coordinator": coordinator,
+                    "totalHours": totalHours
+                };
+
+                totalProjectData.push(totalProjectItem);
+            });
+
+            // Extract Total Admin data
+            var totalAdminData = [];
+            $("#totalAdminTable tbody tr").each(function () {
+                var role = $(this).find(".role").val();
+                var credits = $(this).find(".credits").val();
+                var alpha = $(this).find(".alpha").val();
+                var beta = $(this).find(".beta").val();
+                var numGroupsStudents = $(this).find(".numGroupsStudents").val();
+                var delta = $(this).find(".delta").val();
+                var share = $(this).find(".share").val();
+                var coordinator = $(this).find(".coordinator").val();
+                var totalHours = $(this).find(".totalHours").val();
+
+                var totalAdminItem = {
+                    "role": role,
+                    "credits": credits,
+                    "alpha": alpha,
+                    "beta": beta,
+                    "numGroupsStudents": numGroupsStudents,
+                    "delta": delta,
+                    "share": share,
+                    "coordinator": coordinator,
+                    "totalHours": totalHours
+                };
+
+                totalAdminData.push(totalAdminItem);
+            });
+
+            // Extract School data
+            var schoolData = [];
+            $("#schoolTable tbody tr").each(function () {
+                var role = $(this).find(".role").val();
+                var credits = $(this).find(".credits").val();
+                var alpha = $(this).find(".alpha").val();
+                var beta = $(this).find(".beta").val();
+                var numGroupsStudents = $(this).find(".numGroupsStudents").val();
+                var delta = $(this).find(".delta").val();
+                var share = $(this).find(".share").val();
+                var coordinator = $(this).find(".coordinator").val();
+                var totalHours = $(this).find(".totalHours").val();
+
+                var schoolItem = {
+                    "role": role,
+                    "credits": credits,
+                    "alpha": alpha,
+                    "beta": beta,
+                    "numGroupsStudents": numGroupsStudents,
+                    "delta": delta,
+                    "share": share,
+                    "coordinator": coordinator,
+                    "totalHours": totalHours
+                };
+
+                schoolData.push(schoolItem);
+            });
+
+            // Extract Uni data
+            var uniData = [];
+            $("#uniTable tbody tr").each(function () {
+                var role = $(this).find(".role").val();
+                var credits = $(this).find(".credits").val();
+                var alpha = $(this).find(".alpha").val();
+                var beta = $(this).find(".beta").val();
+                var numGroupsStudents = $(this).find(".numGroupsStudents").val();
+                var delta = $(this).find(".delta").val();
+                var share = $(this).find(".share").val();
+                var coordinator = $(this).find(".coordinator").val();
+                var totalHours = $(this).find(".totalHours").val();
+
+                var uniItem = {
+                    "role": role,
+                    "credits": credits,
+                    "alpha": alpha,
+                    "beta": beta,
+                    "numGroupsStudents": numGroupsStudents,
+                    "delta": delta,
+                    "share": share,
+                    "coordinator": coordinator,
+                    "totalHours": totalHours
+                };
+
+                uniData.push(uniItem);
+            });
+
+            // Assign extracted data to jsonData
+            jsonData.course = totalTeachingData;
+            jsonData.project = totalProjectData;
+            jsonData.adminrole = totalAdminData;
+            jsonData.school = schoolData;
+            jsonData.uni = uniData;
+
+            // Convert JSON object to string
+            var jsonStr = JSON.stringify(jsonData);
+            
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            // 发送POST请求
+            fetch('/staffvModules/detail/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken  // 添加CSRF令牌到头部
+                },
+                body: jsonStr
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Data saved successfully.');
+                } else {
+                    alert('Failed to save data.Please delete empty lines');
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        });
+    });
+</script>
+

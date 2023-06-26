@@ -2,6 +2,8 @@
 from django.shortcuts import get_object_or_404,render, redirect
 from .models import Course,Project,AdminRole,SchoolRole,UniRole
 from django.core.paginator import Paginator
+from .models import TeachCourse, TeachProject, TeachAdminRole, TeachSchoolRoles, TeachUniRoles
+import json
 
 # Create your views here.
 
@@ -124,6 +126,97 @@ def unirole_list(request):
     return render(request, 'unirole_list.html', context)
 
 def detail(request):
+    if request.method == 'POST':
+        json_str = request.body.decode('utf-8')  # 获取请求体中的JSON字符串
+        data = json.loads(json_str)  # 将JSON字符串解析为Python对象
+
+        staff_id = data['staff_id']
+        course_data = data['course']
+        project_data = data['project']
+        admin_role_data = data['adminrole']
+        school_role_data = data['school']
+        uni_role_data = data['uni']
+
+        # 清空对应staff_id的数据
+        TeachCourse.objects.filter(staff_id=staff_id).delete()
+        TeachProject.objects.filter(staff_id=staff_id).delete()
+        TeachAdminRole.objects.filter(staff_id=staff_id).delete()
+        TeachSchoolRoles.objects.filter(staff_id=staff_id).delete()
+        TeachUniRoles.objects.filter(staff_id=staff_id).delete()
+
+        # 插入新的数据
+        for course in course_data:
+            TeachCourse.objects.create(
+                staff_id=staff_id,
+                course_name=course['courseName'],
+                credits=course['credits'],
+                alpha=course['alpha'],
+                beta=course['beta'],
+                num_students=course['numStudents'],
+                delta=course['delta'],
+                share=course['share'],
+                coordinator=course['coordinator'],
+                total_hours=course['totalHours']
+            )
+
+        for project in project_data:
+            TeachProject.objects.create(
+                staff_id=staff_id,
+                project_name=project['projectName'],
+                credits=project['credits'],
+                alpha=project['alpha'],
+                beta=project['beta'],
+                num_students=project['numGroupsStudents'],
+                delta=project['delta'],
+                share=project['share'],
+                coordinator=project['coordinator'],
+                total_hours=project['totalHours']
+            )
+
+        for admin_role in admin_role_data:
+            TeachAdminRole.objects.create(
+                staff_id=staff_id,
+                role_name=admin_role['role'],
+                credits=admin_role['credits'],
+                alpha=admin_role['alpha'],
+                beta=admin_role['beta'],
+                num_students=admin_role['numGroupsStudents'],
+                delta=admin_role['delta'],
+                share=admin_role['share'],
+                coordinator=admin_role['coordinator'],
+                total_hours=admin_role['totalHours']
+            )
+
+        for school_role in school_role_data:
+            TeachSchoolRoles.objects.create(
+                staff_id=staff_id,
+                role_name=school_role['role'],
+                credits=school_role['credits'],
+                alpha=school_role['alpha'],
+                beta=school_role['beta'],
+                num_students=school_role['numGroupsStudents'],
+                delta=school_role['delta'],
+                share=school_role['share'],
+                coordinator=school_role['coordinator'],
+                total_hours=school_role['totalHours']
+            )
+
+        for uni_role in uni_role_data:
+            TeachUniRoles.objects.create(
+                staff_id=staff_id,
+                role_name=uni_role['role'],
+                credits=uni_role['credits'],
+                alpha=uni_role['alpha'],
+                beta=uni_role['beta'],
+                num_students=uni_role['numGroupsStudents'],
+                delta=uni_role['delta'],
+                share=uni_role['share'],
+                coordinator=uni_role['coordinator'],
+                total_hours=uni_role['totalHours']
+            )
+
+        print("Data saved successfully.")  # 打印保存成功的提示
+
     return render(request, 'detail.html')
 
 def staffvModules_course_edit(request, courseId):

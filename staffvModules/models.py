@@ -11,7 +11,7 @@ class TeachCourse(models.Model):
     delta = models.CharField(max_length=100)
     share = models.CharField(max_length=100)
     coordinator = models.CharField(max_length=100)
-    total_hours = models.IntegerField()
+    total_hours = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True)
     is_delete = models.BooleanField(default=False)
 
@@ -32,7 +32,7 @@ class TeachProject(models.Model):
     delta = models.CharField(max_length=100)
     share = models.CharField(max_length=100)
     coordinator = models.CharField(max_length=100)
-    total_hours = models.IntegerField()
+    total_hours = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True)
     is_delete = models.BooleanField(default=False)
 
@@ -53,7 +53,7 @@ class TeachAdminRole(models.Model):
     delta = models.CharField(max_length=100)
     share = models.CharField(max_length=100)
     coordinator = models.CharField(max_length=100)
-    total_hours = models.IntegerField()
+    total_hours = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True)
     is_delete = models.BooleanField(default=False)
 
@@ -75,7 +75,7 @@ class TeachSchoolRoles(models.Model):
     delta = models.CharField(max_length=100)
     share = models.CharField(max_length=100)
     coordinator = models.CharField(max_length=100)
-    total_hours = models.IntegerField()
+    total_hours = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True)
     is_delete = models.BooleanField(default=False)
 
@@ -96,7 +96,7 @@ class TeachUniRoles(models.Model):
     delta = models.CharField(max_length=100)
     share = models.CharField(max_length=100)
     coordinator = models.CharField(max_length=100)
-    total_hours = models.IntegerField()
+    total_hours = models.CharField(max_length=100)
     create_time = models.DateTimeField(auto_now_add=True)
     is_delete = models.BooleanField(default=False)
 
