@@ -114,7 +114,7 @@
 
         <br>
 
-        <!-- Courses table -->
+       <!-- Courses table -->
         <h3>Courses</h3>
         <table id="totalTeachingTable" class="table">
             <thead>
@@ -133,19 +133,21 @@
                 </tr>
             </thead>
             <tbody>
+                {% for course in courses %}
                 <tr>
-                    <td><input type="text" class="courseName" value="CS502K"></td>
-                    <td class="hs">HS1</td>
-                    <td><input type="text" class="credits" value="15"></td>
-                    <td><input type="text" class="alpha" value="4.4"></td>
-                    <td><input type="text" class="beta" value="0.15"></td>
-                    <td><input type="text" class="numStudents" value="35"></td>
-                    <td><input type="text" class="delta" value="1"></td>
-                    <td><input type="text" class="share" value="0.5"></td>
-                    <td><input type="text" class="coordinator" value="15"></td>
-                    <td><input type="text" class="totalHours" value="87.375"></td>
+                    <td><input type="text" class="courseName" value="{{ course.course_name }}"></td>
+                    <td class="hs">{{ course.hs }}</td>
+                    <td><input type="text" class="credits" value="{{ course.credits }}"></td>
+                    <td><input type="text" class="alpha" value="{{ course.alpha }}"></td>
+                    <td><input type="text" class="beta" value="{{ course.beta }}"></td>
+                    <td><input type="text" class="numStudents" value="{{ course.num_students }}"></td>
+                    <td><input type="text" class="delta" value="{{ course.delta }}"></td>
+                    <td><input type="text" class="share" value="{{ course.share }}"></td>
+                    <td><input type="text" class="coordinator" value="{{ course.coordinator }}"></td>
+                    <td><input type="text" class="totalHours" value="{{ course.total_hours }}"></td>
                     <td><a class="removeRow">Remove</a></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
         <button id="addNewOneTotalTeaching">Add New One</button>
@@ -168,18 +170,20 @@
                 </tr>
             </thead>
             <tbody>
+                {% for project in projects %}
                 <tr>
-                    <td><input type="text" class="projectName" value="L3 Group project"></td>
-                    <td><input type="text" class="credits" value="10"></td>
-                    <td><input type="text" class="alpha" value="3.5"></td>
-                    <td><input type="text" class="beta" value="0.1"></td>
-                    <td><input type="text" class="numGroupsStudents" value="30"></td>
-                    <td><input type="text" class="delta" value="0.8"></td>
-                    <td><input type="text" class="share" value="0.4"></td>
-                    <td><input type="text" class="coordinator" value="10"></td>
-                    <td><input type="text" class="totalHours" value="75.125"></td>
+                    <td><input type="text" class="projectName" value="{{ project.project_name }}"></td>
+                    <td><input type="text" class="credits" value="{{ project.credits }}"></td>
+                    <td><input type="text" class="alpha" value="{{ project.alpha }}"></td>
+                    <td><input type="text" class="beta" value="{{ project.beta }}"></td>
+                    <td><input type="text" class="numGroupsStudents" value="{{ project.num_students }}"></td>
+                    <td><input type="text" class="delta" value="{{ project.delta }}"></td>
+                    <td><input type="text" class="share" value="{{ project.share }}"></td>
+                    <td><input type="text" class="coordinator" value="{{ project.coordinator }}"></td>
+                    <td><input type="text" class="totalHours" value="{{ project.total_hours }}"></td>
                     <td><a class="removeRow">Remove</a></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
         <button id="addNewOneTotalProject">Add New One</button>
@@ -202,18 +206,20 @@
                 </tr>
             </thead>
             <tbody>
+                {% for admin_role in admin_roles %}
                 <tr>
-                    <td><input type="text" class="role" value="Exam officer"></td>
-                    <td><input type="text" class="credits" value="10"></td>
-                    <td><input type="text" class="alpha" value="3.5"></td>
-                    <td><input type="text" class="beta" value="0.1"></td>
-                    <td><input type="text" class="numGroupsStudents" value="30"></td>
-                    <td><input type="text" class="delta" value="0.8"></td>
-                    <td><input type="text" class="share" value="0.4"></td>
-                    <td><input type="text" class="coordinator" value="10"></td>
-                    <td><input type="text" class="totalHours" value="75.125"></td>
-                    <td><a  class="removeRow">Remove</a></td>
+                    <td><input type="text" class="role" value="{{ admin_role.role_name }}"></td>
+                    <td><input type="text" class="credits" value="{{ admin_role.credits }}"></td>
+                    <td><input type="text" class="alpha" value="{{ admin_role.alpha }}"></td>
+                    <td><input type="text" class="beta" value="{{ admin_role.beta }}"></td>
+                    <td><input type="text" class="numGroupsStudents" value="{{ admin_role.num_students }}"></td>
+                    <td><input type="text" class="delta" value="{{ admin_role.delta }}"></td>
+                    <td><input type="text" class="share" value="{{ admin_role.share }}"></td>
+                    <td><input type="text" class="coordinator" value="{{ admin_role.coordinator }}"></td>
+                    <td><input type="text" class="totalHours" value="{{ admin_role.total_hours }}"></td>
+                    <td><a class="removeRow">Remove</a></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
         <button id="addNewOneTotalAdmin">Add New One</button>
@@ -237,18 +243,20 @@
                 </tr>
             </thead>
             <tbody>
+                {% for school_role in school_roles %}
                 <tr>
-                    <td><input type="text" class="role" value="Role 1"></td>
-                    <td><input type="text" class="credits" value="10"></td>
-                    <td><input type="text" class="alpha" value="3.5"></td>
-                    <td><input type="text" class="beta" value="0.1"></td>
-                    <td><input type="text" class="numGroupsStudents" value="30"></td>
-                    <td><input type="text" class="delta" value="0.8"></td>
-                    <td><input type="text" class="share" value="0.4"></td>
-                    <td><input type="text" class="coordinator" value="10"></td>
-                    <td><input type="text" class="totalHours" value="75.125"></td>
+                    <td><input type="text" class="role" value="{{ school_role.role_name }}"></td>
+                    <td><input type="text" class="credits" value="{{ school_role.credits }}"></td>
+                    <td><input type="text" class="alpha" value="{{ school_role.alpha }}"></td>
+                    <td><input type="text" class="beta" value="{{ school_role.beta }}"></td>
+                    <td><input type="text" class="numGroupsStudents" value="{{ school_role.num_students }}"></td>
+                    <td><input type="text" class="delta" value="{{ school_role.delta }}"></td>
+                    <td><input type="text" class="share" value="{{ school_role.share }}"></td>
+                    <td><input type="text" class="coordinator" value="{{ school_role.coordinator }}"></td>
+                    <td><input type="text" class="totalHours" value="{{ school_role.total_hours }}"></td>
                     <td><a class="removeRow">Remove</a></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
         <button id="addNewOneSchool">Add New One</button>
@@ -273,21 +281,26 @@
                 </tr>
             </thead>
             <tbody>
+                {% for uni_role in uni_roles %}
                 <tr>
-                    <td><input type="text" class="role" value="Role 1"></td>
-                    <td><input type="text" class="credits" value="10"></td>
-                    <td><input type="text" class="alpha" value="3.5"></td>
-                    <td><input type="text" class="beta" value="0.1"></td>
-                    <td><input type="text" class="numGroupsStudents" value="30"></td>
-                    <td><input type="text" class="delta" value="0.8"></td>
-                    <td><input type="text" class="share" value="0.4"></td>
-                    <td><input type="text" class="coordinator" value="10"></td>
-                    <td><input type="text" class="totalHours" value="75.125"></td>
+                    <td><input type="text" class="role" value="{{ uni_role.role_name }}"></td>
+                    <td><input type="text" class="credits" value="{{ uni_role.credits }}"></td>
+                    <td><input type="text" class="alpha" value="{{ uni_role.alpha }}"></td>
+                    <td><input type="text" class="beta" value="{{ uni_role.beta }}"></td>
+                    <td><input type="text" class="numGroupsStudents" value="{{ uni_role.num_students }}"></td>
+                    <td><input type="text" class="delta" value="{{ uni_role.delta }}"></td>
+                    <td><input type="text" class="share" value="{{ uni_role.share }}"></td>
+                    <td><input type="text" class="coordinator" value="{{ uni_role.coordinator }}"></td>
+                    <td><input type="text" class="totalHours" value="{{ uni_role.total_hours }}"></td>
                     <td><a class="removeRow">Remove</a></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
         <button id="addNewOneUni">Add New One</button>
+        <br>
+        <br>
+
         <br>
         <br>
 

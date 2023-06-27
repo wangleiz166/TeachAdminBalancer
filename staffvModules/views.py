@@ -217,7 +217,23 @@ def detail(request):
 
         print("Data saved successfully.")  # 打印保存成功的提示
 
-    return render(request, 'detail.html')
+    # 从数据库中获取数据
+    courses = TeachCourse.objects.all()
+    projects = TeachProject.objects.all()
+    admin_roles = TeachAdminRole.objects.all()
+    school_roles = TeachSchoolRoles.objects.all()
+    uni_roles = TeachUniRoles.objects.all()
+
+    context = {
+        'courses': courses,
+        'projects': projects,
+        'admin_roles': admin_roles,
+        'school_roles': school_roles,
+        'uni_roles': uni_roles
+    }
+
+    return render(request, 'detail.html', context)
+
 
 def staffvModules_course_edit(request, courseId):
     # Retrieve the course object based on the courseId
