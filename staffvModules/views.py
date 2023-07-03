@@ -4,6 +4,7 @@ from .models import Course,Project,AdminRole,SchoolRole,UniRole
 from django.core.paginator import Paginator
 from .models import TeachCourse, TeachProject, TeachAdminRole, TeachSchoolRoles, TeachUniRoles
 import json
+from staff.models import Staff
 
 # Create your views here.
 
@@ -125,12 +126,11 @@ def unirole_list(request):
     context = {'uniroles': uniroles, 'query': unirole_query}
     return render(request, 'unirole_list.html', context)
 
-def detail(request):
+def detail(request, staff_id=1):
     if request.method == 'POST':
         json_str = request.body.decode('utf-8')  # 获取请求体中的JSON字符串
         data = json.loads(json_str)  # 将JSON字符串解析为Python对象
 
-        staff_id = data['staff_id']
         course_data = data['course']
         project_data = data['project']
         admin_role_data = data['adminrole']
@@ -156,7 +156,7 @@ def detail(request):
                 delta=course['delta'],
                 share=course['share'],
                 coordinator=course['coordinator'],
-                total_hours=course['totalHours']
+                total_hours=course['credits'] * (course['alpha'] * course['delta'] + course['beta'] * course['numStudents']) * course['share'] + course['coordinator']
             )
 
         for project in project_data:
@@ -170,7 +170,7 @@ def detail(request):
                 delta=project['delta'],
                 share=project['share'],
                 coordinator=project['coordinator'],
-                total_hours=project['totalHours']
+                total_hours=project['credits'] * (project['alpha'] * project['delta'] + project['beta'] * project['numStudents']) * project['share'] + project['coordinator']
             )
 
         for admin_role in admin_role_data:
@@ -184,7 +184,7 @@ def detail(request):
                 delta=admin_role['delta'],
                 share=admin_role['share'],
                 coordinator=admin_role['coordinator'],
-                total_hours=admin_role['totalHours']
+                total_hours=admin_role['credits'] * (admin_role['alpha'] * admin_role['delta'] + admin_role['beta'] * admin_role['numStudents']) * admin_role['share'] + admin_role['coordinator']
             )
 
         for school_role in school_role_data:
@@ -197,8 +197,7 @@ def detail(request):
                 num_students=school_role['numGroupsStudents'],
                 delta=school_role['delta'],
                 share=school_role['share'],
-                coordinator=school_role['coordinator'],
-                total_hours=school_role['totalHours']
+                total_hours=school_role['credits'] * (school_role['alpha'] * school_role['delta'] + school_role['beta'] * school_role['numStudents']) * school_role['share'] + school_role['coordinator']
             )
 
         for uni_role in uni_role_data:
@@ -212,24 +211,92 @@ def detail(request):
                 delta=uni_role['delta'],
                 share=uni_role['share'],
                 coordinator=uni_role['coordinator'],
-                total_hours=uni_role['totalHours']
+                total_hours=uni_role['credits'] * (uni_role['alpha'] * uni_role['delta'] + uni_role['beta'] * uni_role['numStudents']) * uni_role['share'] + uni_role['coordinator']
             )
 
         print("Data saved successfully.")  # 打印保存成功的提示
 
     # 从数据库中获取数据
-    courses = TeachCourse.objects.all()
-    projects = TeachProject.objects.all()
-    admin_roles = TeachAdminRole.objects.all()
-    school_roles = TeachSchoolRoles.objects.all()
-    uni_roles = TeachUniRoles.objects.all()
+    #select * from balancer_teach_course as a left join balancer_course as b on a.course_name = b.code where b.is_delete = 0
+    courses = TeachCourse.objects.raw("""
+        SELECT * 
+        FROM balancer_teach_course AS a 
+        LEFT JOIN balancer_course AS b 
+        ON a.course_name = b.code 
+        WHERE b.is_delete = 0 and a.staff_id = %s
+    """, [staff_id])
+
+    projects = TeachProject.objects.filter(staff_id=staff_id).all()
+    admin_roles = TeachAdminRole.objects.filter(staff_id=staff_id).all()
+    school_roles = TeachSchoolRoles.objects.filter(staff_id=staff_id).all()
+    uni_roles = TeachUniRoles.objects.filter(staff_id=staff_id).all()
+
+    courses_hours = sum([float(c.total_hours) for c in courses])
+    courses_shares = sum([float(e.share) for e in courses])
+    projects_hours = sum([float(p.total_hours) for p in projects])
+    admin_roles_hours = sum([float(a.total_hours) for a in admin_roles])
+    school_roles_hours = sum([float(s.total_hours) for s in school_roles])
+    uni_roles_hours = sum([float(u.total_hours) for u in uni_roles])
+
+    staff_total_hours = courses_hours + projects_hours + admin_roles_hours +  school_roles_hours + uni_roles_hours
+    staff_total_no_project_hours = courses_hours  + admin_roles_hours +  school_roles_hours + uni_roles_hours
+    staff_permitt_hours = Staff.objects.get(id=staff_id).annual_availability
+    
+    # For HS1
+    courses_hs1 = TeachCourse.objects.raw("""
+        SELECT * 
+        FROM balancer_teach_course AS a 
+        LEFT JOIN balancer_course AS b 
+        ON a.course_name = b.code 
+        WHERE b.is_delete = 0 and a.staff_id = %s and b.hs = 'HS1'
+    """, [staff_id])
+    courses_hs1_hours = sum([float(c.total_hours) for c in courses_hs1])
+    courses_hs1_shares = sum([float(e.share) for e in courses_hs1])
+
+    # For HS2
+    courses_hs2 = TeachCourse.objects.raw("""
+        SELECT * 
+        FROM balancer_teach_course AS a 
+        LEFT JOIN balancer_course AS b 
+        ON a.course_name = b.code 
+        WHERE b.is_delete = 0 and a.staff_id = %s and b.hs = 'HS2'
+    """, [staff_id])
+    courses_hs2_hours = sum([float(c.total_hours) for c in courses_hs2])
+    courses_hs2_shares = sum([float(e.share) for e in courses_hs2])
+
+    # For HS3
+    courses_hs3 = TeachCourse.objects.raw("""
+        SELECT * 
+        FROM balancer_teach_course AS a 
+        LEFT JOIN balancer_course AS b 
+        ON a.course_name = b.code 
+        WHERE b.is_delete = 0 and a.staff_id = %s and b.hs = 'HS3'
+    """, [staff_id])
+    courses_hs3_hours = sum([float(c.total_hours) for c in courses_hs3])
+    courses_hs3_shares = sum([float(e.share) for e in courses_hs3])
 
     context = {
         'courses': courses,
         'projects': projects,
         'admin_roles': admin_roles,
         'school_roles': school_roles,
-        'uni_roles': uni_roles
+        'uni_roles': uni_roles,
+        'courses_hours': courses_hours,
+        'projects_hours': projects_hours,
+        'admin_roles_hours': admin_roles_hours,
+        'school_roles_hours': school_roles_hours,
+        'uni_roles_hours': uni_roles_hours,
+        'courses_shares': courses_shares,
+        'staff_total_hours': staff_total_hours,
+        'staff_total_no_project_hours': staff_total_no_project_hours,
+        'staff_permitt_hours': staff_permitt_hours,
+        'staff_total_hours_left': float(staff_permitt_hours) - staff_total_hours,
+        'courses_hs1_hours': courses_hs1_hours,
+        'courses_hs1_shares': courses_hs1_shares,
+        'courses_hs2_hours': courses_hs2_hours,
+        'courses_hs2_shares': courses_hs2_shares,
+        'courses_hs3_hours': courses_hs3_hours,
+        'courses_hs3_shares': courses_hs3_shares,
     }
 
     return render(request, 'detail.html', context)

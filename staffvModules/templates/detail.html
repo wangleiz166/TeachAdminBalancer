@@ -29,10 +29,10 @@
                 <tbody>
                     <tr>
                         <td>Jane Doe</td>
-                        <td><input type="text" id="totalHoursPermitted" value="576"></td>
-                        <td id="totalHoursAllocated">558.6429797</td>
-                        <td id="totalHoursLeft">17.35702025</td>
-                        <td id="noProjects">329.145</td>
+                        <td>{{staff_permitt_hours}}</td>
+                        <td id="totalHoursAllocated">{{staff_total_hours}}</td>
+                        <td id="totalHoursLeft">{{staff_total_hours_left}}</td>
+                        <td id="noProjects">{{staff_total_no_project_hours}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -49,24 +49,24 @@
                 <tbody>
                     <tr>
                         <td>Total</td>
-                        <td id="totalShare">Value</td>
-                        <td id="totalHours">Value</td>
+                        <td id="totalShare">{{ courses_shares }}</td>
+                        <td id="totalHours">{{ courses_hours }}</td>
                     </tr>
                     <tr>
                         <td>HS1</td>
-                        <td id="hs1Share">Value</td>
-                        <td id="hs1Hours">Value</td>
+                        <td id="hs1Share">{{ courses_hs1_shares }}</td>
+                        <td id="hs1Hours">{{ courses_hs1_hours }}</td>
                     </tr>
                     <tr>
                         <td>HS2</td>
-                        <td id="hs2Share">Value</td>
-                        <td id="hs2Hours">Value</td>
+                        <td id="hs2Share">{{ courses_hs2_shares }}</td>
+                        <td id="hs2Hours">{{ courses_hs2_hours }}</td>
                     </tr>
                     <tr>
                         <td>HS3</td>
-                        <td id="hs3Share">Value</td>
-                        <td id="hs3Hours">Value</td>
-                    </tr>
+                        <td id="hs3Share">{{ courses_hs3_shares }}</td>
+                        <td id="hs3Hours">{{ courses_hs3_hours }}</td>
+                    </tr>                    
                 </tbody>
             </table>
             <!-- Total Project table -->
@@ -75,7 +75,7 @@
                 <tbody>
                     <tr>
                         <td>Total hours:</td>
-                        <td id="totalProjectHours">Value</td>
+                        <td id="totalProjectHours">{{ projects_hours }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -85,7 +85,7 @@
                 <tbody>
                     <tr>
                         <td>Total hours:</td>
-                        <td id="totalAdminHours">Value</td>
+                        <td id="totalAdminHours">{{ admin_roles_hours }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -95,7 +95,7 @@
                 <tbody>
                     <tr>
                         <td>Total hours:</td>
-                        <td id="totalSchoolHours">Value</td>
+                        <td id="totalSchoolHours">{{ school_roles_hours }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -105,7 +105,7 @@
                 <tbody>
                     <tr>
                         <td>Total hours:</td>
-                        <td id="totalUniHours">Value</td>
+                        <td id="totalUniHours">{{ uni_roles_hours }}</td>
                     </tr>
                 </tbody>
             </table>
