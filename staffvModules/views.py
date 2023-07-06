@@ -2,31 +2,35 @@
 from django.shortcuts import get_object_or_404,render, redirect
 from django.http import JsonResponse
 from .models import Course,Project,AdminRole,SchoolRole,UniRole
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import TeachCourse, TeachProject, TeachAdminRole, TeachSchoolRoles, TeachUniRoles
 import json
 from staff.models import Staff
+from django.db.models import Sum
 
 # Create your views here.
 
 def list(request):
-    # Retrieve all non-deleted courses from the database
-    courses = Course.objects.filter(is_delete=0)
+    if request.user_agent.is_mobile:
+         return render(request, 'staff_h5.html')    
+    else:    
+        # Retrieve all non-deleted courses from the database
+        courses = Course.objects.filter(is_delete=0)
 
-    # Search functionality
-    query = request.GET.get('query')
-    if query:
-        # Filter courses based on the search query and is_delete condition
-        courses = courses.filter(code__icontains=query)
+        # Search functionality
+        query = request.GET.get('query')
+        if query:
+            # Filter courses based on the search query and is_delete condition
+            courses = courses.filter(code__icontains=query)
 
-    # Pagination
-    paginator = Paginator(courses, 10)  # Show 10 courses per page
-    page_number = request.GET.get('page')
-    courses = paginator.get_page(page_number)
+        # Pagination
+        paginator = Paginator(courses, 10)  # Show 10 courses per page
+        page_number = request.GET.get('page')
+        courses = paginator.get_page(page_number)
 
-    # Pass the courses, search query, and pagination to the template
-    context = {'courses': courses, 'query': query}
-    return render(request, 'list.html', context)
+        # Pass the courses, search query, and pagination to the template
+        context = {'courses': courses, 'query': query}
+        return render(request, 'list.html', context)    
 
 def full_list(request, category=None):
     # Retrieve all non-deleted items from the database based on the category
@@ -727,4 +731,28 @@ def staff_list(request, name, type="course"):
     # Return the JSON response
     return JsonResponse(response_data)
 
-    
+def hs_total_list(request):
+    page = request.GET.get('page', 1)
+
+    staffs = Staff.objects.all()
+
+    for staff in staffs:
+        hs1_courses = Course.objects.filter(hs='HS1').values_list('code', flat=True)
+        hs2_courses = Course.objects.filter(hs='HS2').values_list('code', flat=True)
+        hs3_courses = Course.objects.filter(hs='HS3').values_list('code', flat=True)
+
+        staff.hs1_share = TeachCourse.objects.filter(staff_id=staff.id, course_name__in=hs1_courses).aggregate(Sum('share'))['share__sum'] or 0
+        staff.hs2_share = TeachCourse.objects.filter(staff_id=staff.id, course_name__in=hs2_courses).aggregate(Sum('share'))['share__sum'] or 0
+        staff.hs3_share = TeachCourse.objects.filter(staff_id=staff.id, course_name__in=hs3_courses).aggregate(Sum('share'))['share__sum'] or 0
+        staff.hs_total_share = staff.hs1_share + staff.hs2_share + staff.hs3_share
+        
+    paginator = Paginator(staffs, 10)
+
+    try:
+        staffs = paginator.page(page)
+    except PageNotAnInteger:
+        staffs = paginator.page(1)
+    except EmptyPage:
+        staffs = paginator.page(paginator.num_pages)
+
+    return render(request, 'hs_list.html', {'staffs': staffs})

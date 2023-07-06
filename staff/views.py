@@ -23,7 +23,8 @@ def staff_list(request):
 
     return render(request, 'staff_list.html', {'page_obj': page_obj, 'query': query})
 
-
+def totalwork_h5(request):
+     return render(request, 'total_work_h5.html')
 
 def staff_search(request):
     staff_data = Staff.objects.filter(is_delete=0)

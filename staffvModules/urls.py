@@ -8,7 +8,9 @@ urlpatterns = [
     path('edit/<int:courseId>', views.staffvModules_course_edit, name='staffvModules_course_edit'),
     path('delete/<int:courseId>', views.staffvModules_course_del, name='staffvModules_course_del'),
     path('stafflist/<str:name>/<str:type>', views.staff_list, name='staff_list'),
-
+    path('hstotal', views.hs_total_list, name='hs_total_list'),
+    
+  
     path('project/', views.project_list, name='staffvModules_project_list'),
     path('project/add/', views.staffvModules_project_add, name='staffvModules_project_add'),
     path('project/edit/<int:projectId>', views.staffvModules_project_edit, name='staffvModules_project_edit'),
