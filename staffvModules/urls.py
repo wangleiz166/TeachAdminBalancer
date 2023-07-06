@@ -3,10 +3,11 @@ from . import views
 
 urlpatterns = [
     path('', views.list, name='staffvModules_list'),
-    path('detail/', views.detail, name='detail'),
+    path('detail/<int:staffId>', views.detail, name='detail'),
     path('add/', views.staffvModules_course_add, name='staffvModules_course_add'),
     path('edit/<int:courseId>', views.staffvModules_course_edit, name='staffvModules_course_edit'),
     path('delete/<int:courseId>', views.staffvModules_course_del, name='staffvModules_course_del'),
+    path('stafflist/<str:name>/<str:type>', views.staff_list, name='staff_list'),
 
     path('project/', views.project_list, name='staffvModules_project_list'),
     path('project/add/', views.staffvModules_project_add, name='staffvModules_project_add'),

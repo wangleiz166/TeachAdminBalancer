@@ -1,5 +1,6 @@
 
 from django.shortcuts import get_object_or_404,render, redirect
+from django.http import JsonResponse
 from .models import Course,Project,AdminRole,SchoolRole,UniRole
 from django.core.paginator import Paginator
 from .models import TeachCourse, TeachProject, TeachAdminRole, TeachSchoolRoles, TeachUniRoles
@@ -126,7 +127,7 @@ def unirole_list(request):
     context = {'uniroles': uniroles, 'query': unirole_query}
     return render(request, 'unirole_list.html', context)
 
-def detail(request, staff_id=1):
+def detail(request, staffId):
     if request.method == 'POST':
         json_str = request.body.decode('utf-8')  # 获取请求体中的JSON字符串
         data = json.loads(json_str)  # 将JSON字符串解析为Python对象
@@ -138,16 +139,16 @@ def detail(request, staff_id=1):
         uni_role_data = data['uni']
 
         # 清空对应staff_id的数据
-        TeachCourse.objects.filter(staff_id=staff_id).delete()
-        TeachProject.objects.filter(staff_id=staff_id).delete()
-        TeachAdminRole.objects.filter(staff_id=staff_id).delete()
-        TeachSchoolRoles.objects.filter(staff_id=staff_id).delete()
-        TeachUniRoles.objects.filter(staff_id=staff_id).delete()
+        TeachCourse.objects.filter(staff_id=staffId).delete()
+        TeachProject.objects.filter(staff_id=staffId).delete()
+        TeachAdminRole.objects.filter(staff_id=staffId).delete()
+        TeachSchoolRoles.objects.filter(staff_id=staffId).delete()
+        TeachUniRoles.objects.filter(staff_id=staffId).delete()
 
         # 插入新的数据
         for course in course_data:
             TeachCourse.objects.create(
-                staff_id=staff_id,
+                staff_id=staffId,
                 course_name=course['courseName'],
                 credits=course['credits'],
                 alpha=course['alpha'],
@@ -156,12 +157,12 @@ def detail(request, staff_id=1):
                 delta=course['delta'],
                 share=course['share'],
                 coordinator=course['coordinator'],
-                total_hours=course['credits'] * (course['alpha'] * course['delta'] + course['beta'] * course['numStudents']) * course['share'] + course['coordinator']
+                total_hours = int(course['credits']) * (float(course['alpha']) * float(course['delta']) + float(course['beta']) * int(course['numStudents'])) * float(course['share']) + float(course['coordinator'])
             )
 
         for project in project_data:
             TeachProject.objects.create(
-                staff_id=staff_id,
+                staff_id=staffId,
                 project_name=project['projectName'],
                 credits=project['credits'],
                 alpha=project['alpha'],
@@ -170,12 +171,12 @@ def detail(request, staff_id=1):
                 delta=project['delta'],
                 share=project['share'],
                 coordinator=project['coordinator'],
-                total_hours=project['credits'] * (project['alpha'] * project['delta'] + project['beta'] * project['numStudents']) * project['share'] + project['coordinator']
+                total_hours = int(project['credits']) * (float(project['alpha']) * float(project['delta']) + float(project['beta']) * int(project['numGroupsStudents'])) * float(project['share']) + float(project['coordinator'])
             )
 
         for admin_role in admin_role_data:
             TeachAdminRole.objects.create(
-                staff_id=staff_id,
+                staff_id=staffId,
                 role_name=admin_role['role'],
                 credits=admin_role['credits'],
                 alpha=admin_role['alpha'],
@@ -184,12 +185,12 @@ def detail(request, staff_id=1):
                 delta=admin_role['delta'],
                 share=admin_role['share'],
                 coordinator=admin_role['coordinator'],
-                total_hours=admin_role['credits'] * (admin_role['alpha'] * admin_role['delta'] + admin_role['beta'] * admin_role['numStudents']) * admin_role['share'] + admin_role['coordinator']
+                total_hours = float(admin_role['credits']) * (float(admin_role['alpha']) * float(admin_role['delta']) + float(admin_role['beta']) * int(admin_role['numGroupsStudents'])) * float(admin_role['share']) + float(admin_role['coordinator'])
             )
 
         for school_role in school_role_data:
             TeachSchoolRoles.objects.create(
-                staff_id=staff_id,
+                staff_id=staffId,
                 role_name=school_role['role'],
                 credits=school_role['credits'],
                 alpha=school_role['alpha'],
@@ -197,12 +198,12 @@ def detail(request, staff_id=1):
                 num_students=school_role['numGroupsStudents'],
                 delta=school_role['delta'],
                 share=school_role['share'],
-                total_hours=school_role['credits'] * (school_role['alpha'] * school_role['delta'] + school_role['beta'] * school_role['numStudents']) * school_role['share'] + school_role['coordinator']
+                total_hours = float(school_role['credits']) * (float(school_role['alpha']) * float(school_role['delta']) + float(school_role['beta']) * int(school_role['numGroupsStudents'])) * float(school_role['share']) + float(school_role['coordinator'])
             )
 
         for uni_role in uni_role_data:
             TeachUniRoles.objects.create(
-                staff_id=staff_id,
+                staff_id=staffId,
                 role_name=uni_role['role'],
                 credits=uni_role['credits'],
                 alpha=uni_role['alpha'],
@@ -211,7 +212,7 @@ def detail(request, staff_id=1):
                 delta=uni_role['delta'],
                 share=uni_role['share'],
                 coordinator=uni_role['coordinator'],
-                total_hours=uni_role['credits'] * (uni_role['alpha'] * uni_role['delta'] + uni_role['beta'] * uni_role['numStudents']) * uni_role['share'] + uni_role['coordinator']
+                total_hours = float(uni_role['credits']) * (float(uni_role['alpha']) * float(uni_role['delta']) + float(uni_role['beta']) * int(uni_role['numGroupsStudents'])) * float(uni_role['share']) + float(uni_role['coordinator'])
             )
 
         print("Data saved successfully.")  # 打印保存成功的提示
@@ -224,12 +225,12 @@ def detail(request, staff_id=1):
         LEFT JOIN balancer_course AS b 
         ON a.course_name = b.code 
         WHERE b.is_delete = 0 and a.staff_id = %s
-    """, [staff_id])
+    """, [staffId])
 
-    projects = TeachProject.objects.filter(staff_id=staff_id).all()
-    admin_roles = TeachAdminRole.objects.filter(staff_id=staff_id).all()
-    school_roles = TeachSchoolRoles.objects.filter(staff_id=staff_id).all()
-    uni_roles = TeachUniRoles.objects.filter(staff_id=staff_id).all()
+    projects = TeachProject.objects.filter(staff_id=staffId).all()
+    admin_roles = TeachAdminRole.objects.filter(staff_id=staffId).all()
+    school_roles = TeachSchoolRoles.objects.filter(staff_id=staffId).all()
+    uni_roles = TeachUniRoles.objects.filter(staff_id=staffId).all()
 
     courses_hours = sum([float(c.total_hours) for c in courses])
     courses_shares = sum([float(e.share) for e in courses])
@@ -240,8 +241,10 @@ def detail(request, staff_id=1):
 
     staff_total_hours = courses_hours + projects_hours + admin_roles_hours +  school_roles_hours + uni_roles_hours
     staff_total_no_project_hours = courses_hours  + admin_roles_hours +  school_roles_hours + uni_roles_hours
-    staff_permitt_hours = Staff.objects.get(id=staff_id).annual_availability
-    
+    staff_permitt_hours = Staff.objects.get(id=staffId).annual_availability
+    staff_first_name = Staff.objects.get(id=staffId).first_name
+    staff_last_name = Staff.objects.get(id=staffId).last_name
+    staff_name = staff_first_name + " " + staff_last_name
     # For HS1
     courses_hs1 = TeachCourse.objects.raw("""
         SELECT * 
@@ -249,7 +252,7 @@ def detail(request, staff_id=1):
         LEFT JOIN balancer_course AS b 
         ON a.course_name = b.code 
         WHERE b.is_delete = 0 and a.staff_id = %s and b.hs = 'HS1'
-    """, [staff_id])
+    """, [staffId])
     courses_hs1_hours = sum([float(c.total_hours) for c in courses_hs1])
     courses_hs1_shares = sum([float(e.share) for e in courses_hs1])
 
@@ -260,7 +263,7 @@ def detail(request, staff_id=1):
         LEFT JOIN balancer_course AS b 
         ON a.course_name = b.code 
         WHERE b.is_delete = 0 and a.staff_id = %s and b.hs = 'HS2'
-    """, [staff_id])
+    """, [staffId])
     courses_hs2_hours = sum([float(c.total_hours) for c in courses_hs2])
     courses_hs2_shares = sum([float(e.share) for e in courses_hs2])
 
@@ -271,7 +274,7 @@ def detail(request, staff_id=1):
         LEFT JOIN balancer_course AS b 
         ON a.course_name = b.code 
         WHERE b.is_delete = 0 and a.staff_id = %s and b.hs = 'HS3'
-    """, [staff_id])
+    """, [staffId])
     courses_hs3_hours = sum([float(c.total_hours) for c in courses_hs3])
     courses_hs3_shares = sum([float(e.share) for e in courses_hs3])
 
@@ -297,6 +300,7 @@ def detail(request, staff_id=1):
         'courses_hs2_shares': courses_hs2_shares,
         'courses_hs3_hours': courses_hs3_hours,
         'courses_hs3_shares': courses_hs3_shares,
+        "staff_name":staff_name
     }
 
     return render(request, 'detail.html', context)
@@ -619,3 +623,108 @@ def staffvModules_unirole_del(request, uniroleId):
     unirole.save()
     return redirect('/staffvModules/uniRole/')
 
+
+def staff_list(request, name, type="course"):
+    staff_list = []
+    
+    if type == "course":
+        # Retrieve the TeachCourse objects based on the provided name and type
+        teach_courses = TeachCourse.objects.filter(course_name=name)
+        
+        # Iterate over the retrieved TeachCourse objects
+        for teach_course in teach_courses:
+            # Retrieve the staff information using the staff_id from the TeachCourse object
+            staff = Staff.objects.get(id=teach_course.staff_id)
+            
+            # Create a dictionary containing the staff information and share value
+            staff_info = {
+                'staff_id': staff.id,
+                'name': staff.initials,
+                'share': teach_course.share
+            }
+            
+            # Append the staff information dictionary to the staff_list
+            staff_list.append(staff_info)
+    
+    elif type == "project":
+       # Retrieve the TeachCourse objects based on the provided name and type
+        teach_projects = TeachProject.objects.filter(project_name=name)
+        
+        # Iterate over the retrieved TeachCourse objects
+        for teach_project in teach_projects:
+            # Retrieve the staff information using the staff_id from the TeachCourse object
+            staff = Staff.objects.get(id=teach_project.staff_id)
+            
+            # Create a dictionary containing the staff information and share value
+            staff_info = {
+                'staff_id': staff.id,
+                'name': staff.initials,
+                'share': teach_project.share
+            }
+            
+            # Append the staff information dictionary to the staff_list
+            staff_list.append(staff_info)
+    elif type == "adminrole":
+       # Retrieve the TeachCourse objects based on the provided name and type
+        teach_adminroles = TeachAdminRole.objects.filter(role_name=name)
+        
+        # Iterate over the retrieved TeachCourse objects
+        for teach_adminrole in teach_adminroles:
+            # Retrieve the staff information using the staff_id from the TeachCourse object
+            staff = Staff.objects.get(id=teach_adminrole.staff_id)
+            
+            # Create a dictionary containing the staff information and share value
+            staff_info = {
+                'staff_id': staff.id,
+                'name': staff.initials,
+                'share': teach_adminrole.share
+            }
+            
+            # Append the staff information dictionary to the staff_list
+            staff_list.append(staff_info)
+    elif type == "schoolrole":
+       # Retrieve the TeachCourse objects based on the provided name and type
+        teach_schoolroles = TeachSchoolRoles.objects.filter(role_name=name)
+        
+        # Iterate over the retrieved TeachCourse objects
+        for teach_schoolrole in teach_schoolroles:
+            # Retrieve the staff information using the staff_id from the TeachCourse object
+            staff = Staff.objects.get(id=teach_schoolrole.staff_id)
+            
+            # Create a dictionary containing the staff information and share value
+            staff_info = {
+                'staff_id': staff.id,
+                'name': staff.initials,
+                'share': teach_schoolrole.share
+            }
+            
+            # Append the staff information dictionary to the staff_list
+            staff_list.append(staff_info)
+    else:
+       # Retrieve the TeachCourse objects based on the provided name and type
+        teach_uniroles = TeachUniRoles.objects.filter(role_name=name)
+        
+        # Iterate over the retrieved TeachCourse objects
+        for teach_unirole in teach_uniroles:
+            # Retrieve the staff information using the staff_id from the TeachCourse object
+            staff = Staff.objects.get(id=teach_unirole.staff_id)
+            
+            # Create a dictionary containing the staff information and share value
+            staff_info = {
+                'staff_id': staff.id,
+                'name': staff.initials,
+                'share': teach_unirole.share
+            }
+            
+            # Append the staff information dictionary to the staff_list
+            staff_list.append(staff_info)                       
+    
+    # Create a JSON response with the staff_list
+    response_data = {
+        'staff_list': staff_list
+    }
+    
+    # Return the JSON response
+    return JsonResponse(response_data)
+
+    

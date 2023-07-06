@@ -32,7 +32,7 @@
             <tbody>
                 {% for staff in page_obj %}
                 <tr>
-                    <td><a href="/staffvModules/detail">{{ staff.initials }}</a></td>
+                    <td><a href="/staffvModules/detail/{{ staff.id }}">{{ staff.initials }}</a></td>
                     <td>{{ staff.first_name }}</td>
                     <td>{{ staff.last_name }}</td>
                     <td>{{ staff.cat }}</td>
