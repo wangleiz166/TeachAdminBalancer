@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\staffvModules",
     "\\totalWork",
     "\\totalWork\\templates"
   ],
-  "SelectedNode": "\\totalWork\\templates\\total_work.html",
+  "SelectedNode": "\\staffvModules\\views.py",
   "PreviewInSolutionExplorer": false
 }
