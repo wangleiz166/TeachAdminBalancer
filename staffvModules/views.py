@@ -245,7 +245,7 @@ def detail(request, staffId):
 
     staff_total_hours = courses_hours + projects_hours + admin_roles_hours +  school_roles_hours + uni_roles_hours
     staff_total_no_project_hours = courses_hours  + admin_roles_hours +  school_roles_hours + uni_roles_hours
-    staff_permitt_hours = Staff.objects.get(id=staffId).annual_availability
+    staff_permitt_hours = Staff.objects.get(id=staffId).adjusted_max
     staff_first_name = Staff.objects.get(id=staffId).first_name
     staff_last_name = Staff.objects.get(id=staffId).last_name
     staff_name = staff_first_name + " " + staff_last_name

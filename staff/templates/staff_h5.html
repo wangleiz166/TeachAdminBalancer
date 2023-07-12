@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0; /* Add this line to remove default body padding */
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+        li {
+            float: left;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        li a:hover {
+            background-color: #111;
+        }
+        .content {
+            padding: 10px;
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 60px);
+        }
+
+        .item {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 20px;
+            background-color: #f2f2f2;
+            text-align: center;
+            width: 100%;
+        }
+        .item a {
+            text-decoration: none;
+            color: black;
+            display: block;
+        }
+        .item a:hover {
+            background-color: #ddd;
+        }
+        .refresh-container {
+            text-align: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+            animation: fade-in 1s ease-in-out infinite alternate;
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+        }
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        /staff/totalwork-list {
+            width: 100%;
+            max-height: calc(100% - 20px);
+            overflow-y: auto;
+        }
+        /staff/totalwork-list .item {
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        #refresh-text {
+            display: none;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var contentDiv = document.getElementById('staff-list');
+            var refreshTextDiv = document.getElementById('refresh-text');
+
+            contentDiv.addEventListener('scroll', function() {
+                var scrollPosition = contentDiv.scrollTop;
+                var contentHeight = contentDiv.scrollHeight;
+                var visibleHeight = contentDiv.clientHeight;
+
+                if (scrollPosition > 0 && scrollPosition + visibleHeight >= contentHeight) {
+                    refreshTextDiv.style.display = 'block';
+                } else {
+                    refreshTextDiv.style.display = 'none';
+                }
+            });
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset === 0) {
+                    refreshTextDiv.style.display = 'block';
+                    setTimeout(function() {
+                        refreshTextDiv.style.display = 'none';
+                    }, 2000); // 2 seconds delay before hiding
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <ul id="navigation-bar">
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">staff-list</a></li>
+        <li><a href="#contact">login</a></li>
+    </ul>
+
+    <div class="content">
+        <div id="staff-list">
+            <div class="item"><a href="/staff/totalwork">Staff 1</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 2</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 3</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 4</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 5</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 6</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 7</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 8</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 9</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 10</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 11</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 12</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 13</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 14</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 15</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 16</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 17</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 18</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 19</a></div>
+            <div class="item"><a href="/staff/totalwork">Staff 20</a></div>
+        </div>
+        <div id="refresh-text" class="refresh-container">
+            Refreshing...
+        </div>
+    </div>
+    
+</body>
+</html>
