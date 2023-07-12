@@ -50,7 +50,9 @@
 
                     </div>
                 </div>
-                <h1>Total Hours : 1173</h1>
+                <h4>Total Course Hours: {{ course_total_hours}}</h4>
+                <h4>Total Project Hours: {{ project_total_hours}}</h4>
+                <h2>Total Hours: {{ total_hours_sum }}</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -59,73 +61,36 @@
                             <th>Alpha</th>
                             <th>Beta</th>
                             <th>Num. Students</th>
-                            <th>Min Delta</th>
                             <th>Delta</th>
                             <th>Coordinator</th>
                             <th>Minimum hours</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for course in courses %}
                         <tr>
-                            <td>CS1032</td>
-                            <td>15</td>
-                            <td>4.4</td>
-                            <td>0.15</td>
-                            <td>200</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>25</td>
-                            <td>541</td>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.credits }}</td>
+                            <td>{{ course.alpha }}</td>
+                            <td>{{ course.beta }}</td>
+                            <td>{{ course.num_students }}</td>
+                            <td>{{ course.delta }}</td>
+                            <td>{{ course.coordinator }}</td>
+                            <td>{{ course.total_hours }}</td>
                         </tr>
+                        {% endfor %}
+                        {% for project in projects %}
                         <tr>
-                            <td>CS1029</td>
-                            <td>15</td>
-                            <td>4.4</td>
-                            <td>0.15</td>
-                            <td>100</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>25</td>
-                            <td>316</td>
+                            <td>{{ project.code }}</td>
+                            <td>{{ project.credits }}</td>
+                            <td>{{ project.alpha }}</td>
+                            <td>{{ project.beta }}</td>
+                            <td>{{ project.num_students }}</td>
+                            <td>{{ project.delta }}</td>
+                            <td>{{ project.coordinator }}</td>
+                            <td>{{ project.total_hours }}</td>
                         </tr>
-                        <tr>
-                            <td>CS1031</td>
-                            <td>15</td>
-                            <td>4.4</td>
-                            <td>0.15</td>
-                            <td>100</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>25</td>
-                            <td>316</td>
-                        </tr>
-                        <!--<tr>
-                        <td>CS1029</td>
-                        <td>Modelling & Problem Solving for Computing</td>
-                        <td>15</td>
-                        <td>Standard classroom based</td>
-                        <td>100</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>CS1031</td>
-                        <td>Web app</td>
-                        <td>15</td>
-                        <td>Standard classroom based</td>
-                        <td>400</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>CS2019</td>
-                        <td>Databases and Data Management</td>
-                        <td>15</td>
-                        <td>Standard classroom based</td>
-                        <td>200</td>
-                        <td>10</td>
-                        <td>10</td>-->
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <div class="row my-3">
@@ -152,7 +117,6 @@
 <!-- Include the necessary JavaScript code -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // 设置默认活动选项卡
     var tabs = new bootstrap.Tab(document.getElementById('myTabs').querySelector('.nav-link.active'));
     tabs.show();
 </script>
