@@ -25,4 +25,4 @@ trio-websocket==0.10.2
 urllib3==1.26.15
 wsproto==1.2.0
 gunicorn
-django-user-agents==1.4.1
+django-user-agents
