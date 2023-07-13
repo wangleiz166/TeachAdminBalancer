@@ -47,7 +47,7 @@
                             {% if user.permission_id == 1 %}
                             <td>
                                 <a href="/user/edit" class="btn btn-primary">
-                                    Edit 
+                                    Edit
                                 </a>
                                 <a href="/user/logs" class="btn btn-secondary">
                                     Logs
@@ -102,4 +102,15 @@
         }
     }
 
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('searchInput');
+        var searchButton = document.getElementById('searchButton');
+        console.log("1");
+        searchButton.addEventListener('click', function () {
+            console.log("2");
+            var query = searchInput.value;
+            var url = '/user/?query=' + encodeURIComponent(query);
+            window.location.href = url;
+        });
+    })
 </script>

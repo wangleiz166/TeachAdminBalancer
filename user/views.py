@@ -13,8 +13,8 @@ def list(request):
 
     if query:
         user_data = user_data.filter(
-            Q(first_name__icontains=query) |
-            Q(last_name__icontains=query)
+
+            user_name__icontains=query
         )
 
     paginator = Paginator(user_data.order_by(
