@@ -90,8 +90,9 @@
                                 <th>Hours</th>
                                 <th>crit</th>
                                 <th>Num staff allocated</th>
-                                <th>JB</th>
-                                <th>JD</th>
+                                {% for staff in staff_list %}
+                                <th>{{ staff }}</th>
+                                {% endfor %}
                             </tr>
                         </thead>
                         <tbody>
@@ -101,8 +102,13 @@
                                 <td ondblclick="editCell(this)">{{ schoolRole.hours }}</td>
                                 <td ondblclick="editCell(this)">{{ schoolRole.crit }}</td>
                                 <td ondblclick="editCell(this)">{{ schoolRole.num_staff_allocated }}</td>
-                                <td ondblclick="editCell(this)">0.5</td>
-                                <td ondblclick="editCell(this)">0.5</td>
+                                {% for share in schoolRole.share %}
+                                    <td ondblclick="editCell(this)">
+                                    {% if share.0 %}
+                                        {{ share.0 }}
+                                    {% endif %}
+                                    </td>
+                                {% endfor %}
                             </tr>
                             {% endfor %}
                         </tbody>
