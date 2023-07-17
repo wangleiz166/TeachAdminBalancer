@@ -1,4 +1,5 @@
 
+from django.db import connection
 from django.shortcuts import get_object_or_404,render, redirect
 from django.http import JsonResponse
 from .models import Course,Project,AdminRole,SchoolRole,UniRole
@@ -7,53 +8,245 @@ from .models import TeachCourse, TeachProject, TeachAdminRole, TeachSchoolRoles,
 import json
 from staff.models import Staff
 from django.db.models import Sum
-
+from django.db.models import Q
 # Create your views here.
+
+
 
 def list(request):
     if request.user_agent.is_mobile:
-         return render(request, 'staff_h5.html')    
+        return render(request, 'staff_h5.html')    
     else:    
         # Retrieve all non-deleted courses from the database
         courses = Course.objects.filter(is_delete=0)
 
         # Search functionality
-        query = request.GET.get('query')
-        if query:
+        hsQuery = request.GET.get('hsQuery')
+        typeQuery = request.GET.get('typeQuery')
+        codeQuery = request.GET.get('codeQuery')
+
+        if hsQuery or typeQuery or codeQuery:
             # Filter courses based on the search query and is_delete condition
-            courses = courses.filter(code__icontains=query)
+            courses = courses.filter(
+                Q(hs__icontains=hsQuery) | 
+                Q(type__icontains=typeQuery) | 
+                Q(code__icontains=codeQuery)
+            )
 
         # Pagination
         paginator = Paginator(courses, 10)  # Show 10 courses per page
         page_number = request.GET.get('page')
         courses = paginator.get_page(page_number)
 
-        # Pass the courses, search query, and pagination to the template
-        context = {'courses': courses, 'query': query}
-        return render(request, 'list.html', context)    
+        # Pass the courses, search queries, and pagination to the template
+        context = {'courses': courses, 'hsQuery': hsQuery, 'typeQuery': typeQuery, 'codeQuery': codeQuery}
+        return render(request, 'list.html', context)
+ 
 
 def full_list(request, category=None):
     # Retrieve all non-deleted items from the database based on the category
     if category == 'project':
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT initials FROM balancer_staff WHERE id IN (
+                    SELECT a.staff_id FROM balancer_teach_project AS a 
+                    LEFT JOIN balancer_project AS b ON b.code = a.project_name 
+                    WHERE b.is_delete = 0
+                )
+            """)
+            rows = cursor.fetchall()
+            staff_list = [item[0] for item in rows]  # Assuming 'initials' is the first column in your result set
+
         items = Project.objects.filter(is_delete=0)
+        for item in items:
+            code = item.code
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT f.share FROM (
+                        SELECT id AS staff_id FROM balancer_staff WHERE id IN (
+                            SELECT a.staff_id FROM balancer_teach_project AS a 
+                            LEFT JOIN balancer_project AS b ON b.code = a.project_name 
+                            WHERE b.is_delete = 0
+                        )
+                    ) as c 
+                    LEFT JOIN (
+                        SELECT d.staff_id, d.share FROM balancer_teach_project AS d 
+                        LEFT JOIN balancer_project AS e ON e.code = d.project_name 
+                        WHERE e.is_delete = 0 AND e.code = %s 
+                        GROUP BY d.staff_id
+                    ) as f 
+                    ON c.staff_id = f.staff_id
+                """, [code])
+                result = cursor.fetchall()
+
+                # Attach the result to the item
+                item.share = result
         template_name = 'full/full_project_list.html'
+        context = {'list': items, 'staff_list': staff_list}
+        return render(request, template_name, context)
     elif category == 'adminrole':
-        items = AdminRole.objects.filter(is_delete=0)
-        template_name = 'full/full_adminrole_list.html'
+       with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT initials FROM balancer_staff WHERE id IN (
+                    SELECT a.staff_id FROM balancer_teach_admin_role AS a 
+                    LEFT JOIN balancer_admin_role AS b ON b.name = a.role_name
+                    WHERE b.is_delete = 0
+                )
+            """)
+            rows = cursor.fetchall()
+            staff_list = [item[0] for item in rows]  # Assuming 'initials' is the first column in your result set
+
+       items = AdminRole.objects.filter(is_delete=0)
+       for item in items:
+            name = item.name
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT f.share FROM (
+                        SELECT id AS staff_id FROM balancer_staff WHERE id IN (
+                            SELECT a.staff_id FROM balancer_teach_admin_role AS a 
+                            LEFT JOIN balancer_admin_role AS b ON b.name = a.role_name 
+                            WHERE b.is_delete = 0
+                        )
+                    ) as c 
+                    LEFT JOIN (
+                        SELECT d.staff_id, d.share FROM balancer_teach_admin_role AS d 
+                        LEFT JOIN balancer_admin_role AS e ON e.name = d.role_name 
+                        WHERE e.is_delete = 0 AND e.name = %s 
+                        GROUP BY d.staff_id
+                    ) as f 
+                    ON c.staff_id = f.staff_id
+                """, [name])
+                result = cursor.fetchall()
+
+                # Attach the result to the item
+                item.share = result
+       template_name = 'full/full_adminrole_list.html'
+       context = {'list': items, 'staff_list': staff_list}
+       return render(request, template_name, context)
     elif category == 'schoolrole':
-        items = SchoolRole.objects.filter(is_delete=0)
-        template_name = 'full/full_schoolrole_list.html'
+       with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT initials FROM balancer_staff WHERE id IN (
+                    SELECT a.staff_id FROM balancer_teach_school_role AS a 
+                    LEFT JOIN balancer_school_role AS b ON b.name = a.role_name
+                    WHERE b.is_delete = 0
+                )
+            """)
+            rows = cursor.fetchall()
+            staff_list = [item[0] for item in rows]  # Assuming 'initials' is the first column in your result set
+
+       items = SchoolRole.objects.filter(is_delete=0)
+       for item in items:
+            name = item.name
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT f.share FROM (
+                        SELECT id AS staff_id FROM balancer_staff WHERE id IN (
+                            SELECT a.staff_id FROM balancer_teach_school_role AS a 
+                            LEFT JOIN balancer_school_role AS b ON b.name = a.role_name 
+                            WHERE b.is_delete = 0
+                        )
+                    ) as c 
+                    LEFT JOIN (
+                        SELECT d.staff_id, d.share FROM balancer_teach_school_role AS d 
+                        LEFT JOIN balancer_school_role AS e ON e.name = d.role_name 
+                        WHERE e.is_delete = 0 AND e.name = %s 
+                        GROUP BY d.staff_id
+                    ) as f 
+                    ON c.staff_id = f.staff_id
+                """, [name])
+                result = cursor.fetchall()
+
+                # Attach the result to the item
+                item.share = result
+       template_name = 'full/full_schoolrole_list.html'
+       context = {'list': items, 'staff_list': staff_list}
+       return render(request, template_name, context)
     elif category == 'unirole':
-        items = UniRole.objects.filter(is_delete=0)
-        template_name = 'full/full_unirole_list.html'
+       with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT initials FROM balancer_staff WHERE id IN (
+                    SELECT a.staff_id FROM balancer_teach_school_role AS a 
+                    LEFT JOIN balancer_school_role AS b ON b.name = a.role_name
+                    WHERE b.is_delete = 0
+                )
+            """)
+            rows = cursor.fetchall()
+            staff_list = [item[0] for item in rows]  # Assuming 'initials' is the first column in your result set
+
+       items = SchoolRole.objects.filter(is_delete=0)
+       for item in items:
+            name = item.name
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT f.share FROM (
+                        SELECT id AS staff_id FROM balancer_staff WHERE id IN (
+                            SELECT a.staff_id FROM balancer_teach_uni_role AS a 
+                            LEFT JOIN balancer_uni_role AS b ON b.name = a.role_name 
+                            WHERE b.is_delete = 0
+                        )
+                    ) as c 
+                    LEFT JOIN (
+                        SELECT d.staff_id, d.share FROM balancer_teach_uni_role AS d 
+                        LEFT JOIN balancer_uni_role AS e ON e.name = d.role_name 
+                        WHERE e.is_delete = 0 AND e.name = %s 
+                        GROUP BY d.staff_id
+                    ) as f 
+                    ON c.staff_id = f.staff_id
+                """, [name])
+                result = cursor.fetchall()
+
+                # Attach the result to the item
+                item.share = result
+       template_name = 'full/full_unirole_list.html'
+       context = {'list': items, 'staff_list': staff_list}
+       return render(request, template_name, context)
     else:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT initials FROM balancer_staff WHERE id IN (
+                    SELECT a.staff_id FROM balancer_teach_course AS a 
+                    LEFT JOIN balancer_course AS b ON b.code = a.course_name 
+                    WHERE b.is_delete = 0
+                )
+            """)
+            rows = cursor.fetchall()
+            staff_list = [item[0] for item in rows]  # Assuming 'initials' is the first column in your result set
+
         items = Course.objects.filter(is_delete=0)
+        for item in items:
+            code = item.code
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT f.share FROM (
+                        SELECT id AS staff_id FROM balancer_staff WHERE id IN (
+                            SELECT a.staff_id FROM balancer_teach_course AS a 
+                            LEFT JOIN balancer_course AS b ON b.code = a.course_name 
+                            WHERE b.is_delete = 0
+                        )
+                    ) as c 
+                    LEFT JOIN (
+                        SELECT d.staff_id, d.share FROM balancer_teach_course AS d 
+                        LEFT JOIN balancer_course AS e ON e.code = d.course_name 
+                        WHERE e.is_delete = 0 AND e.code = %s 
+                        GROUP BY d.staff_id
+                    ) as f 
+                    ON c.staff_id = f.staff_id
+                """, [code])
+                result = cursor.fetchall()
+
+                # Attach the result to the item
+                item.share = result
+
+
         template_name = 'full/full_course_list.html'
+        context = {'list': items, 'staff_list': staff_list}
+        return render(request, template_name, context)
     
     context = {'list': items}
     return render(request, template_name, context)
 
-    
+
 
 def project_list(request):
     # Retrieve all non-deleted courses from the database
@@ -756,3 +949,98 @@ def hs_total_list(request):
         staffs = paginator.page(paginator.num_pages)
 
     return render(request, 'hs_list.html', {'staffs': staffs})
+
+
+def full_edit(request, type):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        if type == 'course':
+            for row in data:
+                try:
+                    course = Course.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    course.code = row[1]
+                    course.hs = row[2]
+                    course.type = row[3]
+                    course.linked_courses = row[4]
+                    course.unlinked_relatives = row[5]
+                    course.name = row[6]
+                    course.num_staff_allocated = row[7]
+                    course.est_num_students = row[8]
+                    course.hours = row[9]
+                    course.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'Course with code {row[0]} does not exist')
+
+        elif type == 'project':
+            for row in data:
+                try:
+                    project = Project.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    project.code = row[1]
+                    project.type = row[2]
+                    project.linked_courses = row[3]
+                    project.unlinked_relatives = row[4]
+                    project.name = row[5]
+                    project.num_staff_allocated = row[6]
+                    project.est_num_students = row[7]
+                    project.hours = row[8]
+                    project.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'Project with code {row[0]} does not exist')
+
+        elif type == 'adminrole':
+            for row in data:
+                try:
+                    adminrole = AdminRole.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    adminrole.name = row[1]
+                    adminrole.hours = row[2]
+                    adminrole.crit = row[3]
+                    adminrole.num_staff_allocated = row[4]
+                    adminrole.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'adminrole with code {row[0]} does not exist')
+
+
+        elif type == 'schoolrole':
+           for row in data:
+                try:
+                    schoolrole = SchoolRole.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    schoolrole.name = row[1]
+                    schoolrole.hours = row[2]
+                    schoolrole.crit = row[3]
+                    schoolrole.num_staff_allocated = row[4]
+                    schoolrole.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'schoolrole with code {row[0]} does not exist')
+
+        elif type == 'unirole':
+           for row in data:
+                try:
+                    unirole = UniRole.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    unirole.name = row[1]
+                    unirole.hours = row[2]
+                    unirole.crit = row[3]
+                    unirole.num_staff_allocated = row[4]
+                    unirole.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'unirole with code {row[0]} does not exist')
+
+        else:
+            return JsonResponse({'status':'failed', 'message': 'Invalid type parameter'}, status=400)
+
+        # 返回一个成功的响应
+        return JsonResponse({'status':'success', 'message': 'Data updated successfully'}, status=200)
+
+    # 如果不是 POST 请求，返回一个错误响应
+    return JsonResponse({'status':'failed', 'message': 'Not a POST request'}, status=400)
+

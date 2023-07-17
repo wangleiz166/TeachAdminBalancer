@@ -2,7 +2,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import User
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth import logout as auth_logout
+
 
 # Create your views here.
 
@@ -52,7 +54,7 @@ def add(request):
     if request.method == 'POST':
         # Retrieve the form data from the request
         user_name = request.POST.get('username')
-        pass_word = request.POST.get('pass_word')
+        pass_word = request.POST.get('password')
         permission_id = request.POST.get('permission_id')
         # Create a new User object with the form data
         user = User(
@@ -85,12 +87,45 @@ def logs(request):
     return render(request, 'logs.html')
 
 
-def login(request):
-    return render(request, 'login.html')
-
-
 def user_del(request, userId):
     user = get_object_or_404(User, id=userId)
     user.is_delete = 1
     user.save()
     return redirect('/user/')
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(user_name=username)
+        except User.DoesNotExist:
+            # Render the form again with an error message
+            return render(request, 'login.html', {'error_message': 'Invalid username'})
+
+        # Validate the password using Django's check_password function
+        if check_password(password, user.pass_word):
+            # Password is valid. Update the login state and redirect to success page
+            user.is_login = True
+            user.save()
+
+            # Store the user id in the session
+            request.session['user_id'] = user.id
+            request.session['username'] = username
+
+            # Redirect to success page
+            return redirect('/')
+        else:
+            # Render the form again with an error message
+            return render(request, 'login.html', {'error_message': 'Invalid password'})
+    else:
+        return render(request, 'login.html')
+
+
+def logout(request):
+    # This will remove the authenticated user's ID from the session
+    auth_logout(request)
+
+    # Then redirect to a success page or the home page
+    return redirect('/')
