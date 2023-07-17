@@ -37,4 +37,6 @@ urlpatterns = [
     path('full/adminRole/', views.full_list, {'category': 'adminrole'}, name='staffvModules_full_adminrole_list'),
     path('full/schoolRole/', views.full_list, {'category': 'schoolrole'}, name='staffvModules_full_schoolrole_list'),
     path('full/uniRole/', views.full_list, {'category': 'unirole'}, name='staffvModules_full_unirole_list'),
+
+    path('full/edit/<str:type>', views.full_edit, name='staffvModules_full_edit'),
 ]

@@ -949,3 +949,98 @@ def hs_total_list(request):
         staffs = paginator.page(paginator.num_pages)
 
     return render(request, 'hs_list.html', {'staffs': staffs})
+
+
+def full_edit(request, type):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        if type == 'course':
+            for row in data:
+                try:
+                    course = Course.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    course.code = row[1]
+                    course.hs = row[2]
+                    course.type = row[3]
+                    course.linked_courses = row[4]
+                    course.unlinked_relatives = row[5]
+                    course.name = row[6]
+                    course.num_staff_allocated = row[7]
+                    course.est_num_students = row[8]
+                    course.hours = row[9]
+                    course.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'Course with code {row[0]} does not exist')
+
+        elif type == 'project':
+            for row in data:
+                try:
+                    project = Project.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    project.code = row[1]
+                    project.type = row[2]
+                    project.linked_courses = row[3]
+                    project.unlinked_relatives = row[4]
+                    project.name = row[5]
+                    project.num_staff_allocated = row[6]
+                    project.est_num_students = row[7]
+                    project.hours = row[8]
+                    project.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'Project with code {row[0]} does not exist')
+
+        elif type == 'adminrole':
+            for row in data:
+                try:
+                    adminrole = AdminRole.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    adminrole.name = row[1]
+                    adminrole.hours = row[2]
+                    adminrole.crit = row[3]
+                    adminrole.num_staff_allocated = row[4]
+                    adminrole.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'adminrole with code {row[0]} does not exist')
+
+
+        elif type == 'schoolrole':
+           for row in data:
+                try:
+                    schoolrole = SchoolRole.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    schoolrole.name = row[1]
+                    schoolrole.hours = row[2]
+                    schoolrole.crit = row[3]
+                    schoolrole.num_staff_allocated = row[4]
+                    schoolrole.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'schoolrole with code {row[0]} does not exist')
+
+        elif type == 'unirole':
+           for row in data:
+                try:
+                    unirole = UniRole.objects.get(id=row[0])  # 通过code查询
+                    # 更新字段
+                    unirole.name = row[1]
+                    unirole.hours = row[2]
+                    unirole.crit = row[3]
+                    unirole.num_staff_allocated = row[4]
+                    unirole.save()  # 更新数据库
+
+                except ObjectDoesNotExist:
+                    print(f'unirole with code {row[0]} does not exist')
+
+        else:
+            return JsonResponse({'status':'failed', 'message': 'Invalid type parameter'}, status=400)
+
+        # 返回一个成功的响应
+        return JsonResponse({'status':'success', 'message': 'Data updated successfully'}, status=200)
+
+    # 如果不是 POST 请求，返回一个错误响应
+    return JsonResponse({'status':'failed', 'message': 'Not a POST request'}, status=400)
+

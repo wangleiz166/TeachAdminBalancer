@@ -1,4 +1,6 @@
 {% include 'common/header.html' %}
+{% csrf_token %}
+
 <style>
     .container.my-3 {
         width: 100%;
@@ -56,29 +58,92 @@
         }
     }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    // Move the definition to the top of our script
+    var editedRows = {};
+
     function editCell(element) {
-        const cells = document.querySelectorAll('.table tbody td');
-        cells.forEach(cell => cell.classList.remove('editing'));
-        
-        element.classList.add('editing');
-        
-        const cellValue = element.innerText;
-        element.innerHTML = `<input type="text" class="form-control edit-input" value="${cellValue}" onblur="saveCell(this)">`;
-        const inputElement = element.querySelector('input');
+        const cells = $('.table tbody td');
+        cells.removeClass('editing');
+
+        $(element).addClass('editing');
+        const rowIndex = element.parentNode.rowIndex;
+        const columnIndex = element.cellIndex;
+
+        const cellValue = $(element).text();
+        $(element).html(`<input type="text" id="input-${rowIndex}-${columnIndex}" class="form-control edit-input" value="${cellValue}">`);
+        const inputElement = $(element).find('input');
         inputElement.focus();
+
+        inputElement.on('blur', function() {
+            updateCell(this, rowIndex, columnIndex);
+        });
     }
-    
-    function saveCell(element) {
-        const cellValue = element.value;
-        element.parentNode.innerHTML = cellValue;
+
+    function updateCell(element, rowIndex, columnIndex) {
+        const cellValue = $(element).val();
+        $(element).parent().removeClass('editing').text(cellValue);
+
+        if (!editedRows[rowIndex]) {
+            editedRows[rowIndex] = {};
+        }
+
+        editedRows[rowIndex][columnIndex] = cellValue;
     }
+
+    function saveRows() {
+        if (Object.keys(editedRows).length === 0) {
+            alert('No rows have been edited');
+            return;
+        }
+
+        // Create an empty array to store all rows data
+        let allRowsData = [];
+
+        for (let rowIndex in editedRows) {
+            let rowCells = $('table tbody tr').eq(rowIndex - 1).find('td');
+            let rowData = [];
+            rowCells.each(function() {
+                // Use trim() to remove leading and trailing spaces and replace() to remove \n
+                let cellText = $(this).text().trim().replace(/\n/g, '');
+                rowData.push(cellText);
+            });
+
+            // Add row data to allRowsData array
+            allRowsData.push(rowData);
+        }
+
+        // Print the allRowsData array
+        console.log(`All rows data: ${JSON.stringify(allRowsData)}`);
+        let csrftoken = $('[name="csrfmiddlewaretoken"]').val();
+        // Send the JSON data to the specified URL
+        $.ajax({
+            url: '/full/edit/adminrole',
+            type: 'POST',
+            data: JSON.stringify(allRowsData),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            success: function(result) {
+                // Handle the response here
+                alert('Successful update');
+            },
+            error: function(request, status, error) {
+                // Handle the error here
+                console.log(`Error: ${error}`);
+            }
+        });
+    }
+
 </script>
 <div class="main-content">
     <div class="container my-3">
         <div class="alert alert-warning mt-3" role="alert">
             Click me to view the normal screen version <a href="/staffvModules/adminRole/">here</a>
-            <span  style="margin-left: 30px;">Double click on the grid to edit</span><button class="btn btn-success" style="margin-left: 10px;" onclick="alert('This feature has not yet been developed')">Save</button>
+            <span  style="margin-left: 30px;">Double click on the grid to edit</span> <button class="btn btn-success" style="margin-left: 10px;" onclick="saveRows()">Save</button>
         </div>
         <div class="tab-content" id="myTabsContent">
             <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="coursesTab">              
@@ -98,12 +163,13 @@
                         <tbody>
                             {% for adminRole in list %}
                             <tr>
+                                <td style="display: none;">{{ adminRole.id }}</td>
                                 <td ondblclick="editCell(this)">{{ adminRole.name }}</td>
                                 <td ondblclick="editCell(this)">{{ adminRole.hours }}</td>
                                 <td ondblclick="editCell(this)">{{ adminRole.crit }}</td>
                                 <td ondblclick="editCell(this)">{{ adminRole.num_staff_allocated }}</td>
                                 {% for share in adminRole.share %}
-                                    <td ondblclick="editCell(this)">
+                                    <td>
                                     {% if share.0 %}
                                         {{ share.0 }}
                                     {% endif %}
