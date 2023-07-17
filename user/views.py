@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import User
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.hashers import make_password,check_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import logout as auth_logout
 
 
@@ -27,8 +27,27 @@ def list(request):
     return render(request, 'user_list.html', {'page_obj': page_obj, 'query': query})
 
 
-def edit(request):
-    return render(request, 'edit.html')
+def edit(request, userId):
+
+    user = User.objects.get(id=userId)
+
+    if request.method == 'POST':
+        user_name = request.POST.get('username')
+        pass_word = request.POST.get('password')
+        re_pass_word = request.POST.get('re_pass_word')
+        permission_id = request.POST.get('permission')
+
+        user.user_name = user_name
+        user.permission_id = permission_id
+
+        if pass_word != '' and pass_word == re_pass_word:
+            user.pass_word = make_password(pass_word)
+
+        user.save()
+        return redirect('/user')
+
+    context = {'user': user}
+    return render(request, 'edit.html', context)
 
 
 def add(request):
@@ -39,9 +58,9 @@ def add(request):
         permission_id = request.POST.get('permission_id')
         # Create a new User object with the form data
         user = User(
-             user_name=user_name,
-             pass_word=make_password(pass_word),
-             permission_id=permission_id
+            user_name=user_name,
+            pass_word=make_password(pass_word),
+            permission_id=permission_id
         )
 
         # Save the User object to the database
@@ -68,6 +87,13 @@ def logs(request):
     return render(request, 'logs.html')
 
 
+def user_del(request, userId):
+    user = get_object_or_404(User, id=userId)
+    user.is_delete = 1
+    user.save()
+    return redirect('/user/')
+
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -87,7 +113,7 @@ def login(request):
             # Store the user id in the session
             request.session['user_id'] = user.id
             request.session['username'] = username
-            
+
             # Redirect to success page
             return redirect('/')
         else:
@@ -95,6 +121,7 @@ def login(request):
             return render(request, 'login.html', {'error_message': 'Invalid password'})
     else:
         return render(request, 'login.html')
+
 
 def logout(request):
     # This will remove the authenticated user's ID from the session
