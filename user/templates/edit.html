@@ -5,32 +5,48 @@
     <div class="container mt-5">
         <h1>Edit User</h1>
         <hr>
-        <form method="POST" action="">
+        <form method="POST" action="/user/edit/{{user.id}}">
+            {% csrf_token %}
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="username" value="{{user.user_name}}"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" value="">
             </div>
             <div class="mb-3">
                 <label for="confirm-password" class="form-label">Repeat Password</label>
-                <input type="password" class="form-control" id="confirm-password" name="confirm_password" required>
+                <input type="password" class="form-control" id="confirm-password" name="re_pass_word">
             </div>
             <div class="mb-3">
                 <label for="permission" class="form-label">Permission</label>
-                <select class="form-select" id="permission" name="permission" required>
-                    <option value="Manager">Manager</option>
-                    <option value="Employee">Employee</option>
-                    <option value="IT Administrator">IT Administrator</option>
+                <select class="form-select" id="permission" name="permission" value="{{user.permission}}">
+                    <option value="1">Manager</option>
+                    <option value="2">Employee</option>
+                    <option value="3">IT Administrator</option>
                 </select>
             </div>
 
             <span style="color:red"></span><br>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+
+            <button type="submit" class="btn btn-primary" onclick="return validateForm()">Submit</button>&nbsp;&nbsp;
             <a href="/user/" class="btn btn-primary">Return to User List</a>
         </form>
     </div>
 </div>
+
+<script>
+
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return false; // 阻止表单提交
+        }
+        return true; // 允许表单提交
+    }
+</script>

@@ -46,7 +46,7 @@
                             <td style="color: green;">Yes</td>
                             {% if user.permission_id == 1 %}
                             <td>
-                                <a href="/user/edit" class="btn btn-primary">
+                                <a href="/user/edit/{{user.id}}" class="btn btn-primary">
                                     Edit
                                 </a>
                                 <a href="/user/logs" class="btn btn-secondary">
@@ -55,10 +55,10 @@
                             </td>
                             {% else %}
                             <td>
-                                <a href="/user/edit" class="btn btn-primary">
+                                <a href="/user/edit/{{user.id}}" class="btn btn-primary">
                                     Edit
                                 </a>
-                                <a href="#" onclick="confirmDelete(event)" class="btn btn-danger">Delete</a>
+                                <a href="#" onclick="confirmDelete(event,{{user.id}})" class="btn btn-danger">Delete</a>
                                 <a href="/user/permission" class="btn btn-info">
                                     Permission
                                 </a>
@@ -105,12 +105,18 @@
     document.addEventListener('DOMContentLoaded', function () {
         var searchInput = document.getElementById('searchInput');
         var searchButton = document.getElementById('searchButton');
-        console.log("1");
         searchButton.addEventListener('click', function () {
-            console.log("2");
             var query = searchInput.value;
             var url = '/user/?query=' + encodeURIComponent(query);
             window.location.href = url;
         });
     })
+
+    function confirmDelete(event, userId) {
+        if (confirm("Are you sure want to delete this item?")) {
+            window.location.href = "/user/delete/" + userId;
+        } else {
+            event.preventDefault();
+        }
+    }
 </script>

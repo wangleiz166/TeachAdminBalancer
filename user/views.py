@@ -25,8 +25,27 @@ def list(request):
     return render(request, 'user_list.html', {'page_obj': page_obj, 'query': query})
 
 
-def edit(request):
-    return render(request, 'edit.html')
+def edit(request, userId):
+
+    user = User.objects.get(id=userId)
+
+    if request.method == 'POST':
+        user_name = request.POST.get('username')
+        pass_word = request.POST.get('password')
+        re_pass_word = request.POST.get('re_pass_word')
+        permission_id = request.POST.get('permission')
+
+        user.user_name = user_name
+        user.permission_id = permission_id
+
+        if pass_word != '' and pass_word == re_pass_word:
+            user.pass_word = make_password(pass_word)
+
+        user.save()
+        return redirect('/user')
+
+    context = {'user': user}
+    return render(request, 'edit.html', context)
 
 
 def add(request):
@@ -68,3 +87,10 @@ def logs(request):
 
 def login(request):
     return render(request, 'login.html')
+
+
+def user_del(request, userId):
+    user = get_object_or_404(User, id=userId)
+    user.is_delete = 1
+    user.save()
+    return redirect('/user/')
