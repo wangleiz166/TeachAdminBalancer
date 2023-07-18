@@ -6,93 +6,59 @@
         <h1>Permission Management</h1>
         <hr>
 
-        <h3>StaffvModules</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="staffvmodules-view" checked>
-            <label class="form-check-label" for="staffvmodules-view">
-                View
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="staffvmodules-edit" checked>
-            <label class="form-check-label" for="staffvmodules-edit">
-                Edit
-            </label>
-        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3>StaffvModules</h3>
+            <div class="form-check">
+                <label class="form-check-label" for="menu1_view">
+                    View
+                    <input class="form-check-input" type="checkbox" name="menu1_view" value="1" id="menu1_view" {% if permissions.menu1_view %}checked{% endif %}>
+                </label>
+            </div>
 
-        <h3>Staff Management</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="staff-management-view" checked>
-            <label class="form-check-label" for="staff-management-view">
-                View
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="staff-management-edit" checked>
-            <label class="form-check-label" for="staff-management-edit">
-                Edit
-            </label>
-        </div>
+            <h3>Staff Management</h3>
+            <div class="form-check">
+                <label class="form-check-label" for="menu2_view">
+                    View
+                    <input class="form-check-input" type="checkbox" name="menu2_view" value="1" id="menu2_view" {% if permissions.menu2_view %}checked{% endif %}>
+                </label>
+            </div>
 
-        <h3>Courses Management</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="courses-management-view" checked>
-            <label class="form-check-label" for="courses-management-view">
-                View
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="courses-management-edit" checked>
-            <label class="form-check-label" for="courses-management-edit">
-                Edit
-            </label>
-        </div>
+            <h3>Courses Management</h3>
+            <div class="form-check">
+                <label class="form-check-label" for="menu3_view">
+                    View
+                    <input class="form-check-input" type="checkbox" name="menu3_view" value="1" id="menu3_view" {% if permissions.menu3_view %}checked{% endif %}>
+                </label>
+            </div>
 
-        <h3>Dashboard</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="dashboard-view" checked>
-            <label class="form-check-label" for="dashboard-view">
-                View
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="dashboard-edit" checked>
-            <label class="form-check-label" for="dashboard-edit">
-                Edit
-            </label>
-        </div>
+            <h3>Dashboard</h3>
+            <div class="form-check">
+                <label class="form-check-label" for="menu4_view">
+                    View
+                    <input class="form-check-input" type="checkbox" name="menu4_view" value="1" id="menu4_view" {% if permissions.menu4_view %}checked{% endif %}>
+                </label>
+            </div>
 
-        <h3>User Management</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="user-management-view">
-            <label class="form-check-label" for="user-management-view">
-                View
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="user-management-edit">
-            <label class="form-check-label" for="user-management-edit">
-                Edit
-            </label>
-        </div>
+            <h3>User Management</h3>
+            <div class="form-check">
+                <label class="form-check-label" for="menu5_view">
+                    View
+                    <input class="form-check-input" type="checkbox" name="menu5_view" value="1" id="menu5_view" {% if permissions.menu5_view %}checked{% endif %}>
+                </label>
+            </div>
 
-        <h3>Setting</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="setting-view">
-            <label class="form-check-label" for="setting-view">
-                View
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="setting-edit">
-            <label class="form-check-label" for="setting-edit">
-                Edit
-            </label>
-        </div>
+            <h3>Setting</h3>
+            <div class="form-check">
+                <label class="form-check-label" for="menu6_view">
+                    View
+                    <input class="form-check-input" type="checkbox" name="menu6_view" value="1" id="menu6_view" {% if permissions.menu6_view %}checked{% endif %}>
+                </label>
+            </div>
+            <hr>
 
-        <hr>
-
-        <button type="submit" class="btn btn-success">Save Permissions</button>
-        <a href="/setting/" class="btn btn-success">Return to Setting List</a>
+            <button type="submit" class="btn btn-success">Save Permissions</button>
+            <a href="/setting/" class="btn btn-success">Return to Setting List</a>
+        </form>
     </div>
 </div>
