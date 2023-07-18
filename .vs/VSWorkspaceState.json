@@ -3,12 +3,11 @@
     "",
     "\\dashboard",
     "\\dashboard\\migrations",
-    "\\staff",
     "\\staffvModules",
-    "\\templates",
     "\\templates\\common",
-    "\\totalWork"
+    "\\totalWork",
+    "\\totalWork\\templates"
   ],
-  "SelectedNode": "\\Work_blanked.xlsx",
+  "SelectedNode": "\\staffvModules\\models.py",
   "PreviewInSolutionExplorer": false
 }
