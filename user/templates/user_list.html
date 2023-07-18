@@ -43,7 +43,11 @@
                             </td>
 
 
-                            <td style="color: green;">Yes</td>
+                            {% if request.session.user_id %}
+                                <td style="color: green;">Yes</td>
+                            {% else %}
+                                <td style="color: gray;">No</td>
+                            {% endif %}
                             {% if user.permission_id == 1 %}
                             <td>
                                 <a href="/user/edit/{{user.id}}" class="btn btn-primary">
