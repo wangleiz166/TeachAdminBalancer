@@ -6,7 +6,8 @@
         <div class="row">
             <div class="col">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search by name" aria-label="Search" id="searchInput">
+                    <input type="text" class="form-control" placeholder="Search by name" aria-label="Search"
+                        id="searchInput">
                     <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
                 </div>
             </div>
@@ -24,106 +25,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for log in page_obj %}
                         <tr>
-                            <td>1</td>
-                            <td>1001</td>
-                            <td>John Doe</td>
+                            <td>{{log.id}}</td>
+                            <td>{{log.user_id}}</td>
+                            <td>{{log.user_name}}</td>
                             <td>Edit (User ID 1)</td>
-                            <td>2023-06-01 09:30 AM</td>
+                            <td>{{log.create_time}}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>1002</td>
-                            <td>Jane Smith</td>
-                            <td>Delete (User ID 2)</td>
-                            <td>2023-06-02 02:45 PM</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>1003</td>
-                            <td>Mike Johnson</td>
-                            <td>Permission (User ID 3)</td>
-                            <td>2023-06-03 11:15 AM</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>1004</td>
-                            <td>Sarah Williams</td>
-                            <td>Edit (User ID 4)</td>
-                            <td>2023-06-04 04:20 PM</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>1005</td>
-                            <td>Robert Davis</td>
-                            <td>Delete (User ID 5)</td>
-                            <td>2023-06-05 10:10 AM</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>1002</td>
-                            <td>Jane Smith</td>
-                            <td>Delete (User ID 2)</td>
-                            <td>2023-06-02 02:45 PM</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>1003</td>
-                            <td>Mike Johnson</td>
-                            <td>Permission (User ID 3)</td>
-                            <td>2023-06-03 11:15 AM</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>1004</td>
-                            <td>Sarah Williams</td>
-                            <td>Edit (User ID 4)</td>
-                            <td>2023-06-04 04:20 PM</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>1005</td>
-                            <td>Robert Davis</td>
-                            <td>Delete (User ID 5)</td>
-                            <td>2023-06-05 10:10 AM</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>1002</td>
-                            <td>Jane Smith</td>
-                            <td>Delete (User ID 2)</td>
-                            <td>2023-06-02 02:45 PM</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>1003</td>
-                            <td>Mike Johnson</td>
-                            <td>Permission (User ID 3)</td>
-                            <td>2023-06-03 11:15 AM</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>1004</td>
-                            <td>Sarah Williams</td>
-                            <td>Edit (User ID 4)</td>
-                            <td>2023-06-04 04:20 PM</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>1005</td>
-                            <td>Robert Davis</td>
-                            <td>Delete (User ID 5)</td>
-                            <td>2023-06-05 10:10 AM</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>1002</td>
-                            <td>Jane Smith</td>
-                            <td>Delete (User ID 2)</td>
-                            <td>2023-06-02 02:45 PM</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
-                </table>                             
+                </table>
             </div>
         </div>
         <div class="row my-3">
