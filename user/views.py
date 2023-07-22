@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import User
+from .models import Log
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password, check_password
@@ -83,10 +84,6 @@ def permission(request):
     return render(request, 'permission.html')
 
 
-def logs(request):
-    return render(request, 'logs.html')
-
-
 def user_del(request, userId):
     user = get_object_or_404(User, id=userId)
     user.is_delete = 1
@@ -129,3 +126,21 @@ def logout(request):
 
     # Then redirect to a success page or the home page
     return redirect('/')
+
+
+def logs(request):
+    query = request.GET.get('query')
+    log_data = Log.objects.filter(is_delete=0)
+
+    if query:
+        log_data = log_data.filter(
+
+            operation_details__icontains=query
+        )
+
+    paginator = Paginator(log_data.order_by(
+        'id'), 10)  # 按照id字段升序排序
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'logs.html', {'page_obj': page_obj, 'query': query})
