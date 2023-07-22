@@ -13,9 +13,9 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link fw-bold" href="/totalWork/overallCalcs/" role="tab" aria-controls="overallCalcs" aria-selected="true">Overall Calcs</a>
             </li>
-            <li class="nav-item" role="presentation">
+            <!--<li class="nav-item" role="presentation">
                 <a class="nav-link fw-bold" href="/totalWork/frozenModules/" role="tab" aria-controls="frozenModules" aria-selected="true">Frozen Modules</a>
-            </li>
+            </li>-->
         </ul>
 
         <div class="tab-content" id="myTabsContent">
@@ -29,109 +29,56 @@
                         </div>
                     </div>
                 </div>
+                <h2>Total Hours:{{admin_total_hours}}</h2>
 
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Admin roles</th>
-                            <th>Hours</th>
-                            <th>Filled</th>
-                            <th>Load</th>
-                            <th>Allocated</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ALM+A77:G93</td>
-                            <td>320</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>320</td>
-                        </tr>
-                        <tr>
-                            <td>CS core research theme lead</td>
-                            <td>280</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>280</td>
-                        </tr>
-                        <tr>
-                            <td>PGR</td>
-                            <td>80</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>80</td>
-                        </tr>
-                        <tr>
-                            <td>Taught PGT lead</td>
-                            <td>80</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>DuP</td>
-                            <td>320</td>
-                            <td>1</td>
-                            <td>320</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <td>Msc AI Dir (300 with Jan)</td>
-                            <td>300</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td>MSc Cyber Dir</td>
-                            <td>200</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>200</td>
-                        </tr>
-                        <tr>
-                            <td>MSc IT Dir (300 with Jan)</td>
-                            <td>300</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>300</td>
-                        </tr>
-                        <tr>
-                            <td>Go abroad/Erasmus/Turing</td>
-                            <td>120</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>120</td>
-                        </tr>
-                        <tr>
-                            <td>Exam officer</td>
-                            <td>80</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>80</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Admin roles</th>
+                                <th>Credits</th>
+                                <th>Alpha</th>
+                                <th>Beta</th>
+                                <th>Num. Students</th>
+                                <th>Delta</th>
+                                <th>Coordinator</th>
+                                <th>Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for admin_role in admin %}
+                            <tr>
+                                <td>{{ admin_role.code }}</td>
+                                <td>{{ admin_role.credits }}</td>
+                                <td>{{ admin_role.alpha }}</td>
+                                <td>{{ admin_role.beta }}</td>
+                                <td>{{ admin_role.num_students }}</td>
+                                <td>{{ admin_role.delta }}</td>
+                                <td>{{ admin_role.coordinator }}</td>
+                                <td>{{ admin_role.total_hours }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
 
-                <div class="row my-3">
-                    <div class="col-12 col-md-6">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="?page=1">1</a>
-                                </li>
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+
+                    <div class="row my-3">
+                        <div class="col-12 col-md-6">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-end">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="?page=1">1</a>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                </div>
-            </div>
+</div>
         </div>
     </div>
 </div>

@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\dashboard",
+    "\\dashboard\\migrations",
     "\\staffvModules",
+    "\\templates\\common",
     "\\totalWork",
     "\\totalWork\\templates"
   ],
-  "SelectedNode": "\\staffvModules\\views.py",
+  "SelectedNode": "\\staffvModules\\models.py",
   "PreviewInSolutionExplorer": false
 }
