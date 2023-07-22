@@ -84,10 +84,6 @@ def permission(request):
     return render(request, 'permission.html')
 
 
-def logs(request):
-    return render(request, 'logs.html')
-
-
 def user_del(request, userId):
     user = get_object_or_404(User, id=userId)
     user.is_delete = 1
