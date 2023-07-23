@@ -163,21 +163,22 @@ def overall_calcs(request):
         """
         cursor.execute(sql_query)
         results= cursor.fetchall()
-        course_total=results[0][0]
+        course_total=results[0][0] if results[0][0] is not None else 0.0
     with connection.cursor() as cursor:
         sql_query = """
             SELECT SUM(total_hours) FROM balancer_teach_project
         """
         cursor.execute(sql_query)
         results= cursor.fetchall()
-        project_total=results[0][0]
+        project_total=results[0][0] if results[0][0] is not None else 0.0
     with connection.cursor() as cursor:
         sql_query = """
             SELECT SUM(total_hours) FROM balancer_teach_admin_role
         """
         cursor.execute(sql_query)
         results= cursor.fetchall()
-        admin_total=results[0][0]
+        # admin_total=results[0][0]
+        admin_total = results[0][0] if results[0][0] is not None else 0.0
     total_teaching=course_total+project_total
     total_sum_teach_admin=total_teaching+admin_total
 

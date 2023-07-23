@@ -27,11 +27,9 @@ def check_login_decorator(view_func):
 def list(request):
     return render(request, 'setting_list.html')
 
-@check_login_decorator
 def warn(request):
     return render(request, 'warn.html')
 
-@check_login_decorator
 def login_warn(request):
     return render(request, 'login_warn.html')
 

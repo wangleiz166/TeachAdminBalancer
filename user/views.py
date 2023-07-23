@@ -127,7 +127,7 @@ def user_del(request, userId):
 
     return redirect('/user/')
 
-@check_login_decorator
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
