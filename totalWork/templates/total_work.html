@@ -42,6 +42,30 @@
             <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="coursesTab">
                 <br>
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center text-white" style="background-color:#7abaee;">
+                                <h3>Total Course Hours: {{ course_total_hours}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center text-white" style="background-color:#7dc904;">
+                                <h3>Total Project Hours: {{ project_total_hours}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center text-white" style="background-color:#f17e64;">
+                                <h3>Total Hours: {{ total_hours_sum }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Search by code" aria-label="Search" id="searchInput">
@@ -50,9 +74,6 @@
 
                     </div>
                 </div>
-                <h4>Total Course Hours: {{ course_total_hours}}</h4>
-                <h4>Total Project Hours: {{ project_total_hours}}</h4>
-                <h2>Total Hours: {{ total_hours_sum }}</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
