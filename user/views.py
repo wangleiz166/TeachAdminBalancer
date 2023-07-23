@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import User
-from .models import Log
+from .models import Log,Permission
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password, check_password
@@ -8,8 +8,26 @@ from django.contrib.auth import logout as auth_logout
 
 
 # Create your views here.
+def check_login_decorator(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            return redirect('/setting/login_warn')
+        else:
+            user = User.objects.get(id=request.session['user_id'])  # fetch user's info from User model
+            permission_mapping = {
+                1: "Manager",
+                2: "Employee",
+                3: "IT Administrator",
+            }
+            user_permission_name = permission_mapping.get(user.permission_id) 
+            # Find the permission with the specified permission_id and menu_id=5
+            permission = Permission.objects.get(permission=user_permission_name, menu_id=5)
+            if permission.position_id == 0:
+                return redirect('/setting/warn')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
 
-
+@check_login_decorator
 def list(request):
     query = request.GET.get('query')
     user_data = User.objects.filter(is_delete=0)
@@ -27,7 +45,7 @@ def list(request):
 
     return render(request, 'user_list.html', {'page_obj': page_obj, 'query': query})
 
-
+@check_login_decorator
 def edit(request, userId):
 
     user = User.objects.get(id=userId)
@@ -45,12 +63,17 @@ def edit(request, userId):
             user.pass_word = make_password(pass_word)
 
         user.save()
-        return redirect('/user')
+        user_id = request.session.get('user_id')
+        operation_details = "user_edit "+ "user_id:"+str(userId)
+            
+        if user_id:
+            Log.create_log(user_id, operation_details)
+            return redirect('/user')
 
     context = {'user': user}
     return render(request, 'edit.html', context)
 
-
+@check_login_decorator
 def add(request):
     if request.method == 'POST':
         # Retrieve the form data from the request
@@ -66,7 +89,14 @@ def add(request):
 
         # Save the User object to the database
         user.save()
-        # Redirect to the staff list page
+        
+        user_id = request.session.get('user_id')
+        operation_details = "user_add"
+            
+        if user_id:
+            Log.create_log(user_id, operation_details)
+  
+          # Redirect to the staff list page
         return redirect('/user/')
 
     else:
@@ -79,18 +109,25 @@ def add(request):
 #     user.save()
 #     return redirect('user_list')
 
-
+@check_login_decorator
 def permission(request):
     return render(request, 'permission.html')
 
-
+@check_login_decorator
 def user_del(request, userId):
     user = get_object_or_404(User, id=userId)
     user.is_delete = 1
     user.save()
+    
+    user_id = request.session.get('user_id')
+    operation_details = "user_del "+"user_id:"+str(userId)
+            
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
     return redirect('/user/')
 
-
+@check_login_decorator
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -119,7 +156,7 @@ def login(request):
     else:
         return render(request, 'login.html')
 
-
+@check_login_decorator
 def logout(request):
     # This will remove the authenticated user's ID from the session
     auth_logout(request)
@@ -127,20 +164,26 @@ def logout(request):
     # Then redirect to a success page or the home page
     return redirect('/')
 
-
-def logs(request):
+@check_login_decorator
+def logs(request, userId):
     query = request.GET.get('query')
-    log_data = Log.objects.filter(is_delete=0)
+    search_display = 1
+
+    if userId == 0:
+        log_data = Log.objects.filter(is_delete=0)
+    else:
+        search_display = 0
+        log_data = Log.objects.filter(is_delete=0, user_id=userId)
 
     if query:
         log_data = log_data.filter(
-
             operation_details__icontains=query
         )
 
+    
     paginator = Paginator(log_data.order_by(
-        'id'), 10)  # 按照id字段升序排序
+            'id'), 10)  # 按照id字段升序排序
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'logs.html', {'page_obj': page_obj, 'query': query})
+    return render(request, 'logs.html', {'page_obj': page_obj, 'query': query,'search_display':search_display})

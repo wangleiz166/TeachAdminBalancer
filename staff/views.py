@@ -1,10 +1,32 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Staff
+from user.models import Log,User,Permission
 from django.core.paginator import Paginator
 import datetime
 from django.db.models import Q
 
 
+# Create your views here.
+def check_login_decorator(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            return redirect('/setting/login_warn')
+        else:
+            user = User.objects.get(id=request.session['user_id'])  # fetch user's info from User model
+            permission_mapping = {
+                1: "Manager",
+                2: "Employee",
+                3: "IT Administrator",
+            }
+            user_permission_name = permission_mapping.get(user.permission_id) 
+            # Find the permission with the specified permission_id and menu_id=2
+            permission = Permission.objects.get(permission=user_permission_name, menu_id=2)
+            if permission.position_id == 0:
+                return redirect('/setting/warn')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
+@check_login_decorator
 def staff_list(request):
     query = request.GET.get('query')
     staff_data = Staff.objects.filter(is_delete=0)
@@ -23,9 +45,11 @@ def staff_list(request):
 
     return render(request, 'staff_list.html', {'page_obj': page_obj, 'query': query})
 
+@check_login_decorator
 def totalwork_h5(request):
      return render(request, 'total_work_h5.html')
 
+@check_login_decorator
 def staff_search(request):
     staff_data = Staff.objects.filter(is_delete=0)
     paginator = Paginator(staff_data, 10)  # Show 10 staff members per page
@@ -35,14 +59,21 @@ def staff_search(request):
 
     return render(request, 'staff_list.html', {'page_obj': page_obj})
 
-
+@check_login_decorator
 def staff_delete(request, staffId):
     staff = get_object_or_404(Staff, id=staffId)
     staff.is_delete = 1
     staff.save()
+
+    user_id = request.session.get('user_id')
+    operation_details = "staff_delete "+ "user_id:"+str(staffId)
+    
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
     return redirect('staff_list')
 
-
+@check_login_decorator
 def staff_add(request):
     if request.method == 'POST':
         # Retrieve the form data from the request
@@ -78,6 +109,12 @@ def staff_add(request):
 
         # Save the Staff object to the database
         staff.save()
+        
+        user_id = request.session.get('user_id')
+        operation_details = "staff_add "
+        
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         # Redirect to the staff list page
         return redirect('/staff/')
@@ -86,16 +123,16 @@ def staff_add(request):
         # Render the staff_add.html template
         return render(request, 'staff_add.html')
 
-
+@check_login_decorator
 def staff_bulk_add(request):
     return render(request, 'staff_bulk_add.html')
 
-
+@check_login_decorator
 def staff_detail(request, staffId):
     staff = get_object_or_404(Staff, id=staffId)
     return render(request, 'staff_detail.html', {'staff': staff})
 
-
+@check_login_decorator
 def staff_update(request, staffId):
     staff = get_object_or_404(Staff, id=staffId)
 
@@ -125,5 +162,12 @@ def staff_update(request, staffId):
         'probationStartYearStage')
 
     staff.save()
+
+    user_id = request.session.get('user_id')
+    operation_details = "staff_update "+ "user_id:"+str(staffId)
+        
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
 
     return redirect('/staff/')

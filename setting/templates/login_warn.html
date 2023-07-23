@@ -1,0 +1,13 @@
+{% include 'common/header.html' %}
+{% include 'common/nav.html' %}
+<div class="main-content">
+    <div class="container my-3">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Inaccessible</h4>
+            <p>You are not logged in, please log in to your account.</p>
+            <hr>
+            <a href="{% url 'login' %}" class="btn btn-primary">Back to the login page</a>
+        </div>
+    </div>
+</div>
+

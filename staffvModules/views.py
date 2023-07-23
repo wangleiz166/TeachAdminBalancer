@@ -3,16 +3,39 @@ from django.db import connection
 from django.shortcuts import get_object_or_404,render, redirect
 from django.http import JsonResponse
 from .models import Course,Project,AdminRole,SchoolRole,UniRole
+from user.models import Log,User,Permission
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import TeachCourse, TeachProject, TeachAdminRole, TeachSchoolRoles, TeachUniRoles
 import json
 from staff.models import Staff
 from django.db.models import Sum
 from django.db.models import Q
+
+
 # Create your views here.
 
+def check_login_decorator(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            return redirect('/setting/login_warn')
+        else:
+            user = User.objects.get(id=request.session['user_id'])  # fetch user's info from User model
+            permission_mapping = {
+                1: "Manager",
+                2: "Employee",
+                3: "IT Administrator",
+            }
+            user_permission_name = permission_mapping.get(user.permission_id) 
+            # Find the permission with the specified permission_id and menu_id=1
+            permission = Permission.objects.get(permission=user_permission_name, menu_id=1)
+            if permission.position_id == 0:
+                return redirect('/setting/warn')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
 
 
+
+@check_login_decorator
 def list(request):
     if request.user_agent.is_mobile:
         return render(request, 'staff_h5.html')    
@@ -42,7 +65,7 @@ def list(request):
         context = {'courses': courses, 'hsQuery': hsQuery, 'typeQuery': typeQuery, 'codeQuery': codeQuery}
         return render(request, 'list.html', context)
  
-
+@check_login_decorator
 def full_list(request, category=None):
     # Retrieve all non-deleted items from the database based on the category
     if category == 'project':
@@ -247,7 +270,7 @@ def full_list(request, category=None):
     return render(request, template_name, context)
 
 
-
+@check_login_decorator
 def project_list(request):
     # Retrieve all non-deleted courses from the database
     projects = Project.objects.filter(is_delete=0)
@@ -267,6 +290,7 @@ def project_list(request):
     context = {'projects': projects, 'query': project_query}
     return render(request, 'project_list.html', context)
 
+@check_login_decorator
 def adminrole_list(request):
     # Retrieve all non-deleted courses from the database
     adminroles = AdminRole.objects.filter(is_delete=0)
@@ -286,6 +310,7 @@ def adminrole_list(request):
     context = {'adminroles': adminroles, 'query': adminrole_query}
     return render(request, 'adminrole_list.html', context)
 
+@check_login_decorator
 def schoolrole_list(request):
     # Retrieve all non-deleted courses from the database
     schoolroles = SchoolRole.objects.filter(is_delete=0)
@@ -305,6 +330,7 @@ def schoolrole_list(request):
     context = {'schoolroles': schoolroles, 'query': schoolrole_query}
     return render(request, 'schoolrole_list.html', context)
 
+@check_login_decorator
 def unirole_list(request):
     # Retrieve all non-deleted courses from the database
     uniroles = UniRole.objects.filter(is_delete=0)
@@ -324,6 +350,7 @@ def unirole_list(request):
     context = {'uniroles': uniroles, 'query': unirole_query}
     return render(request, 'unirole_list.html', context)
 
+@check_login_decorator
 def detail(request, staffId):
     if request.method == 'POST':
         json_str = request.body.decode('utf-8')  # 获取请求体中的JSON字符串
@@ -411,6 +438,12 @@ def detail(request, staffId):
                 coordinator=uni_role['coordinator'],
                 total_hours = float(uni_role['credits']) * (float(uni_role['alpha']) * float(uni_role['delta']) + float(uni_role['beta']) * int(uni_role['numGroupsStudents'])) * float(uni_role['share']) + float(uni_role['coordinator'])
             )
+
+        user_id = request.session.get('user_id')
+        operation_details = "staffvMoudles detail save"
+                
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         print("Data saved successfully.")  # 打印保存成功的提示
 
@@ -502,7 +535,7 @@ def detail(request, staffId):
 
     return render(request, 'detail.html', context)
 
-
+@check_login_decorator
 def staffvModules_course_edit(request, courseId):
     # Retrieve the course object based on the courseId
     course = Course.objects.get(id=courseId)
@@ -532,6 +565,11 @@ def staffvModules_course_edit(request, courseId):
 
         # Save the updated course object to the database
         course.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_course_edit"
+                
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         # Redirect to the staffvModules list page
         return redirect('/staffvModules/')
@@ -540,6 +578,7 @@ def staffvModules_course_edit(request, courseId):
     context = {'course': course}
     return render(request, 'staffvModules_course_edit.html', context)
 
+@check_login_decorator
 def staffvModules_course_add(request):
     if request.method == 'POST':
         code = request.POST.get('code')
@@ -568,19 +607,30 @@ def staffvModules_course_add(request):
         )
 
         course.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_course_add"
+                
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         return redirect('/staffvModules/')
 
     return render(request, 'staffvModules_course_add.html')
 
-
+@check_login_decorator
 def staffvModules_course_del(request, courseId):
     course = get_object_or_404(Course, id=courseId)
     course.is_delete = 1
     course.save()
+    user_id = request.session.get('user_id')
+    operation_details = "staffvModules_course_del"
+                
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
     return redirect('/staffvModules/')
 
-
+@check_login_decorator
 def staffvModules_project_edit(request, projectId):
     # Retrieve the project object based on the projectId
     project = Project.objects.get(id=projectId)
@@ -608,7 +658,11 @@ def staffvModules_project_edit(request, projectId):
 
         # Save the updated project object to the database
         project.save()
-
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_project_edit"
+                    
+        if user_id:
+            Log.create_log(user_id, operation_details)
         # Redirect to the staffvModules project list page
         return redirect('/staffvModules/project/')
 
@@ -616,7 +670,7 @@ def staffvModules_project_edit(request, projectId):
     context = {'project': project}
     return render(request, 'staffvModules_project_edit.html', context)
 
-
+@check_login_decorator
 def staffvModules_project_add(request):
     if request.method == 'POST':
         code = request.POST.get('code')
@@ -641,20 +695,31 @@ def staffvModules_project_add(request):
         )
 
         project.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_project_add"
+                    
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         return redirect('/staffvModules/project/')
 
     return render(request, 'staffvModules_project_add.html')
 
-
+@check_login_decorator
 def staffvModules_project_del(request, projectId):
     project = get_object_or_404(Project, id=projectId)
     project.is_delete = 1
     project.save()
+    user_id = request.session.get('user_id')
+    operation_details = "staffvModules_project_del"
+                    
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
     return redirect('/staffvModules/project/')
 
 
-
+@check_login_decorator
 def staffvModules_adminrole_edit(request, adminroleId):
     # Retrieve the course object based on the courseId
     adminrole = AdminRole.objects.get(id=adminroleId)
@@ -674,7 +739,11 @@ def staffvModules_adminrole_edit(request, adminroleId):
 
         # Save the updated course object to the database
         adminrole.save()
-
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_adminrole_edit"
+                        
+        if user_id:
+            Log.create_log(user_id, operation_details)
         # Redirect to the staffvModules list page
         return redirect('/staffvModules/adminRole/')
 
@@ -682,6 +751,7 @@ def staffvModules_adminrole_edit(request, adminroleId):
     context = {'adminrole': adminrole}
     return render(request, 'staffvModules_adminrole_edit.html', context)
 
+@check_login_decorator
 def staffvModules_adminrole_add(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -698,18 +768,30 @@ def staffvModules_adminrole_add(request):
         )
 
         adminrole.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_adminrole_add"
+                        
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         return redirect('/staffvModules/adminRole/')
 
     return render(request, 'staffvModules_adminrole_add.html')
 
+@check_login_decorator
 def staffvModules_adminrole_del(request, adminroleId):
     adminrole = get_object_or_404(AdminRole, id=adminroleId)
     adminrole.is_delete = 1
     adminrole.save()
+    user_id = request.session.get('user_id')
+    operation_details = "staffvModules_adminrole_del"
+                        
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
     return redirect('/staffvModules/adminRole/')
 
-
+@check_login_decorator
 def staffvModules_schoolrole_edit(request, schoolroleId):
     # Retrieve the course object based on the courseId
     schoolrole = SchoolRole.objects.get(id=schoolroleId)
@@ -729,6 +811,11 @@ def staffvModules_schoolrole_edit(request, schoolroleId):
 
         # Save the updated course object to the database
         schoolrole.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_schoolrole_edit"
+                            
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         # Redirect to the staffvModules list page
         return redirect('/staffvModules/schoolRole/')
@@ -737,6 +824,7 @@ def staffvModules_schoolrole_edit(request, schoolroleId):
     context = {'schoolrole': schoolrole}
     return render(request, 'staffvModules_schoolrole_edit.html', context)
 
+@check_login_decorator
 def staffvModules_schoolrole_add(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -753,19 +841,31 @@ def staffvModules_schoolrole_add(request):
         )
 
         schoolrole.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_schoolrole_add"
+                            
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         return redirect('/staffvModules/schoolRole/')
 
     return render(request, 'staffvModules_schoolrole_add.html')
 
+@check_login_decorator
 def staffvModules_schoolrole_del(request, schoolroleId):
     schoolrole = get_object_or_404(SchoolRole, id=schoolroleId)
     schoolrole.is_delete = 1
     schoolrole.save()
+    user_id = request.session.get('user_id')
+    operation_details = "staffvModules_schoolrole_del"
+                            
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
     return redirect('/staffvModules/schoolRole/')
 
 
-
+@check_login_decorator
 def staffvModules_unirole_edit(request, uniroleId):
     # Retrieve the course object based on the courseId
     unirole = UniRole.objects.get(id=uniroleId)
@@ -785,6 +885,11 @@ def staffvModules_unirole_edit(request, uniroleId):
 
         # Save the updated course object to the database
         unirole.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_unirole_edit"
+                                
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         # Redirect to the staffvModules list page
         return redirect('/staffvModules/uniRole/')
@@ -793,6 +898,7 @@ def staffvModules_unirole_edit(request, uniroleId):
     context = {'unirole': unirole}
     return render(request, 'staffvModules_unirole_edit.html', context)
 
+@check_login_decorator
 def staffvModules_unirole_add(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -809,18 +915,30 @@ def staffvModules_unirole_add(request):
         )
 
         unirole.save()
+        user_id = request.session.get('user_id')
+        operation_details = "staffvModules_unirole_add"
+                                
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         return redirect('/staffvModules/uniRole/')
 
     return render(request, 'staffvModules_unirole_add.html')
 
+@check_login_decorator
 def staffvModules_unirole_del(request, uniroleId):
     unirole = get_object_or_404(UniRole, id=uniroleId)
     unirole.is_delete = 1
     unirole.save()
+    user_id = request.session.get('user_id')
+    operation_details = "staffvModules_unirole_del"
+                                
+    if user_id:
+        Log.create_log(user_id, operation_details)
+
     return redirect('/staffvModules/uniRole/')
 
-
+@check_login_decorator
 def staff_list(request, name, type="course"):
     staff_list = []
     
@@ -924,6 +1042,7 @@ def staff_list(request, name, type="course"):
     # Return the JSON response
     return JsonResponse(response_data)
 
+@check_login_decorator
 def hs_total_list(request):
     page = request.GET.get('page', 1)
 
@@ -950,7 +1069,7 @@ def hs_total_list(request):
 
     return render(request, 'hs_list.html', {'staffs': staffs})
 
-
+@check_login_decorator
 def full_edit(request, type):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -1034,9 +1153,15 @@ def full_edit(request, type):
 
                 except ObjectDoesNotExist:
                     print(f'unirole with code {row[0]} does not exist')
-
+           
         else:
             return JsonResponse({'status':'failed', 'message': 'Invalid type parameter'}, status=400)
+         
+        user_id = request.session.get('user_id')
+        operation_details = "full_screen_edit"
+                                    
+        if user_id:
+            Log.create_log(user_id, operation_details)
 
         # 返回一个成功的响应
         return JsonResponse({'status':'success', 'message': 'Data updated successfully'}, status=200)

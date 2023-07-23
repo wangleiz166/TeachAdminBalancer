@@ -1,13 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from staffvModules.models import TeachCourse,TeachProject,TeachAdminRole,TeachSchoolRoles,TeachUniRoles,Course,Project,AdminRole,SchoolRole,UniRole
 from django.db import connection
 from django.db.models import Sum
-
+from user.models import Log,User,Permission
 from staffvModules.views import project_list
     
 
 # Create your views here.
+def check_login_decorator(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if 'user_id' not in request.session:
+            return redirect('/setting/login_warn')
+        else:
+            user = User.objects.get(id=request.session['user_id'])  # fetch user's info from User model
+            permission_mapping = {
+                1: "Manager",
+                2: "Employee",
+                3: "IT Administrator",
+            }
+            user_permission_name = permission_mapping.get(user.permission_id) 
+            # Find the permission with the specified permission_id and menu_id=3
+            permission = Permission.objects.get(permission=user_permission_name, menu_id=3)
+            if permission.position_id == 0:
+                return redirect('/setting/warn')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
 
+@check_login_decorator
 def total_work_list(request):
     with connection.cursor() as cursor:
         sql_query = """
@@ -88,6 +107,7 @@ def total_work_list(request):
 
     return render(request, 'total_work.html', context)
 
+@check_login_decorator
 def admin_roles(request):
     with connection.cursor() as cursor:
         sql_query = """
@@ -128,6 +148,7 @@ def admin_roles(request):
     }
     return render(request, 'admin_roles.html',context)
 
+@check_login_decorator
 def overall_calcs(request):
     with connection.cursor() as cursor:
         sql_query = """
@@ -171,5 +192,6 @@ def overall_calcs(request):
         
     return render(request, 'overall_calcs.html',context)
 
+@check_login_decorator
 def frozen_modules(request):
     return render(request, 'frozen_modules.html')

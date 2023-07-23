@@ -69,3 +69,8 @@ class Log(models.Model):
 
     class Meta:
         db_table = 'balancer_log'
+
+    @classmethod
+    def create_log(cls, user_id, operation_details):
+        log = cls(user_id=user_id, operation_details=operation_details)
+        log.save()    

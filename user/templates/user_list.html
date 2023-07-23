@@ -9,7 +9,7 @@
                     <input type="text" class="form-control" placeholder="Search by name" aria-label="Search"
                         id="searchInput">
                     <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
-                    <a href="/user/logs" class="btn btn-secondary">Logs</a>&nbsp;
+                    <a href="/user/logs/0" class="btn btn-secondary">Logs</a>&nbsp;
                     <a href="/user/add" class="btn btn-primary">Add Account</a>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                                 <a href="/user/edit/{{user.id}}" class="btn btn-primary">
                                     Edit
                                 </a>
-                                <a href="/user/logs" class="btn btn-secondary">
+                                <a href="/user/logs/{{user.id}}" class="btn btn-secondary">
                                     Logs
                                 </a>
                             </td>
@@ -63,9 +63,6 @@
                                     Edit
                                 </a>
                                 <a href="#" onclick="confirmDelete(event,{{user.id}})" class="btn btn-danger">Delete</a>
-                                <a href="/user/permission" class="btn btn-info">
-                                    Permission
-                                </a>
                                 <a href="/user/logs" class="btn btn-secondary">
                                     Logs
                                 </a>
