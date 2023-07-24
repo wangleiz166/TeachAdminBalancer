@@ -140,21 +140,21 @@ def login(request):
             # Render the form again with an error message
             return render(request, 'login.html', {'error_message': 'Invalid username'})
 
-        if user.is_locked:
-            if user.locked_at and timezone.now() >= user.locked_at + timedelta(minutes=1):
-                user.is_locked = False
-                user.login_attempts = 0
-                user.locked_at = None
-                user.save()
-            else:
-                return render(request, 'login.html', {'error_message': 'Account is locked(1 minute). Please try again later.'})
+        # if user.is_locked:
+        #     if user.locked_at and timezone.now() >= user.locked_at + timedelta(minutes=1):
+        #         user.is_locked = False
+        #         user.login_attempts = 0
+        #         user.locked_at = None
+        #         user.save()
+        #     else:
+        #         return render(request, 'login.html', {'error_message': 'Account is locked(1 minute). Please try again later.'})
 
         # Validate the password using Django's check_password function
         if check_password(password, user.pass_word):
             # Password is valid. Update the login state and redirect to success page
-            user.login_attempts = 0
-            user.is_locked = False
-            user.save()
+            # user.login_attempts = 0
+            # user.is_locked = False
+            # user.save()
 
             # Store the user id in the session
             request.session['user_id'] = user.id
@@ -163,17 +163,17 @@ def login(request):
             # Redirect to success page
             return redirect('/')
         else:
-            user.login_attempts += 1
-            if user.login_attempts >= 3:
-                user.is_locked = True
-                user.locked_at = timezone.now()
-            user.save()
+            # user.login_attempts += 1
+            # if user.login_attempts >= 3:
+            #     user.is_locked = True
+            #     user.locked_at = timezone.now()
+            # user.save()
             # Render the form again with an error message
             return render(request, 'login.html', {'error_message': 'Invalid password'})
     else:
         return render(request, 'login.html')
 
-@check_login_decorator
+
 def logout(request):
     # This will remove the authenticated user's ID from the session
     auth_logout(request)
