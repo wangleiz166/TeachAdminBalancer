@@ -6,7 +6,7 @@
 #   (4, 0, 1, 4, 'Manager', CURRENT_TIMESTAMP, 0),
 #   (5, 0, 1, 5, 'Manager', CURRENT_TIMESTAMP, 0),
 #   (6, 0, 1, 6, 'Manager', CURRENT_TIMESTAMP, 0),
-  
+
 #   -- Employee Permissions
 #   (7, 0, 1, 1, 'Employee', CURRENT_TIMESTAMP, 0),
 #   (8, 0, 1, 2, 'Employee', CURRENT_TIMESTAMP, 0),
@@ -14,7 +14,7 @@
 #   (10, 0, 1, 4, 'Employee', CURRENT_TIMESTAMP, 0),
 #   (11, 0, 1, 5, 'Employee', CURRENT_TIMESTAMP, 0),
 #   (12, 0, 1, 6, 'Employee', CURRENT_TIMESTAMP, 0),
-  
+
 #   -- IT Administrator Permissions
 #   (13, 0, 1, 1, 'IT Administrator', CURRENT_TIMESTAMP, 0),
 #   (14, 0, 1, 2, 'IT Administrator', CURRENT_TIMESTAMP, 0),
@@ -33,6 +33,9 @@ class User(models.Model):
     permission_id = models.IntegerField()
     create_time = models.DateTimeField(auto_now_add=True)
     is_delete = models.BooleanField(default=False)
+    is_locked = models.BooleanField(default=False)
+    login_attempts = models.IntegerField(default=0)
+    locked_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"User {self.user_name}"
@@ -73,4 +76,4 @@ class Log(models.Model):
     @classmethod
     def create_log(cls, user_id, operation_details):
         log = cls(user_id=user_id, operation_details=operation_details)
-        log.save()    
+        log.save()
