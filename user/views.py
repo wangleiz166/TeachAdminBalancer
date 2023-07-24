@@ -174,12 +174,40 @@ def login(request):
         return render(request, 'login.html')
 
 
+def wap_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(user_name=username)
+        except User.DoesNotExist:
+            return render(request, 'wap_login.html', {'error_message': 'Invalid username'})
+      
+        if check_password(password, user.pass_word):
+            request.session['user_id'] = user.id
+            request.session['username'] = username
+
+            # Redirect to success page
+            return redirect('/')
+        else:
+            return render(request, 'login.html', {'error_message': 'Invalid password'})
+    else:
+        return render(request, 'wap_login.html')
+
 def logout(request):
     # This will remove the authenticated user's ID from the session
     auth_logout(request)
 
     # Then redirect to a success page or the home page
     return redirect('/')
+
+
+def wap_logout(request):
+    # This will remove the authenticated user's ID from the session
+    auth_logout(request)
+
+    # Then redirect to a success page or the home page
+    return redirect('/user/wap/login')
 
 @check_login_decorator
 def logs(request, userId):

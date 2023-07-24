@@ -2,112 +2,35 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
     <style>
-       body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 9999;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #111;
-}
-
-.content {
-    padding: 20px;
-    margin-top: 50px;
-}
-
-.item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 10px;
-    background-color: #f2f2f2;
-    text-align: center;
-    width: 90%;
-    max-width: 200px;
-    align-self: center;
-}
-
-.item a {
-    text-decoration: none;
-    color: black;
-}
-
-.item a:hover {
-    background-color: #ddd;
-}
-
-.refresh-container {
-    text-align: center;
-    padding: 10px;
-    background-color: #f2f2f2;
-    animation: fade-in 1s ease-in-out infinite alternate;
-}
-
-@keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-#staff-list {
-    width: 100%;
-    max-height: calc(100% - 20px);
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#staff-list .item {
-    width: 90%;
-    max-width: 200px;
-}
-
-#refresh-text {
-    display: none;
-    background-color: #f2f2f2;
-    padding: 10px;
-}
+        .navbar { background-color: black; }
+        .navbar .nav-link { color: white; }
+        .list-group-item { margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <ul>
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href="#staff">Staff</a></li>
-        <li><a href="#login">Login</a></li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <ul class="navbar-nav">
+            {% if request.session.username %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: white">{{ request.session.username }}</a>
+                    <a class="nav-link" href="/user/wap/logout" style="color: white">logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/wap/login" style="color: white">login</a>
+                </li>
+            {% endif %}
+        </ul>        
+    </nav>
 
-    <div class="content">
-        <div class="item">
-            <a href="/staff/totalwork">Staff 1</a>
-        </div>
-        <!-- Repeat the .item div for each staff member -->
+    <div class="container mt-4">
+        {% for staff in staffList %}
+            <div class="list-group">
+                <a href="/staff/totalwork/{{staff.id}}" class="list-group-item list-group-item-action rounded mb-3">{{ staff.initials }}</a>
+            </div>
+        {% endfor %}
     </div>
 </body>
 </html>

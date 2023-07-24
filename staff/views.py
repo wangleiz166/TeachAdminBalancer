@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Staff
 from user.models import Log,User,Permission
+from staffvModules.models import TeachCourse,TeachProject,TeachSchoolRoles,TeachAdminRole,TeachUniRoles
 from django.core.paginator import Paginator
 import datetime
 from django.db.models import Q
@@ -46,8 +47,43 @@ def staff_list(request):
     return render(request, 'staff_list.html', {'page_obj': page_obj, 'query': query})
 
 @check_login_decorator
-def totalwork_h5(request):
-     return render(request, 'total_work_h5.html')
+def totalwork_h5(request, staffId):
+    staff_first_name = Staff.objects.get(id=staffId).first_name
+    staff_last_name = Staff.objects.get(id=staffId).last_name
+    staff_name = staff_first_name + " " + staff_last_name
+    staff_permitt_hours = Staff.objects.get(id=staffId).adjusted_max
+
+    courses = TeachCourse.objects.raw("""
+        SELECT * 
+        FROM balancer_teach_course AS a 
+        LEFT JOIN balancer_course AS b 
+        ON a.course_name = b.code 
+        WHERE b.is_delete = 0 and a.staff_id = %s
+    """, [staffId])
+
+    projects = TeachProject.objects.filter(staff_id=staffId).all()
+    admin_roles = TeachAdminRole.objects.filter(staff_id=staffId).all()
+    school_roles = TeachSchoolRoles.objects.filter(staff_id=staffId).all()
+    uni_roles = TeachUniRoles.objects.filter(staff_id=staffId).all()
+
+    courses_hours = sum([float(c.total_hours) for c in courses])
+    projects_hours = sum([float(p.total_hours) for p in projects])
+    admin_roles_hours = sum([float(a.total_hours) for a in admin_roles])
+    school_roles_hours = sum([float(s.total_hours) for s in school_roles])
+    uni_roles_hours = sum([float(u.total_hours) for u in uni_roles])
+
+    staff_total_hours = courses_hours + projects_hours + admin_roles_hours +  school_roles_hours + uni_roles_hours
+    staff_total_no_project_hours = courses_hours  + admin_roles_hours +  school_roles_hours + uni_roles_hours
+
+    context =  {
+                    'staff_name': staff_name,
+                    'staff_permitt_hours':staff_permitt_hours,
+                    'staff_total_hours':staff_total_hours,
+                    'staff_total_no_project_hours':staff_total_no_project_hours,
+                    'staff_total_hours_left': float(staff_permitt_hours) - staff_total_hours,
+               }
+
+    return render(request, 'total_work_h5.html', context)
 
 @check_login_decorator
 def staff_search(request):

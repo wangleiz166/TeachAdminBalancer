@@ -2,130 +2,55 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        .card {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            color: #333;
         }
-        .container {
-            background-color: #cad4c8;
-            padding: 20px;
+        .card-header {
+            background-color: #000;
+            color: #fff;
         }
-        h3 {
-            margin-top: 0;
+        .card-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        th, td {
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        /* Add additional styling as needed */
     </style>
 </head>
 <body>
-    <div class="container">
-        <h3>Total</h3>
-        <!-- Total table -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Total hours permitted</th>
-                    <th>Total hours allocated</th>
-                    <th>Total left</th>
-                    <th>No Projects</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>40</td>
-                    <td id="totalHoursAllocated">30</td>
-                    <td id="totalHoursLeft">10</td>
-                    <td id="noProjects">2</td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Total Courses table -->
-        <h3>Total Courses</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>HS</th>
-                    <th>Share</th>
-                    <th>Total hours</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Total</td>
-                    <td id="totalShare">50</td>
-                    <td id="totalHours">100</td>
-                </tr>
-                <tr>
-                    <td>HS1</td>
-                    <td id="hs1Share">20</td>
-                    <td id="hs1Hours">30</td>
-                </tr>
-                <tr>
-                    <td>HS2</td>
-                    <td id="hs2Share">15</td>
-                    <td id="hs2Hours">25</td>
-                </tr>
-                <tr>
-                    <td>HS3</td>
-                    <td id="hs3Share">15</td>
-                    <td id="hs3Hours">45</td>
-                </tr>                    
-            </tbody>
-        </table>
-        <!-- Total Project table -->
-        <h3>Total Project</h3>
-        <table style="max-width: 300px;">
-            <tbody>
-                <tr>
-                    <td>Total hours:</td>
-                    <td id="totalProjectHours">80</td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Total Admin table -->
-        <h3>Total Admin</h3>
-        <table style="max-width: 300px;">
-            <tbody>
-                <tr>
-                    <td>Total hours:</td>
-                    <td id="totalAdminHours">60</td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Total School table -->
-        <h3>Total School</h3>
-        <table style="max-width: 300px;">
-            <tbody>
-                <tr>
-                    <td>Total hours:</td>
-                    <td id="totalSchoolHours">40</td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- Total Uni table -->
-        <h3>Total Uni</h3>
-        <table style="max-width: 300px;">
-            <tbody>
-                <tr>
-                    <td>Total hours:</td>
-                    <td id="totalUniHours">30</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container mt-5">
+        <div class="card">
+            <h3 class="card-header text-center">Total</h3>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 col-lg-2 mb-4 card-item">
+                        <h5 class="card-title">Name</h5>
+                        <p class="card-text">{{staff_name}}</p>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-4 card-item">
+                        <h5 class="card-title">Total hours permitted</h5>
+                        <p class="card-text">{{staff_permitt_hours}}</p>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-4 card-item">
+                        <h5 class="card-title">Total hours allocated</h5>
+                        <p class="card-text" id="totalHoursAllocated">{{staff_total_hours}}</p>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-4 card-item">
+                        <h5 class="card-title">Total left</h5>
+                        <p class="card-text" id="totalHoursLeft">{{staff_total_hours_left}}</p>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-4 card-item">
+                        <h5 class="card-title">No Projects</h5>
+                        <p class="card-text" id="noProjects">{{staff_total_no_project_hours}}</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <a href="/" class="btn btn-dark">Return</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

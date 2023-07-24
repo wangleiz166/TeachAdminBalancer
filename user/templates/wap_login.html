@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+        .auth-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px black;
+        }
+        .auth-form .form-control {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form class="auth-form" method="post" action="">
+                    {% csrf_token %}
+                    <h2>Login</h2>
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    {% if error_message != "" %}
+                        <span class="text-danger">{{error_message}}</span>
+                    {% endif %}
+                    <input type="submit" class="btn btn-dark mt-2" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

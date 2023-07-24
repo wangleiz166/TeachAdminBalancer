@@ -16,6 +16,9 @@ from django.db.models import Q
 
 def check_login_decorator(view_func):
     def _wrapped_view(request, *args, **kwargs):
+        if 'username' not in request.session and request.user_agent.is_mobile:
+            return redirect('/user/wap/login')
+        
         if 'user_id' not in request.session:
             return redirect('/setting/login_warn')
         else:
@@ -38,7 +41,11 @@ def check_login_decorator(view_func):
 @check_login_decorator
 def list(request):
     if request.user_agent.is_mobile:
-        return render(request, 'staff_h5.html')    
+        if 'username' in request.session:
+            staff_list = Staff.objects.filter(is_delete=0)
+            context = {'staffList': staff_list}
+            return render(request, 'staff_h5.html', context)
+        return render(request, 'wap_login.html', context)     
     else:    
         # Retrieve all non-deleted courses from the database
         courses = Course.objects.filter(is_delete=0)
