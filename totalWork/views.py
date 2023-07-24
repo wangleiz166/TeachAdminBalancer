@@ -4,6 +4,10 @@ from django.db import connection
 from django.db.models import Sum
 from user.models import Log,User,Permission
 from staffvModules.views import project_list
+import csv
+from django.http import HttpResponse
+from django.test import Client
+
     
 
 # Create your views here.
@@ -26,8 +30,7 @@ def check_login_decorator(view_func):
         return view_func(request, *args, **kwargs)
     return _wrapped_view
 
-@check_login_decorator
-def total_work_list(request):
+def get_total_work_list():
     with connection.cursor() as cursor:
         sql_query = """
             SELECT c.code, tc.credits, tc.alpha, tc.beta, tc.num_students, tc.delta, tc.coordinator, tc.total_hours
@@ -105,10 +108,67 @@ def total_work_list(request):
     }
 
 
-    return render(request, 'total_work.html', context)
+    return context
+
+
 
 @check_login_decorator
-def admin_roles(request):
+def total_work_list(request):
+    context=get_total_work_list()
+
+    return render(request, 'total_work.html', context)
+
+def export_total_work_to_csv(request):  
+    context = get_total_work_list()
+    courses = context['courses']
+    projects = context['projects']
+    course_total_hours = context['course_total_hours']
+    project_total_hours = context['project_total_hours']
+    total_hours_sum = context['total_hours_sum']
+
+    # Prepare response as CSV file
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="total_work_data.csv"'
+
+    # Create CSV writer and write the header row
+    writer = csv.writer(response)
+    writer.writerow(['Code', 'Credits', 'Alpha', 'Beta', 'Num Students', 'Delta', 'Coordinator', 'Total Hours'])
+
+    # Write course data to CSV
+    for course in courses:
+        writer.writerow([
+            course['code'],
+            course['credits'],
+            course['alpha'],
+            course['beta'],
+            course['num_students'],
+            course['delta'],
+            course['coordinator'],
+            course['total_hours']
+        ])
+
+    # Write project data to CSV
+    for project in projects:
+        writer.writerow([
+            project['code'],
+            project['credits'],
+            project['alpha'],
+            project['beta'],
+            project['num_students'],
+            project['delta'],
+            project['coordinator'],
+            project['total_hours']
+        ])
+
+    # Write the totals to CSV
+    writer.writerow([])  # Empty row as a separator
+    writer.writerow(['Course Total Hours', course_total_hours])
+    writer.writerow(['Project Total Hours', project_total_hours])
+    writer.writerow(['Total Hours Sum', total_hours_sum])
+
+    return response
+
+def get_admin_roles():
     with connection.cursor() as cursor:
         sql_query = """
             SELECT a.name, ta.credits, ta.alpha, ta.beta, ta.num_students, ta.delta, ta.coordinator, ta.total_hours
@@ -146,10 +206,47 @@ def admin_roles(request):
         'admin': admin_data,
         'admin_total_hours':admin_total_hours,
     }
-    return render(request, 'admin_roles.html',context)
+    return context
+
+def download_admin_roles(request):
+    # Get the admin roles data using the get_admin_roles function
+    admin_data = get_admin_roles()
+    
+    # Prepare response as CSV file
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="admin_roles_data.csv"'
+
+    # Create CSV writer and write the header row
+    writer = csv.writer(response)
+    writer.writerow(['Code', 'Credits', 'Alpha', 'Beta', 'Num Students', 'Delta', 'Coordinator', 'Total Hours'])
+
+    # Write admin data to CSV
+    for admin in admin_data['admin']:
+        writer.writerow([
+            admin['code'],
+            admin['credits'],
+            admin['alpha'],
+            admin['beta'],
+            admin['num_students'],
+            admin['delta'],
+            admin['coordinator'],
+            admin['total_hours']
+        ])
+
+    # Write the total hours to CSV
+    writer.writerow([])  # Empty row as a separator
+    writer.writerow(['Admin Total Hours', admin_data['admin_total_hours']])
+
+    return response
+
+
 
 @check_login_decorator
-def overall_calcs(request):
+def admin_roles(request):
+    context=get_admin_roles()
+    return render(request, 'admin_roles.html',context)
+
+def get_overall_calcs():
     with connection.cursor() as cursor:
         sql_query = """
             SELECT SUM(adjusted_max) FROM balancer_staff
@@ -191,6 +288,37 @@ def overall_calcs(request):
             'total_sum_teach_admin':total_sum_teach_admin,
             }
         
+    return context
+
+def download_overall_calcs(request):
+    context = get_overall_calcs()
+    corestaff_available = context['corestaff_available']
+    course_total = context['course_total']
+    project_total = context['project_total']
+    total_teaching = context['total_teaching']
+    admin_total = context['admin_total']
+    total_sum_teach_admin = context['total_sum_teach_admin']
+
+    # Prepare response as CSV file
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="overall_calcs_data.csv"'
+
+    # Create CSV writer and write the data rows
+    writer = csv.writer(response)
+    writer.writerow(['Name','Hours'])
+    writer.writerow(['Corestaff Available', corestaff_available])
+    writer.writerow(['Course Total', course_total])
+    writer.writerow(['Project Total', project_total])
+    writer.writerow(['Total Teaching', total_teaching])
+    writer.writerow(['Admin Total', admin_total])
+    writer.writerow(['Total Sum Teach Admin', total_sum_teach_admin])
+
+    return response
+
+
+@check_login_decorator
+def overall_calcs(request):
+    context=get_overall_calcs()        
     return render(request, 'overall_calcs.html',context)
 
 @check_login_decorator

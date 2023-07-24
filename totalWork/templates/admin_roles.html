@@ -13,72 +13,81 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link fw-bold" href="/totalWork/overallCalcs/" role="tab" aria-controls="overallCalcs" aria-selected="true">Overall Calcs</a>
             </li>
+            <button class="btn btn-success">
+                <a href="{% url 'download_admin_roles' %}" style="text-decoration: none; color: inherit;">
+                    Download Total Admin Roles Data
+                </a>
+            </button>
             <!--<li class="nav-item" role="presentation">
-                <a class="nav-link fw-bold" href="/totalWork/frozenModules/" role="tab" aria-controls="frozenModules" aria-selected="true">Frozen Modules</a>
-            </li>-->
+        <a class="nav-link fw-bold" href="/totalWork/frozenModules/" role="tab" aria-controls="frozenModules" aria-selected="true">Frozen Modules</a>
+    </li>-->
         </ul>
 
         <div class="tab-content" id="myTabsContent">
-            <div class="tab-pane fade show active" id="adminRoles" role="tabpanel" aria-labelledby="adminRolesTab">
+            <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="coursesTab">
                 <br>
-                <div class="row">
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search by Admin roles" aria-label="Search" id="searchInput">
-                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
+                <div class="row justify-content-center">
+                    <!-- Add justify-content-center class here -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body text-center text-white" style="background-color:#7abaee;">
+                                <h3>Total Admin Hours: {{admin_total_hours}}</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <h2>Total Hours:{{admin_total_hours}}</h2>
-
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Admin roles</th>
-                                <th>Credits</th>
-                                <th>Alpha</th>
-                                <th>Beta</th>
-                                <th>Num. Students</th>
-                                <th>Delta</th>
-                                <th>Coordinator</th>
-                                <th>Hours</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for admin_role in admin %}
-                            <tr>
-                                <td>{{ admin_role.code }}</td>
-                                <td>{{ admin_role.credits }}</td>
-                                <td>{{ admin_role.alpha }}</td>
-                                <td>{{ admin_role.beta }}</td>
-                                <td>{{ admin_role.num_students }}</td>
-                                <td>{{ admin_role.delta }}</td>
-                                <td>{{ admin_role.coordinator }}</td>
-                                <td>{{ admin_role.total_hours }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <br>
 
 
-                    <div class="row my-3">
-                        <div class="col-12 col-md-6">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-end">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                    </li>
-                                    <li class="page-item active" aria-current="page">
-                                        <a class="page-link" href="?page=1">1</a>
-                                    </li>
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Admin roles</th>
+                            <th>Credits</th>
+                            <th>Alpha</th>
+                            <th>Beta</th>
+                            <th>Num. Students</th>
+                            <th>Delta</th>
+                            <th>Coordinator</th>
+                            <th>Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for admin_role in admin %}
+                        <tr>
+                            <td>{{ admin_role.code }}</td>
+                            <td>{{ admin_role.credits }}</td>
+                            <td>{{ admin_role.alpha }}</td>
+                            <td>{{ admin_role.beta }}</td>
+                            <td>{{ admin_role.num_students }}</td>
+                            <td>{{ admin_role.delta }}</td>
+                            <td>{{ admin_role.coordinator }}</td>
+                            <td>{{ admin_role.total_hours }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+
+                <div class="row my-3">
+                    <div class="col-12 col-md-6">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="?page=1">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

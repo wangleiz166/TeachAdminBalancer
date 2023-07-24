@@ -16,7 +16,6 @@
         z-index: 9999;
         overflow: auto;
     }
-
 </style>
 <div class="main-content">
     <div class="container my-3">
@@ -34,10 +33,20 @@
                 <a class="nav-link fw-bold" href="/totalWork/frozenModules/" role="tab" aria-controls="frozenModules" aria-selected="false">Frozen Modules</a>
             </li>-->
             <div>
-                <button class="btn btn-success">Download CSV</button>
+                <!-- total_work.html -->
+                <!-- Add this link inside the template where you want to provide the download option -->
+                <!-- total_work.html -->
+                <!-- Add this button inside the template where you want to provide the download option -->
+                <button class="btn btn-success">
+                    <a href="{% url 'download_total_work' %}" style="text-decoration: none; color: inherit;">
+                        Download Total Work Data
+                    </a>
+                </button>
+
+
             </div>
         </ul>
-        
+
         <div class="tab-content" id="myTabsContent">
             <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="coursesTab">
                 <br>
@@ -65,15 +74,6 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search by code" aria-label="Search" id="searchInput">
-                            <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>&nbsp;
-                        </div>
-
-                    </div>
-                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -141,3 +141,4 @@
     var tabs = new bootstrap.Tab(document.getElementById('myTabs').querySelector('.nav-link.active'));
     tabs.show();
 </script>
+
