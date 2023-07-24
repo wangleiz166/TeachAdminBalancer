@@ -5,6 +5,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import logout as auth_logout
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 
 # Create your views here.
@@ -19,7 +21,7 @@ def check_login_decorator(view_func):
                 2: "Employee",
                 3: "IT Administrator",
             }
-            user_permission_name = permission_mapping.get(user.permission_id) 
+            user_permission_name = permission_mapping.get(user.permission_id)
             # Find the permission with the specified permission_id and menu_id=5
             permission = Permission.objects.get(permission=user_permission_name, menu_id=5)
             if permission.position_id == 0:
@@ -65,7 +67,7 @@ def edit(request, userId):
         user.save()
         user_id = request.session.get('user_id')
         operation_details = "user_edit "+ "user_id:"+str(userId)
-            
+
         if user_id:
             Log.create_log(user_id, operation_details)
             return redirect('/user')
@@ -89,13 +91,13 @@ def add(request):
 
         # Save the User object to the database
         user.save()
-        
+
         user_id = request.session.get('user_id')
         operation_details = "user_add"
-            
+
         if user_id:
             Log.create_log(user_id, operation_details)
-  
+
           # Redirect to the staff list page
         return redirect('/user/')
 
@@ -118,10 +120,10 @@ def user_del(request, userId):
     user = get_object_or_404(User, id=userId)
     user.is_delete = 1
     user.save()
-    
+
     user_id = request.session.get('user_id')
     operation_details = "user_del "+"user_id:"+str(userId)
-            
+
     if user_id:
         Log.create_log(user_id, operation_details)
 
@@ -138,10 +140,20 @@ def login(request):
             # Render the form again with an error message
             return render(request, 'login.html', {'error_message': 'Invalid username'})
 
+        if user.is_locked:
+            if user.locked_at and timezone.now() >= user.locked_at + timedelta(minutes=1):
+                user.is_locked = False
+                user.login_attempts = 0
+                user.locked_at = None
+                user.save()
+            else:
+                return render(request, 'login.html', {'error_message': 'Account is locked(1 minute). Please try again later.'})
+
         # Validate the password using Django's check_password function
         if check_password(password, user.pass_word):
             # Password is valid. Update the login state and redirect to success page
-            user.is_login = True
+            user.login_attempts = 0
+            user.is_locked = False
             user.save()
 
             # Store the user id in the session
@@ -151,6 +163,11 @@ def login(request):
             # Redirect to success page
             return redirect('/')
         else:
+            user.login_attempts += 1
+            if user.login_attempts >= 3:
+                user.is_locked = True
+                user.locked_at = timezone.now()
+            user.save()
             # Render the form again with an error message
             return render(request, 'login.html', {'error_message': 'Invalid password'})
     else:
@@ -180,7 +197,7 @@ def logs(request, userId):
             operation_details__icontains=query
         )
 
-    
+
     paginator = Paginator(log_data.order_by(
             'id'), 10)  # 按照id字段升序排序
     page_number = request.GET.get('page')
