@@ -7,5 +7,5 @@ urlpatterns = [
     path('menu/', views.menu_edit, name='menu_edit'),
     path('warn/',views.warn, name="warn"),
     path('login_warn/',views.login_warn, name="login_warn"),
-    
+    path('guide/',views.guide, name="guide"),
 ]

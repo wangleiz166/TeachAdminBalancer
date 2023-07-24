@@ -33,6 +33,9 @@ def warn(request):
 def login_warn(request):
     return render(request, 'login_warn.html')
 
+def guide(request):
+    return render(request, 'quick_guide.html')
+
 @check_login_decorator
 def permission_edit(request, permissionName):
     if request.method == 'POST':
