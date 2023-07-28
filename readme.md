@@ -1,161 +1,107 @@
+## Project
+
+  
+
+### Title
+
+  
+
+A web application to manage staff workload balancing of teaching and admin
+
+  
+
+### Description
+
+  
 
 
+TeachBalancer is an all-encompassing teaching management system designed to address the challenges faced by administrators in managing diverse teaching activities. It replaces manual Excel-based management with automated processes to improve accuracy, data synchronization, and security. The system offers real-time data updates, convenient management on a unified platform, hierarchical task allocation, and customized permissions. It promotes team collaboration and enhances security through audit tracking, providing a higher quality and more efficient teaching management solution for our clients. 
 
-The code tree structure is as follows:
+  
 
-```
-TeachAdminBalancer
-├─ .git
-├─ .gitignore
-├─ .python-version
-├─ dashboard
-│  ├─ admin.py
-│  ├─ apps.py
-│  ├─ migrations
-│  │  └─ __init__.py
-│  ├─ models.py
-│  ├─ templates
-│  │  └─ dashboard.html
-│  ├─ tests.py
-│  ├─ urls.py
-│  ├─ views.py
-│  └─ __init__.py
-├─ database.pdf
-├─ dev.md
-├─ import_data
-│  ├─ admin.py
-│  ├─ apps.py
-│  ├─ management
-│  │  └─ commands
-│  │     ├─ import_course.py
-│  │     └─ import_staff.py
-│  ├─ migrations
-│  │  └─ __init__.py
-│  ├─ models.py
-│  ├─ tests.py
-│  ├─ views.py
-│  └─ __init__.py
-├─ manage.py
-├─ mysite
-│  ├─ asgi.py
-│  ├─ settings.py
-│  ├─ urls.py
-│  ├─ wsgi.py
-│  └─ __init__.py
-├─ readme.md
-├─ requirements.txt
-├─ setting
-│  ├─ admin.py
-│  ├─ apps.py
-│  ├─ migrations
-│  │  ├─ 0001_initial.py
-│  │  └─ __init__.py
-│  ├─ models.py
-│  ├─ templates
-│  │  ├─ menu_edit.html
-│  │  ├─ permission_setting.html
-│  │  └─ setting_list.html
-│  ├─ tests.py
-│  ├─ urls.py
-│  ├─ views.py
-│  └─ __init__.py
-├─ staff
-│  ├─ admin.py
-│  ├─ apps.py
-│  ├─ migrations
-│  │  ├─ 0001_initial.py
-│  │  └─ __init__.py
-│  ├─ models.py
-│  ├─ templates
-│  │  ├─ staff_add.html
-│  │  ├─ staff_bulk_add.html
-│  │  ├─ staff_detail.html
-│  │  ├─ staff_h5.html
-│  │  ├─ staff_list.html
-│  │  └─ total_work_h5.html
-│  ├─ tests.py
-│  ├─ urls.py
-│  ├─ views.py
-│  └─ __init__.py
-├─ staffvModules
-│  ├─ admin.py
-│  ├─ apps.py
-│  ├─ migrations
-│  │  ├─ 0001_initial.py
-│  │  ├─ 0002_course_schoolrole_teachadminrole_teachcourse_and_more.py
-│  │  ├─ 0003_course_type.py
-│  │  ├─ 0004_project_type.py
-│  │  ├─ 0005_course_hs.py
-│  │  ├─ 0006_alter_teachadminrole_total_hours_and_more.py
-│  │  └─ __init__.py
-│  ├─ models.py
-│  ├─ templates
-│  │  ├─ adminrole_list.html
-│  │  ├─ detail.html
-│  │  ├─ full
-│  │  │  ├─ full_adminrole_list.html
-│  │  │  ├─ full_course_list.html
-│  │  │  ├─ full_project_list.html
-│  │  │  ├─ full_schoolrole_list.html
-│  │  │  └─ full_unirole_list.html
-│  │  ├─ hs_list.html
-│  │  ├─ list.html
-│  │  ├─ project_list.html
-│  │  ├─ schoolrole_list.html
-│  │  ├─ staffvModules_adminrole_add.html
-│  │  ├─ staffvModules_adminrole_edit.html
-│  │  ├─ staffvModules_course_add.html
-│  │  ├─ staffvModules_course_edit.html
-│  │  ├─ staffvModules_project_add.html
-│  │  ├─ staffvModules_project_edit.html
-│  │  ├─ staffvModules_schoolrole_add.html
-│  │  ├─ staffvModules_schoolrole_edit.html
-│  │  ├─ staffvModules_unirole_add.html
-│  │  ├─ staffvModules_unirole_edit.html
-│  │  └─ unirole_list.html
-│  ├─ tests.py
-│  ├─ urls.py
-│  ├─ views.py
-│  └─ __init__.py
-├─ templates
-│  └─ common
-│     ├─ header.html
-│     └─ nav.html
-├─ totalWork
-│  ├─ admin.py
-│  ├─ apps.py
-│  ├─ migrations
-│  │  ├─ 0001_initial.py
-│  │  └─ __init__.py
-│  ├─ models.py
-│  ├─ templates
-│  │  ├─ admin_roles.html
-│  │  ├─ course_project.html
-│  │  ├─ frozen_modules.html
-│  │  ├─ overall_calcs.html
-│  │  └─ total_work.html
-│  ├─ tests.py
-│  ├─ urls.py
-│  ├─ views.py
-│  └─ __init__.py
-├─ user
-│  ├─ admin.py
-│  ├─ apps.py
-│  ├─ migrations
-│  │  ├─ 0001_initial.py
-│  │  └─ __init__.py
-│  ├─ models.py
-│  ├─ templates
-│  │  ├─ add.html
-│  │  ├─ edit.html
-│  │  ├─ login.html
-│  │  ├─ logs.html
-│  │  ├─ permission.html
-│  │  └─ user_list.html
-│  ├─ tests.py
-│  ├─ urls.py
-│  ├─ views.py
-│  └─ __init__.py
-└─ Work_blanked.xlsx 
+### Installation and Setup
+
+  
+
+1. Clone the Repository:
 
 ```
+
+git clone https://github.com/wangleiz166/TeachAdminBalancer.git
+
+```
+
+  
+
+2. Navigate to the Project Directory:
+
+```
+
+cd TeachAdminBalancer
+
+```
+
+  
+
+3. Create and Activate a Virtual Environment:
+
+```
+
+python -m venv env
+
+source env/bin/activate
+
+```
+
+  
+
+4. Install Dependencies:
+
+```
+
+pip install --upgrade pip && pip install -r requirements.txt
+
+```
+
+  
+
+### Running the website application
+
+  
+
+Once you've activated the virtual environment and installed the dependencies, you can start the server:
+
+  
+
+```bash
+
+  python3 manage.py runserver 0.0.0.0:8000
+
+```
+  
+
+### Main features
+
+ - **StaffvModules** : A module for managing courses, programmes, administrative roles, and school roles, along with staff information and "HS" shared statistics.
+
+ - **Staff**: Maintains faculty and staff information and allows association with courses, programmes, administrative roles, and school roles.
+
+ - **TotalWork**: Provides real-time display of staff workload distribution and availability.
+
+  - **Course Information**: Displays details of various courses, including categories and relevant parameters.
+
+ - **User Managemen**t: Enables comprehensive user management, including search, activity history, adding, editing, deleting, and modifying user access rights.
+
+ - **Settings**: Allows setting default permissions for back-office administrator roles.
+ 
+###  Database overview
+![enter image description here](https://github.com/wangleiz166/studyInAberdeen/blob/main/Diagram%201.jpg?raw=true)
+
+### Managed by Team Alpha
+
+- Lei Wang  
+- Ali Liu
+- Abdul-Kadir Lansah
+- Frederick Oppong Tabiri
+- Ruihao Liu
+- Jiaqi Sun

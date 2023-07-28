@@ -33,9 +33,9 @@ class User(models.Model):
     permission_id = models.IntegerField()
     create_time = models.DateTimeField(auto_now_add=True)
     is_delete = models.BooleanField(default=False)
-    # is_locked = models.BooleanField(default=False)
-    # login_attempts = models.IntegerField(default=0)
-    # locked_at = models.DateTimeField(null=True, blank=True)
+    is_locked = models.BooleanField(default=False)
+    login_attempts = models.IntegerField(default=0)
+    locked_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"User {self.user_name}"
