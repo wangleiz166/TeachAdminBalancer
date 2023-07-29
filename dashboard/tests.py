@@ -54,3 +54,5 @@ class DashboardViewTestCase(TestCase):
 
         # Assert that the user is redirected to a warning page
         self.assertRedirects(response, '/setting/warn', fetch_redirect_response=False)  # Replace with the URL of the warning page
+
+
