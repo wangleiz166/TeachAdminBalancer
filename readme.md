@@ -2,7 +2,7 @@
 
   
 
-### Title
+### Project Title
 
   
 
@@ -10,7 +10,7 @@ A web application to manage staff workload balancing of teaching and admin
 
   
 
-### Description
+### Description of TeachBalancer
 
   
 
