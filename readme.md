@@ -1,27 +1,27 @@
-## Project
+## Alpha Team Project
 
-  
 
-### Title
 
-  
+### Project Title
+
+
 
 A web application to manage staff workload balancing of teaching and admin
 
-  
-
-### Description
-
-  
 
 
-TeachBalancer is an all-encompassing teaching management system designed to address the challenges faced by administrators in managing diverse teaching activities. It replaces manual Excel-based management with automated processes to improve accuracy, data synchronization, and security. The system offers real-time data updates, convenient management on a unified platform, hierarchical task allocation, and customized permissions. It promotes team collaboration and enhances security through audit tracking, providing a higher quality and more efficient teaching management solution for our clients. 
+### Description of TeachBalancer
 
-  
+
+
+
+TeachBalancer is an all-encompassing teaching management system designed to address the challenges faced by administrators in managing diverse teaching activities. It replaces manual Excel-based management with automated processes to improve accuracy, data synchronization, and security. The system offers real-time data updates, convenient management on a unified platform, hierarchical task allocation, and customized permissions. It promotes team collaboration and enhances security through audit tracking, providing a higher quality and more efficient teaching management solution for our clients.
+
+
 
 ### Installation and Setup
 
-  
+
 
 1. Clone the Repository:
 
@@ -31,7 +31,7 @@ git clone https://github.com/wangleiz166/TeachAdminBalancer.git
 
 ```
 
-  
+
 
 2. Navigate to the Project Directory:
 
@@ -41,7 +41,7 @@ cd TeachAdminBalancer
 
 ```
 
-  
+
 
 3. Create and Activate a Virtual Environment:
 
@@ -53,7 +53,7 @@ source env/bin/activate
 
 ```
 
-  
+
 
 4. Install Dependencies:
 
@@ -63,22 +63,30 @@ pip install --upgrade pip && pip install -r requirements.txt
 
 ```
 
-  
+
 
 ### Running the website application
 
-  
+
 
 Once you've activated the virtual environment and installed the dependencies, you can start the server:
 
-  
 
+# run server in Codio
 ```bash
 
   python3 manage.py runserver 0.0.0.0:8000
 
 ```
-  
+
+# run server in local
+```bash
+
+  python3 manage.py runserver 8000
+
+```
+
+
 
 ### Main features
 
@@ -93,13 +101,34 @@ Once you've activated the virtual environment and installed the dependencies, yo
  - **User Managemen**t: Enables comprehensive user management, including search, activity history, adding, editing, deleting, and modifying user access rights.
 
  - **Settings**: Allows setting default permissions for back-office administrator roles.
- 
+
 ###  Database overview
 ![enter image description here](https://github.com/wangleiz166/studyInAberdeen/blob/main/Diagram%201.jpg?raw=true)
 
+
+### Testing
+
+
+# Running Tests
+```
+
+python3 manage.py test
+
+```
+
+
+# Running Behave Tests
+
+```
+
+behave
+
+```
+
+
 ### Managed by Team Alpha
 
-- Lei Wang  
+- Lei Wang
 - Ali Liu
 - Abdul-Kadir Lansah
 - Frederick Oppong Tabiri
