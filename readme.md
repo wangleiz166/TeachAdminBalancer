@@ -2,7 +2,7 @@
 
 
 
-### Project Title
+### 1 Project Title
 
 
 
@@ -10,7 +10,7 @@ A web application to manage staff workload balancing of teaching and admin
 
 
 
-### Description of TeachBalancer
+### 2 Description of TeachBalancer
 
 
 
@@ -19,7 +19,7 @@ TeachBalancer is an all-encompassing teaching management system designed to addr
 
 
 
-### Installation and Setup
+### 3 Installation and Setup
 
 
 
@@ -55,7 +55,7 @@ source env/bin/activate
 
 
 
-4. Install Dependencies:
+4. Install local Dependencies:
 
 ```
 
@@ -65,21 +65,21 @@ pip install --upgrade pip && pip install -r requirements.txt
 
 
 
-### Running the website application
+### 4 Running the website application
 
 
 
 Once you've activated the virtual environment and installed the dependencies, you can start the server:
 
 
-# run server in Codio
+#### run server in Codio
 ```bash
 
   python3 manage.py runserver 0.0.0.0:8000
 
 ```
 
-# run server in local
+#### run server in local
 ```bash
 
   python3 manage.py runserver 8000
@@ -88,7 +88,7 @@ Once you've activated the virtual environment and installed the dependencies, yo
 
 
 
-### Main features
+### 5 Main features
 
  - **StaffvModules** : A module for managing courses, programmes, administrative roles, and school roles, along with staff information and "HS" shared statistics.
 
@@ -106,10 +106,10 @@ Once you've activated the virtual environment and installed the dependencies, yo
 ![enter image description here](https://github.com/wangleiz166/studyInAberdeen/blob/main/Diagram%201.jpg?raw=true)
 
 
-### Testing
+### 6 Testing
 
 
-# Running Tests
+#### Running Tests
 ```
 
 python3 manage.py test
@@ -117,7 +117,7 @@ python3 manage.py test
 ```
 
 
-# Running Behave Tests
+##### Running Behave Tests
 
 ```
 
@@ -125,8 +125,30 @@ behave
 
 ```
 
+### 7 Online dependencies
 
-### Managed by Team Alpha
+```
+
+1.heroku's online database service: PostgreSQL
+2.Bootstrap: https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css
+
+```
+
+### 8 Future fixes, adaptations and extensions.
+
+```
+
+1 User password reset function: In order to enhance security, a password reset function can be added to allow users to reset their passwords via email or mobile phone when they forget their passwords.
+2 Query and Filtering: The management page can be improved by adding query and filtering functions so that administrators can find and analyse log records according to different conditions.
+3 Data backup and recovery: Consider adding data backup and recovery functions to ensure data security and reliability.
+4 Performance optimisation: For the parts where there may be performance bottlenecks, optimisation can be carried out to improve the performance and response speed of the application.
+
+Translated with www.DeepL.com/Translator (free version)
+
+```
+
+
+### *Managed by Team Alpha
 
 - Lei Wang
 - Ali Liu
