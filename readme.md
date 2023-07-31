@@ -1,4 +1,4 @@
-## Alpha Team Project
+# Alpha Team Project
 
 
 
@@ -102,16 +102,16 @@ Once you've activated the virtual environment and installed the dependencies, yo
 
  - **Settings**: Allows setting default permissions for back-office administrator roles.
 
-###  Database overview
+### 6 Database overview
 ![enter image description here](https://github.com/wangleiz166/studyInAberdeen/blob/main/Diagram%201.jpg?raw=true)
 
 
-### 6 Testing
+### 7 Testing
 
 
 #### Running Tests
-```
 
+```bash
 python3 manage.py test
 
 ```
@@ -119,33 +119,30 @@ python3 manage.py test
 
 ##### Running Behave Tests
 
-```
+```bash
 
 behave
 
 ```
 
-### 7 Online dependencies
+### 8 Online dependencies
 
-```
+- **heroku's online database service**: PostgreSQL
+- **Bootstrap**: https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css
 
-1.heroku's online database service: PostgreSQL
-2.Bootstrap: https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css
 
-```
+### 9 Future fixes, adaptations and extensions.
 
-### 8 Future fixes, adaptations and extensions.
 
-```
+- **User password reset function:**
+In order to enhance security, a password reset function can be added to allow users to reset their passwords via email or mobile phone when they forget their passwords.
+- **Query and Filtering:**
+The management page can be improved by adding query and filtering functions so that administrators can find and analyse log records according to different conditions.
+- **Data backup and recovery:**
+Consider adding data backup and recovery functions to ensure data security and reliability.
+- **Performance optimisation:**
+For the parts where there may be performance bottlenecks, optimisation can be carried out to improve the performance and response speed of the application.
 
-1 User password reset function: In order to enhance security, a password reset function can be added to allow users to reset their passwords via email or mobile phone when they forget their passwords.
-2 Query and Filtering: The management page can be improved by adding query and filtering functions so that administrators can find and analyse log records according to different conditions.
-3 Data backup and recovery: Consider adding data backup and recovery functions to ensure data security and reliability.
-4 Performance optimisation: For the parts where there may be performance bottlenecks, optimisation can be carried out to improve the performance and response speed of the application.
-
-Translated with www.DeepL.com/Translator (free version)
-
-```
 
 
 ### *Managed by Team Alpha
