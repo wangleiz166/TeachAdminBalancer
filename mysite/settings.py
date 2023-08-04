@@ -90,12 +90,12 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
-#          'ENGINE': 'django.db.backends.mysql',
-#          'NAME': 'balancer',
-#          'USER': 'root',
-#          'PASSWORD': '',
-#          'HOST': '127.0.0.1',
-#          'PORT': '3306',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dbu3jnrbp5p0eu',
+#         'USER': 'ewskehwaipytcg',
+#         'PASSWORD': '898952b5e2f1ee26ee0fd8c0adae6051c12ba9e63c9e282c0b34f743e0b55e1b',
+#         'HOST': 'ec2-52-215-68-14.eu-west-1.compute.amazonaws.com',
+#         'PORT': '5432',
 #     }
 # }
 
