@@ -117,14 +117,6 @@ python3 manage.py test
 ```
 
 
-##### Running Behave Tests
-
-```bash
-
-behave
-
-```
-
 ### 8 Online dependencies
 
 - **heroku's online database service**: PostgreSQL
