@@ -17,6 +17,9 @@ A web application to manage staff workload balancing of teaching and admin
 
 TeachBalancer is an all-encompassing teaching management system designed to address the challenges faced by administrators in managing diverse teaching activities. It replaces manual Excel-based management with automated processes to improve accuracy, data synchronization, and security. The system offers real-time data updates, convenient management on a unified platform, hierarchical task allocation, and customized permissions. It promotes team collaboration and enhances security through audit tracking, providing a higher quality and more efficient teaching management solution for our clients.
 
+Render: https://teachadminbalancer-aberdeen.onrender.com
+Heroku: https://teach-admin-balancer-95267a713d3b.herokuapp.com
+
 
 
 ### 3 Installation and Setup
